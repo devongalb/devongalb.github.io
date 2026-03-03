@@ -14,13 +14,21 @@ p {
     color: #5b6472 !important;
 }
 
-/* About image responsiveness (smooth scaling) */
+/* About image */
 .about-img {
     width: 100%;
-    height: auto;
     max-width: 520px;
+    height: auto;
     border-radius: 18px;
+    object-fit: cover;
+    object-position: center top;
     box-shadow: 0 14px 40px rgba(0, 0, 0, 0.10);
+}
+
+@media (max-width: 991px) {
+    .about-img {
+        max-height: 620px;
+    }
 }
 
 /* Quick links */

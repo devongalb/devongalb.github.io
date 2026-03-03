@@ -60,7 +60,21 @@
 
           <!--Photo displayed-->
           <div class="col-lg-6 mb-5 text-center" data-aos="fade-up">
-            <img src="images/Image.JPG" alt="Devon Galbraith" class="img-fluid about-img">
+            <picture>
+              <!-- Small screens: smaller WebP -->
+              <source media="(max-width: 991px)" srcset="images/Image-800.webp" type="image/webp" />
+
+              <!-- Large screens: full WebP -->
+              <source srcset="images/Image.webp" type="image/webp" />
+
+              <!-- JPEG fallback (add these files if you want full compatibility) -->
+              <source media="(max-width: 991px)" srcset="images/Image-800.jpg" type="image/jpeg" />
+              <source srcset="images/Image.jpg" type="image/jpeg" />
+
+              <!-- Final fallback -->
+              <img src="images/Image.jpg" alt="Devon Galbraith" class="img-fluid about-img" loading="lazy"
+                decoding="async" />
+            </picture>
           </div>
 
           <div class="col-lg-5 ml-auto" data-aos="fade-up" data-aos-delay="100">
@@ -137,6 +151,7 @@
             </div>
           </div>
         </div>
+      </div>
     </section>
 
     <!-- EDUCATION SECTION -->
@@ -644,146 +659,145 @@
           </div>
         </div>
       </div>
-  </div>
-  </section>
+    </section>
 
-  <!-- MILITARY SERVICE SECTION -->
-  <section class="site-section border-bottom" id="military-section">
-    <div class="container">
+    <!-- MILITARY SERVICE SECTION -->
+    <section class="site-section border-bottom" id="military-section">
+      <div class="container">
 
-      <div class="row mb-4 justify-content-center">
-        <div class="col-md-10 text-center">
-          <h2 class="section-title mb-2">Military Service</h2>
+        <div class="row mb-4 justify-content-center">
+          <div class="col-md-10 text-center">
+            <h2 class="section-title mb-2">Military Service</h2>
+          </div>
         </div>
-      </div>
 
-      <!-- Timeline -->
-      <div class="row justify-content-center" data-aos="fade-up">
-        <div class="col-lg-10">
-          <div class="service-timeline">
+        <!-- Timeline -->
+        <div class="row justify-content-center" data-aos="fade-up">
+          <div class="col-lg-10">
+            <div class="service-timeline">
 
-            <!-- Current / Reserves -->
-            <div class="service-item">
-              <div class="service-item-header">
-                <h4 class="service-item-title mb-1">Senior Nuclear Command and Control Operations Specialist</h4>
-                <div class="service-item-meta">
-                  <span class="service-item-unit">452d Air Mobility Wing (AFRC), March ARB, CA — Reserves</span>
-                  <span class="service-item-dates">Aug 2024 – Present</span>
+              <!-- Current / Reserves -->
+              <div class="service-item">
+                <div class="service-item-header">
+                  <h4 class="service-item-title mb-1">Senior Nuclear Command and Control Operations Specialist</h4>
+                  <div class="service-item-meta">
+                    <span class="service-item-unit">452d Air Mobility Wing (AFRC), March ARB, CA — Reserves</span>
+                    <span class="service-item-dates">Aug 2024 – Present</span>
+                  </div>
                 </div>
-              </div>
-              <ul class="ul-dot mb-0">
-                <li>Modernized secure information workflows and strengthened
-                  cross-system communication pipelines to improve real-time
-                  operational visibility and reliability.</li>
-              </ul>
-            </div>
-
-            <!-- RAF Mildenhall -->
-            <div class="service-item">
-              <div class="service-item-header">
-                <h4 class="service-item-title mb-1">Senior Command and Control Operations Specialist</h4>
-                <div class="service-item-meta">
-                  <span class="service-item-unit">100th Air Refueling Wing (USAFE), RAF Mildenhall, United
-                    Kingdom</span>
-                  <span class="service-item-dates">Mar 2022 – Aug 2024</span>
-                </div>
-              </div>
-              <ul class="ul-dot mb-0">
-                <li>Led multinational refueling coordination improvements that
-                  increased fuel utilization efficiency, reducing waste and
-                  generating significant operational cost savings.</li>
-              </ul>
-
-              <div class="service-subitem">
-                <div class="service-subitem-title">Deployment — SOCAFRICA JOC (Germany) and 406 AEW (Germany)</div>
-                <div class="service-subitem-dates">Oct 2023 – Apr 2024</div>
                 <ul class="ul-dot mb-0">
-                  <li>Directed the establishment of a new command center and
-                    integrated multiple operational systems into a unified,
-                    mission-focused dashboard to enhance situational awareness.</li>
+                  <li>Modernized secure information workflows and strengthened
+                    cross-system communication pipelines to improve real-time
+                    operational visibility and reliability.</li>
                 </ul>
               </div>
-            </div>
 
-            <!-- Incirlik -->
-            <div class="service-item">
-              <div class="service-item-header">
-                <h4 class="service-item-title mb-1">Nuclear Command and Control Operations Specialist</h4>
-                <div class="service-item-meta">
-                  <span class="service-item-unit">39th Air Base Wing (USAFE), Incirlik AB, Turkey</span>
-                  <span class="service-item-dates">Mar 2021 – Mar 2022</span>
+              <!-- RAF Mildenhall -->
+              <div class="service-item">
+                <div class="service-item-header">
+                  <h4 class="service-item-title mb-1">Senior Command and Control Operations Specialist</h4>
+                  <div class="service-item-meta">
+                    <span class="service-item-unit">100th Air Refueling Wing (USAFE), RAF Mildenhall, United
+                      Kingdom</span>
+                    <span class="service-item-dates">Mar 2022 – Aug 2024</span>
+                  </div>
+                </div>
+                <ul class="ul-dot mb-0">
+                  <li>Led multinational refueling coordination improvements that
+                    increased fuel utilization efficiency, reducing waste and
+                    generating significant operational cost savings.</li>
+                </ul>
+
+                <div class="service-subitem">
+                  <div class="service-subitem-title">Deployment — SOCAFRICA JOC (Germany) and 406 AEW (Germany)</div>
+                  <div class="service-subitem-dates">Oct 2023 – Apr 2024</div>
+                  <ul class="ul-dot mb-0">
+                    <li>Directed the establishment of a new command center and
+                      integrated multiple operational systems into a unified,
+                      mission-focused dashboard to enhance situational awareness.</li>
+                  </ul>
                 </div>
               </div>
-              <ul class="ul-dot mb-0">
-                <li>Oversaw secure communications and mission-tracking systems
-                  supporting multinational flight operations, strengthening
-                  coordination accuracy and operational continuity.</li>
-              </ul>
-            </div>
 
-            <!-- Kadena -->
-            <div class="service-item">
-              <div class="service-item-header">
-                <h4 class="service-item-title mb-1">Command and Control Operations Specialist</h4>
-                <div class="service-item-meta">
-                  <span class="service-item-unit">18th Air Refueling Wing (PACAF), Kadena AB, Japan</span>
-                  <span class="service-item-dates">Feb 2019 – Mar 2021</span>
+              <!-- Incirlik -->
+              <div class="service-item">
+                <div class="service-item-header">
+                  <h4 class="service-item-title mb-1">Nuclear Command and Control Operations Specialist</h4>
+                  <div class="service-item-meta">
+                    <span class="service-item-unit">39th Air Base Wing (USAFE), Incirlik AB, Turkey</span>
+                    <span class="service-item-dates">Mar 2021 – Mar 2022</span>
+                  </div>
                 </div>
+                <ul class="ul-dot mb-0">
+                  <li>Oversaw secure communications and mission-tracking systems
+                    supporting multinational flight operations, strengthening
+                    coordination accuracy and operational continuity.</li>
+                </ul>
               </div>
-              <ul class="ul-dot mb-0">
-                <li>Maintained and enhanced mission monitoring systems in
-                  high-tempo environments, improving operational reliability
-                  and infrastructure performance.</li>
-              </ul>
+
+              <!-- Kadena -->
+              <div class="service-item">
+                <div class="service-item-header">
+                  <h4 class="service-item-title mb-1">Command and Control Operations Specialist</h4>
+                  <div class="service-item-meta">
+                    <span class="service-item-unit">18th Air Refueling Wing (PACAF), Kadena AB, Japan</span>
+                    <span class="service-item-dates">Feb 2019 – Mar 2021</span>
+                  </div>
+                </div>
+                <ul class="ul-dot mb-0">
+                  <li>Maintained and enhanced mission monitoring systems in
+                    high-tempo environments, improving operational reliability
+                    and infrastructure performance.</li>
+                </ul>
+              </div>
+
             </div>
 
-          </div>
-
-          <!-- Awards -->
-          <div class="service-awards mt-4">
-            <div class="service-awards-title">Awards &amp; Decorations</div>
-            <div class="service-awards-pills">
-              <span class="award-pill">Joint Service Achievement Medal</span>
-              <span class="award-pill">Air and Space Commendation Medal (2)</span>
-              <span class="award-pill">Air and Space Achievement Medal (2)</span>
-              <span class="award-pill">Air Force Outstanding Unit Award</span>
-              <span class="award-pill">Air Force Good Conduct Medal</span>
+            <!-- Awards -->
+            <div class="service-awards mt-4">
+              <div class="service-awards-title">Awards &amp; Decorations</div>
+              <div class="service-awards-pills">
+                <span class="award-pill">Joint Service Achievement Medal</span>
+                <span class="award-pill">Air and Space Commendation Medal (2)</span>
+                <span class="award-pill">Air and Space Achievement Medal (2)</span>
+                <span class="award-pill">Air Force Outstanding Unit Award</span>
+                <span class="award-pill">Air Force Good Conduct Medal</span>
+              </div>
             </div>
+
+
           </div>
-
-
         </div>
+
       </div>
+    </section>
 
-    </div>
-  </section>
+    <!-- CONTACT SECTION -->
+    <section class="site-section" id="contact-section">
+      <div class="container text-center">
+        <h2 class="section-title mb-3">Contact</h2>
 
-  <!-- CONTACT SECTION -->
-  <section class="site-section" id="contact-section">
-    <div class="container text-center">
-      <h2 class="section-title mb-3">Contact</h2>
+        <p class="mb-4">
 
-      <p class="mb-4">
+          <!-- Email -->
+          <a href="mailto:dgalbraith@sandiego.edu" class="btn btn-primary m-1">
+            Email
+          </a>
 
-        <!-- Email -->
-        <a href="mailto:dgalbraith@sandiego.edu" class="btn btn-primary m-1">
-          Email
-        </a>
-
-      </p>
-    </div>
-  </section>
+        </p>
+      </div>
+    </section>
 
 
-  <footer class="site-footer">
-    <div class="container text-center">
-      <p class="mb-0">
-        Copyright &copy;
-        <script>document.write(new Date().getFullYear());</script>
-        All rights reserved.
-      </p>
-    </div>
-  </footer>
+    <footer class="site-footer">
+      <div class="container text-center">
+        <p class="mb-0">
+          Copyright &copy;
+          <script>document.write(new Date().getFullYear());</script>
+          All rights reserved.
+        </p>
+      </div>
+    </footer>
 
   </div>
 
