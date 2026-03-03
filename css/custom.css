@@ -1,0 +1,485 @@
+/* Softer background + darker, higher-contrast text */
+body {
+    color: #1f2937;
+    /* darker text */
+    background-color: #f2f4f8;
+    /* softer than sharp white */
+}
+
+p {
+    color: #1f2937;
+}
+
+.text-muted {
+    color: #5b6472 !important;
+}
+
+/* About image responsiveness (smooth scaling) */
+.about-img {
+    width: 100%;
+    height: auto;
+    max-width: 520px;
+    border-radius: 18px;
+    box-shadow: 0 14px 40px rgba(0, 0, 0, 0.10);
+}
+
+/* Quick links */
+.quick-links .btn {
+    border-radius: 999px;
+    padding: 10px 18px;
+}
+
+/* Make the featured strip end exactly at the section divider */
+#about-section.site-section {
+    padding-bottom: 0;
+    /* removes the extra space below the strip */
+}
+
+#about-section .featured-strip {
+    margin-bottom: 0;
+    /* ensures the strip reaches the divider */
+}
+
+/* Skills cards */
+.skills-row {
+    margin-top: 18px;
+}
+
+.skill-group {
+    height: 100%;
+    background: #ffffff;
+    border: 1px solid rgba(0, 0, 0, 0.06);
+    border-radius: 18px;
+    padding: 18px 18px 14px 18px;
+    box-shadow: 0 12px 34px rgba(0, 0, 0, 0.06);
+    transition: transform .2s ease, box-shadow .2s ease;
+}
+
+.skill-group:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 16px 42px rgba(0, 0, 0, 0.08);
+}
+
+.skill-group-title {
+    color: #00005f;
+    font-weight: 800;
+    margin-bottom: 6px;
+}
+
+.skill-group-desc {
+    margin-bottom: 12px;
+    color: #374151;
+}
+
+.skill-pills {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.skill-pill {
+    display: inline-block;
+    padding: 8px 12px;
+    border-radius: 999px;
+    background: rgba(0, 0, 95, 0.08);
+    color: #00005f;
+    border: 1px solid rgba(0, 0, 95, 0.18);
+    font-weight: 700;
+    font-size: 0.92rem;
+}
+
+@media (min-width: 992px) {
+    .skills-row [class*="col-"] {
+        display: flex;
+    }
+
+    .skills-row .skill-group {
+        width: 100%;
+    }
+}
+
+/* Uniform project tiles (same size, soft, rounded) */
+.project-tile {
+    width: 100%;
+    border: 0;
+    padding: 0;
+    background: transparent;
+    text-align: left;
+}
+
+.project-tile-inner {
+    height: clamp(210px, 22vw, 240px);
+    padding: clamp(16px, 1.6vw, 18px);
+    /* uniform height */
+    background: #ffffff;
+    border-radius: 18px;
+    /* soft rounded */
+    border: 1px solid rgba(0, 0, 0, 0.06);
+    box-shadow: 0 14px 40px rgba(0, 0, 0, 0.06);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    transition: transform .18s ease, box-shadow .18s ease, border-color .18s ease;
+}
+
+.project-tile:hover .project-tile-inner,
+.project-tile:focus .project-tile-inner {
+    transform: translateY(-2px);
+    box-shadow: 0 18px 52px rgba(0, 0, 0, 0.09);
+    border-color: rgba(0, 0, 0, 0.10);
+    outline: none;
+}
+
+/* Active/open project tile indication */
+.project-tile[aria-expanded="true"] .project-tile-inner {
+    border-color: rgba(0, 0, 95, 0.35);
+    box-shadow: 0 18px 52px rgba(0, 0, 0, 0.10);
+    background: #eef2ff;
+    /* subtle tint */
+}
+
+/* Active tile indication (color change only, no arrow) */
+.project-tile.is-active .project-tile-inner {
+    border-color: #00005f;
+    box-shadow: 0 10px 30px -18px rgba(0, 0, 95, 0.6);
+}
+
+.project-tile[aria-expanded="true"] .project-tile-title {
+    color: #00005f;
+}
+
+.project-tile-title {
+    font-size: 1.05rem;
+    margin: 0 0 8px 0;
+    color: #111;
+    font-weight: 700;
+    line-height: 1.25;
+}
+
+.project-tile-tags {
+    margin-bottom: 10px;
+}
+
+.project-tile-blurb {
+    margin: 0;
+    color: #222;
+    opacity: .85;
+    font-size: .95rem;
+    line-height: 1.45;
+
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    /* keeps same height look */
+    line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+.project-tile-cta {
+    margin-top: 14px;
+    font-weight: 700;
+    color: #00005f;
+    font-size: .95rem;
+    opacity: .95;
+}
+
+.project-tile:focus-visible .project-tile-inner {
+    outline: 3px solid rgba(0, 0, 95, 0.25);
+    outline-offset: 3px;
+}
+
+/* Details area styling (also soft + rounded) */
+.project-detail-card {
+    margin-top: 8px;
+    margin-bottom: 18px;
+    background: #ffffff;
+    border-radius: 18px;
+    border: 1px solid rgba(0, 0, 0, 0.06);
+    box-shadow: 0 14px 40px rgba(0, 0, 0, 0.06);
+    padding: 22px;
+}
+
+.project-detail-header {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 10px;
+    margin-bottom: 10px;
+}
+
+.project-details-col {
+    flex: 0 0 100%;
+    max-width: 100%;
+}
+
+/* De-emphasize GitHub button */
+.btn-outline-secondary {
+    border-radius: 999px;
+}
+
+/* Project bullets: small soft dot */
+.ul-dot {
+    list-style: none;
+    padding-left: 0;
+    margin-bottom: 0;
+}
+
+.ul-dot li {
+    position: relative;
+    padding-left: 18px;
+    margin-bottom: 12px;
+    line-height: 1.6;
+}
+
+.ul-dot li:before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 9px;
+    width: 6px;
+    height: 6px;
+    background: #00005f;
+    border-radius: 50%;
+}
+
+/* Site logo (name) color override */
+.site-logo a {
+    color: #000000 !important;
+}
+
+/* Mobile navbar dropdown: right-aligned panel + border */
+/* Breakpoint matches `navbar-expand-xl` (collapses below 1200px) */
+@media (max-width: 1199.98px) {
+    .site-navbar .navbar {
+        position: relative;
+        /* anchor the dropdown to the navbar */
+    }
+
+    /* Make the collapsed menu appear as a panel on the RIGHT */
+    #mainNav.mobile-nav-panel {
+        position: absolute;
+        top: calc(100% + 10px);
+        right: 0;
+        left: auto;
+
+        width: min(320px, calc(100vw - 24px));
+        background: #ffffff;
+
+        border: 1px solid rgba(0, 0, 0, 0.10);
+        border-radius: 16px;
+        box-shadow: 0 18px 55px rgba(0, 0, 0, 0.10);
+
+        padding: 12px;
+        z-index: 3000;
+    }
+
+    /* Ensure menu items stack nicely inside the panel */
+    #mainNav.mobile-nav-panel .site-menu {
+        width: 100%;
+    }
+
+    #mainNav.mobile-nav-panel .site-menu>li {
+        display: block;
+    }
+
+    #mainNav.mobile-nav-panel .site-menu>li>a {
+        display: block;
+        padding: 10px 12px;
+        border-radius: 12px;
+    }
+
+    #mainNav.mobile-nav-panel .site-menu>li>a:hover {
+        background: rgba(0, 0, 95, 0.06);
+    }
+}
+
+/* Mobile header text wrapping (prevent truncation) */
+@media (max-width: 1199.98px) {
+    .site-navbar .navbar {
+        flex-wrap: wrap;
+    }
+
+    .site-navbar .navbar-brand {
+        flex: 1 1 auto;
+        min-width: 0;
+        /* allows flex child text to wrap */
+        max-width: calc(100% - 56px);
+        /* leave room for the hamburger */
+    }
+
+    .site-navbar .site-logo a {
+        white-space: normal;
+        line-height: 1.15;
+    }
+
+    .site-navbar .navbar-brand p,
+    .site-navbar .navbar-brand .text-muted {
+        white-space: normal;
+        overflow-wrap: anywhere;
+        word-break: break-word;
+        line-height: 1.25;
+    }
+}
+
+/* ===== MILITARY SECTION ===== */
+.service-timeline {
+    background: rgba(255, 255, 255, 0.65);
+    border: 1px solid rgba(0, 0, 0, 0.06);
+    border-radius: 18px;
+    padding: 18px;
+    box-shadow: 0 10px 26px rgba(0, 0, 0, 0.06);
+}
+
+.service-item {
+    padding: 16px 14px;
+    border-radius: 16px;
+}
+
+.service-item+.service-item {
+    margin-top: 10px;
+    border-top: 1px solid rgba(0, 0, 0, 0.06);
+    padding-top: 18px;
+}
+
+.service-item-title {
+    color: #0f172a;
+    font-weight: 800;
+    margin: 0;
+}
+
+.service-item-meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px 14px;
+    align-items: baseline;
+    margin-top: 2px;
+    color: #4b5563;
+}
+
+.service-item-unit {
+    font-weight: 600;
+}
+
+.service-item-dates {
+    font-weight: 700;
+    color: #111827;
+    background: #eef2ff;
+    border: 1px solid rgba(0, 0, 0, 0.06);
+    padding: 4px 10px;
+    border-radius: 999px;
+}
+
+.service-subitem {
+    margin-top: 12px;
+    padding: 12px 12px 10px 12px;
+    border-radius: 14px;
+    background: #f7f8fb;
+    border: 1px solid rgba(0, 0, 0, 0.06);
+}
+
+.service-subitem-title {
+    font-weight: 800;
+    color: #111827;
+}
+
+.service-subitem-dates {
+    font-weight: 700;
+    color: #374151;
+    margin-bottom: 6px;
+}
+
+.service-awards {
+    background: rgba(255, 255, 255, 0.65);
+    border: 1px solid rgba(0, 0, 0, 0.06);
+    border-radius: 18px;
+    padding: 16px;
+    box-shadow: 0 10px 26px rgba(0, 0, 0, 0.06);
+}
+
+.service-awards-title {
+    font-weight: 900;
+    color: #0f172a;
+    margin-bottom: 10px;
+}
+
+.service-awards-pills {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.award-pill {
+    background: #ffffff;
+    border: 1px solid rgba(0, 0, 0, 0.06);
+    border-radius: 999px;
+    padding: 8px 12px;
+    font-weight: 700;
+    color: #111827;
+    box-shadow: 0 8px 18px rgba(0, 0, 0, 0.05);
+}
+
+/* Mobile spacing */
+@media (max-width: 767.98px) {
+    .service-timeline {
+        padding: 14px;
+    }
+
+    .service-item {
+        padding: 14px 10px;
+    }
+
+    .service-item-dates {
+        padding: 4px 9px;
+    }
+}
+
+/* Inline project detail under tile */
+.project-inline-detail {
+    margin-top: 14px;
+}
+
+.project-inline-detail .project-detail-card {
+    border-radius: 16px;
+    background: rgba(255, 255, 255, 0.7);
+    border: 1px solid rgba(0, 0, 0, 0.06);
+    box-shadow: 0 10px 28px rgba(0, 0, 0, 0.05);
+}
+
+.resume-links {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 8px;
+    margin-bottom: 8px;
+}
+
+/* Featured Skills Strip */
+.featured-strip {
+    position: relative;
+    width: 100%;
+    padding: 2rem 0;
+
+    background: linear-gradient(to right,
+            rgba(247, 248, 251, 0) 0%,
+            #f1f3f8 8%,
+            #f1f3f8 92%,
+            rgba(247, 248, 251, 0) 100%);
+}
+
+.featured-strip-inner {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 12px;
+}
+
+.featured-pill {
+    background: #ffffff;
+    color: #00005f;
+    padding: 8px 18px;
+    border-radius: 999px;
+    font-size: 0.9rem;
+    letter-spacing: 0.4px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+}
