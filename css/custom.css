@@ -468,6 +468,10 @@ p {
     width: 100%;
     padding: 2rem 0;
 
+    /* Restores visual separation from About section */
+    margin-top: 28px;
+    border-top: 1px solid rgba(0,0,0,0.08);
+
     background: linear-gradient(to right,
             rgba(247, 248, 251, 0) 0%,
             #f1f3f8 8%,
