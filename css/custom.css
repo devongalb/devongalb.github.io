@@ -47,6 +47,7 @@
         --active-tile-bg: rgba(199, 210, 254, 0.12);
 
         --section-divider: rgba(255, 255, 255, 0.10);
+        --strip-mid: rgba(16, 26, 46, 0.92);
         --strip-mid: color-mix(in srgb, var(--card-bg) 92%, transparent);
         --strip-fade: rgba(11, 18, 32, 0);
     }
@@ -70,6 +71,11 @@
 }
 
 .site-navbar {
+    position: sticky;
+    top: 0;
+    z-index: 9999;
+
+    /* anchor for absolute-positioned mobile panel */
     background: var(--site-bg) !important;
     border-bottom: 1px solid var(--section-divider);
 }
@@ -380,15 +386,12 @@ p {
 /* Mobile navbar dropdown: right-aligned panel + border */
 /* Breakpoint matches `navbar-expand-xl` (collapses below 1200px) */
 @media (max-width: 1199.98px) {
-    .site-navbar .navbar {
-        position: relative;
-        /* anchor the dropdown to the navbar */
-    }
 
     /* Make the collapsed menu appear as a panel on the RIGHT */
     #mainNav.mobile-nav-panel {
         position: absolute;
-        top: calc(100% + 10px);
+        top: 100%;
+        margin-top: 10px;
         right: 0;
         left: auto;
 
@@ -625,22 +628,12 @@ p {
     box-shadow: 0 4px 12px var(--card-shadow);
 }
 
-/* Mobile navbar visibility in dark mode */
-.site-navbar {
-    position: sticky;
-    top: 0;
-    z-index: 4000;
-}
-
-/* Ensure hamburger icon is visible */
+/* Ensure hamburger icon / toggle stays visible (covers different markup variants) */
+.site-menu-toggle,
+.site-menu-toggle *,
 .site-menu-toggle span,
 .site-menu-toggle .icon-menu,
 .icon-menu {
     color: var(--heading-text) !important;
     opacity: 1 !important;
-}
-
-/* Ensure dropdown menu appears above content */
-#mainNav.mobile-nav-panel {
-    z-index: 5000;
 }
