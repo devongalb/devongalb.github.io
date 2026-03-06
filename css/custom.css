@@ -113,6 +113,7 @@ h3.section-title {
 
 /* Ensure section titles remain readable in dark mode */
 @media (prefers-color-scheme: dark) {
+
     .section-title,
     .section-title.mb-3,
     h2.section-title,
