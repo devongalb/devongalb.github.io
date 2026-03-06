@@ -638,3 +638,58 @@ p {
     color: var(--heading-text) !important;
     opacity: 1 !important;
 }
+
+.tag i {
+    margin-right: 6px;
+    font-size: 0.95em;
+    vertical-align: -1px;
+}
+
+/* Skills -> Projects language highlighting */
+
+.skill-filter {
+    cursor: pointer;
+    appearance: none;
+    -webkit-appearance: none;
+    font-family: inherit;
+}
+
+.skill-filter:focus-visible {
+    outline: 3px solid var(--brand-navy);
+    outline-offset: 3px;
+}
+
+.skill-filter.is-active {
+    border-color: var(--brand-navy);
+    box-shadow: 0 0 0 2px color-mix(in srgb, var(--brand-navy) 18%, transparent);
+}
+
+.project-card {
+    transition: opacity 180ms ease, transform 180ms ease;
+}
+
+
+.project-grid.language-filter-active .project-card[data-languages] {
+    opacity: 1;
+}
+
+.project-grid.language-filter-active .project-card.language-match {
+    opacity: 1;
+}
+
+.project-grid.language-filter-active .project-card.language-match .project-tile-inner {
+    border-color: var(--brand-navy);
+    box-shadow: 0 0 0 3px color-mix(in srgb, var(--brand-navy) 22%, transparent), 0 18px 52px var(--card-shadow);
+    transform: translateY(-2px);
+}
+
+@supports not (box-shadow: 0 0 0 3px color-mix(in srgb, white 20%, transparent)) {
+    .skill-filter.is-active {
+        box-shadow: 0 0 0 2px rgba(0, 0, 95, 0.18);
+    }
+
+    .project-grid.language-filter-active .project-card.language-match .project-tile-inner {
+        box-shadow: 0 0 0 3px rgba(0, 0, 95, 0.18), 0 18px 52px var(--card-shadow);
+    }
+}
+

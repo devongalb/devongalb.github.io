@@ -12,6 +12,7 @@
   <link rel="stylesheet" href="css/aos.css">
   <link rel="stylesheet" href="css/style.css">
   <link rel="stylesheet" href="css/custom.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/devicon.min.css">
 
   <link rel="icon" href="/favicon.ico">
   <link rel="shortcut icon" href="/favicon.ico">
@@ -136,12 +137,12 @@
 
                 <!-- GitHub -->
                 <a href="https://github.com/devongalb" target="_blank" rel="noopener" class="btn btn-primary m-1">
-                  GitHub
+                  <i class="devicon-github-original"></i> GitHub
                 </a>
                 <!-- LinkedIn -->
                 <a href="https://www.linkedin.com/in/devongalbraith" target="_blank" rel="noopener"
                   class="btn btn-primary m-1">
-                  LinkedIn
+                  <i class="devicon-linkedin-plain"></i> LinkedIn
                 </a>
               </div>
             </div>
@@ -240,7 +241,6 @@
               <p class="skill-group-desc">Concepts I apply when designing
                 and building systems.</p>
               <div class="skill-pills">
-                <span class="skill-pill">OOP</span>
                 <span class="skill-pill">Data Structures</span>
                 <span class="skill-pill">Algorithm Design</span>
                 <span class="skill-pill">Debugging</span>
@@ -255,9 +255,18 @@
               <p class="skill-group-desc">Programming languages used across
                 coursework and projects.</p>
               <div class="skill-pills">
-                <span class="skill-pill">Python</span>
-                <span class="skill-pill">Java</span>
-                <span class="skill-pill">C</span>
+                <button type="button" class="skill-pill skill-filter" data-language="python" aria-label="Show Python projects">
+                  <i class="devicon-python-plain"></i> Python
+                </button>
+                <button type="button" class="skill-pill skill-filter" data-language="java" aria-label="Show Java projects">
+                  <i class="devicon-java-plain"></i> Java
+                </button>
+                <button type="button" class="skill-pill skill-filter" data-language="c" aria-label="Show C projects">
+                  <i class="devicon-c-plain"></i>
+                </button>
+                <button type="button" class="skill-pill skill-filter" data-language="cpp" aria-label="Show C++ projects">
+                  <i class="devicon-cplusplus-plain"></i>
+                </button>
               </div>
             </div>
           </div>
@@ -268,14 +277,12 @@
               <p class="skill-group-desc">Tools used for development,
                 collaboration, and quality.</p>
               <div class="skill-pills">
-                <span class="skill-pill">Git</span>
-                <span class="skill-pill">GitHub</span>
-                <span class="skill-pill">Linux</span>
-                <span class="skill-pill">VS Code</span>
-                <span class="skill-pill">IntelliJ IDEA</span>
-                <span class="skill-pill">Vim</span>
-                <span class="skill-pill">Unit Testing</span>
-                <span class="skill-pill">Coverage Analysis</span>
+                <span class="skill-pill"><i class="devicon-git-plain"></i> Git</span>
+                <span class="skill-pill"><i class="devicon-github-original"></i> GitHub</span>
+                <span class="skill-pill"><i class="devicon-linux-plain"></i> Linux</span>
+                <span class="skill-pill"><i class="devicon-vscode-plain"></i> VS Code</span>
+                <span class="skill-pill"><i class="devicon-intellij-plain"></i> IntelliJ</span>
+                <span class="skill-pill"><i class="devicon-vim-plain"></i> Vim</span>
               </div>
             </div>
           </div>
@@ -299,16 +306,15 @@
         <div class="row project-grid" data-aos="fade-up">
 
           <!-- Card: Birthday Paradox -->
-          <div class="col-md-6 col-lg-4 mb-4">
+          <div class="col-md-6 col-lg-4 mb-4 project-card" data-languages="python">
             <button class="project-tile collapsed" type="button" data-target="#projectDetails1" aria-expanded="false"
               aria-controls="projectDetails1">
               <div class="project-tile-inner">
                 <div class="project-tile-top">
                   <h3 class="project-tile-title">Birthday Paradox Simulation Engine</h3>
-                  <div class="project-tile-tags">
-                    <span class="tag">Python</span>
-                    <span class="tag">Monte Carlo</span>
-                  </div>
+                <div class="project-tile-tags">
+                  <span class="tag" title="Python"><i class="devicon-python-plain"></i> </span>
+                </div>
                 </div>
                 <p class="project-tile-blurb">
                   Simulation framework to compare experimental convergence against theoretical probability.
@@ -319,16 +325,15 @@
           </div>
 
           <!-- Card: Game Controller System -->
-          <div class="col-md-6 col-lg-4 mb-4">
+          <div class="col-md-6 col-lg-4 mb-4 project-card" data-languages="python">
             <button class="project-tile collapsed" type="button" data-target="#projectDetails2" aria-expanded="false"
               aria-controls="projectDetails2">
               <div class="project-tile-inner">
                 <div class="project-tile-top">
                   <h3 class="project-tile-title">Real-Time Multi-Modal Control System</h3>
                   <div class="project-tile-tags">
-                    <span class="tag">Python</span>
-                    <span class="tag">OpenCV</span>
-                    <span class="tag">MediaPipe</span>
+                    <span class="tag" title="Python"><i class="devicon-python-plain"></i> </span>
+                    <span class="tag" title="OpenCV"><i class="devicon-opencv-plain"></i> </span>
                   </div>
                 </div>
                 <p class="project-tile-blurb">
@@ -347,29 +352,24 @@
                 <div class="project-tile-top">
                   <h3 class="project-tile-title">Workflow Automation – U.S. Air Force</h3>
                   <div class="project-tile-tags">
-                    <span class="tag">Automation</span>
-                    <span class="tag">Reliability</span>
                   </div>
                 </div>
                 <p class="project-tile-blurb">
-                  Streamlined time-sensitive operational coordination with standardized digital workflows.
-                </p>
+                  Built Microsoft Power Automate and Power Apps workflows to streamline time-sensitive operational coordination.                </p>
                 <div class="project-tile-cta">View details</div>
               </div>
             </button>
           </div>
 
           <!-- PROJECT CARD: Personnel Readiness Dashboard -->
-          <div class="col-md-6 col-lg-4 mb-4">
-            <button class="project-tile collapsed" type="button" data-target="#projectDetails9" aria-expanded="false"
+            <div class="col-md-6 col-lg-4 mb-4">        
+              <button class="project-tile collapsed" type="button" data-target="#projectDetails9" aria-expanded="false"
               aria-controls="projectDetails9">
               <div class="project-tile-inner">
                 <div class="project-tile-top">
                   <h3 class="project-tile-title">Personnel Readiness Dashboard – U.S. Air Force</h3>
                   <div class="project-tile-tags">
-                    <span class="tag">SharePoint</span>
-                    <span class="tag">JSON</span>
-                    <span class="tag">Readiness Tracking</span>
+                    <span class="tag" title="JSON"><i class="devicon-json-plain"></i></span>
                   </div>
                 </div>
                 <p class="project-tile-blurb">
@@ -382,16 +382,14 @@
           </div>
 
           <!-- PROJECT CARD: Distributed Time Synchronization Protocol (C) -->
-          <div class="col-md-6 col-lg-4 mb-4">
+          <div class="col-md-6 col-lg-4 mb-4 project-card" data-languages="c">
             <button class="project-tile collapsed" type="button" data-target="#projectDetails4" aria-expanded="false"
               aria-controls="projectDetails4">
               <div class="project-tile-inner">
                 <div class="project-tile-top">
                   <h3 class="project-tile-title">Distributed Time Sync Protocol</h3>
                   <div class="project-tile-tags">
-                    <span class="tag">C</span>
-                    <span class="tag">TCP/IP</span>
-                    <span class="tag">Sockets</span>
+                    <span class="tag" title="C"><i class="devicon-c-plain"></i></span>
                   </div>
                 </div>
                 <p class="project-tile-blurb">
@@ -403,16 +401,14 @@
           </div>
 
           <!-- PROJECT CARD: Finite-State Source Code Analyzer (C) -->
-          <div class="col-md-6 col-lg-4 mb-4">
+          <div class="col-md-6 col-lg-4 mb-4 project-card" data-languages="c">
             <button class="project-tile collapsed" type="button" data-target="#projectDetails5" aria-expanded="false"
               aria-controls="projectDetails5">
               <div class="project-tile-inner">
                 <div class="project-tile-top">
                   <h3 class="project-tile-title">Finite-State Code Analyzer</h3>
                   <div class="project-tile-tags">
-                    <span class="tag">C</span>
-                    <span class="tag">State Machine</span>
-                    <span class="tag">Parsing</span>
+                    <span class="tag" title="C"><i class="devicon-c-plain"></i> </span>
                   </div>
                 </div>
                 <p class="project-tile-blurb">
@@ -424,16 +420,14 @@
           </div>
 
           <!-- PROJECT CARD: Binary Record Decoder (C) -->
-          <div class="col-md-6 col-lg-4 mb-4">
+          <div class="col-md-6 col-lg-4 mb-4 project-card" data-languages="c">
             <button class="project-tile collapsed" type="button" data-target="#projectDetails6" aria-expanded="false"
               aria-controls="projectDetails6">
               <div class="project-tile-inner">
                 <div class="project-tile-top">
                   <h3 class="project-tile-title">Binary Record Decoder</h3>
                   <div class="project-tile-tags">
-                    <span class="tag">C</span>
-                    <span class="tag">Binary I/O</span>
-                    <span class="tag">Bit Fields</span>
+                    <span class="tag" title="C"><i class="devicon-c-plain"></i> </span>
                   </div>
                 </div>
                 <p class="project-tile-blurb">
@@ -445,16 +439,14 @@
           </div>
 
           <!-- PROJECT CARD: Data Structures Library (Java) -->
-          <div class="col-md-6 col-lg-4 mb-4">
+          <div class="col-md-6 col-lg-4 mb-4 project-card" data-languages="java">
             <button class="project-tile collapsed" type="button" data-target="#projectDetails7" aria-expanded="false"
               aria-controls="projectDetails7">
               <div class="project-tile-inner">
                 <div class="project-tile-top">
                   <h3 class="project-tile-title">Data Structures Library</h3>
                   <div class="project-tile-tags">
-                    <span class="tag">Java</span>
-                    <span class="tag">Data Structures</span>
-                    <span class="tag">JUnit</span>
+                    <span class="tag" title="Java"><i class="devicon-java-plain"></i> </span>
                   </div>
                 </div>
                 <p class="project-tile-blurb">
@@ -466,16 +458,14 @@
           </div>
 
           <!-- PROJECT CARD: BST + Heap Implementations (Java) -->
-          <div class="col-md-6 col-lg-4 mb-4">
+          <div class="col-md-6 col-lg-4 mb-4 project-card" data-languages="java">
             <button class="project-tile collapsed" type="button" data-target="#projectDetails8" aria-expanded="false"
               aria-controls="projectDetails8">
               <div class="project-tile-inner">
                 <div class="project-tile-top">
                   <h3 class="project-tile-title">Search Structures & Heaps</h3>
                   <div class="project-tile-tags">
-                    <span class="tag">Java</span>
-                    <span class="tag">BST</span>
-                    <span class="tag">Heaps</span>
+                    <span class="tag" title="Java"><i class="devicon-java-plain"></i> </span>
                   </div>
                 </div>
                 <p class="project-tile-blurb">
@@ -594,8 +584,8 @@
                 <div class="project-detail-header">
                   <h3 class="mb-1">Workflow Automation – U.S. Air Force</h3>
                   <div class="project-tags">
-                    <span class="tag">Process Automation</span>
-                    <span class="tag">Systems Thinking</span>
+                    <span class="tag">Power Automate</span>
+                    <span class="tag">Power Apps</span>
                     <span class="tag">Operational Reliability</span>
                   </div>
                 </div>
@@ -615,9 +605,8 @@
 
                 <p class="mb-2"><strong>What I Built</strong></p>
                 <ul class="ul-dot mb-3">
-                  <li>Digital workflows to replace manual trackers and reduce duplicate data entry</li>
-                  <li>Structured submission/approval logic with clearer status visibility</li>
-                  <li>Documentation and handoff guidance to keep the process consistent across teams</li>
+                  <li>Microsoft Power Automate workflows to replace manual trackers and reduce duplicate data entry</li>
+                  <li>Power Apps interfaces to standardize submissions, approvals, and status visibility</li>
                 </ul>
 
                 <p class="mb-2"><strong>Results / Impact</strong></p>
@@ -629,8 +618,7 @@
                 <p class="mb-2"><strong>What I Learned</strong></p>
                 <ul class="ul-dot mb-0">
                   <li>How to translate ambiguous requirements into enforceable workflow rules</li>
-                  <li>Designing systems that prioritize correctness and clarity over “heroic” manual effort</li>
-                </ul>
+                  <li>How Microsoft Power Platform tools can improve reliability, visibility, and process consistency without custom backend infrastructure</li>                </ul>
               </div>
             </div>
 

@@ -140,5 +140,49 @@ $(document).ready(function () {
             }
         });
     });
+    /* Language pills -> scroll to projects and highlight matching cards */
+    function clearLanguageProjectHighlights() {
+        $('.project-grid').removeClass('language-filter-active');
+        $('.project-card').removeClass('language-match');
+        $('.skill-filter').removeClass('is-active').attr('aria-pressed', 'false');
+    }
 
+    $('.skill-filter').attr('aria-pressed', 'false');
+
+    $('.skill-filter').on('click', function () {
+        const $pill = $(this);
+        const language = String($pill.data('language') || '').toLowerCase().trim();
+        const $grid = $('.project-grid');
+        const $cards = $('.project-card');
+
+        if (!language || !$grid.length || !$cards.length) return;
+
+        const alreadyActive = $pill.hasClass('is-active');
+
+        clearLanguageProjectHighlights();
+
+        if (alreadyActive) {
+            $('html, body').animate({
+                scrollTop: $('#projects-section').offset().top - 110
+            }, 450);
+            return;
+        }
+
+        const $matches = $cards.filter(function () {
+            const langs = String($(this).attr('data-languages') || '').toLowerCase().split(/\s+/);
+            return langs.includes(language);
+        });
+
+        $pill.addClass('is-active').attr('aria-pressed', 'true');
+        $grid.addClass('language-filter-active');
+        $matches.addClass('language-match');
+
+        $('html, body').animate({
+            scrollTop: $('#projects-section').offset().top - 110
+        }, 450);
+    });
+    /* Reset language highlighting when a project tile is clicked */
+    $('.project-tile').on('click', function () {
+        clearLanguageProjectHighlights();
+    });
 });
