@@ -230,6 +230,14 @@ p {
     font-size: 0.92rem;
 }
 
+.skill-filter-hint {
+    margin-top: 25px;
+    font-size: 0.85rem;
+    color: var(--muted-text);
+    text-align: center;
+    line-height: 1.3;
+}
+
 @media (min-width: 992px) {
     .skills-row [class*="col-"] {
         display: flex;
@@ -645,8 +653,21 @@ p {
     vertical-align: -1px;
 }
 
-/* Skills -> Projects language highlighting */
+/* Project tags dot separator (for .project-tags .tag) */
+.project-tags .tag {
+    position: relative;
+    margin-right: 14px;
+}
 
+.project-tags .tag:not(:last-child)::after {
+    content: "•";
+    position: absolute;
+    right: -10px;
+    color: var(--muted-text);
+    font-weight: 700;
+}
+
+/* Skills -> Projects language highlighting */
 .skill-filter {
     cursor: pointer;
     appearance: none;

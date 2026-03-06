@@ -140,6 +140,7 @@ $(document).ready(function () {
             }
         });
     });
+
     /* Language pills -> scroll to projects and highlight matching cards */
     function clearLanguageProjectHighlights() {
         $('.project-grid').removeClass('language-filter-active');
@@ -181,6 +182,7 @@ $(document).ready(function () {
             scrollTop: $('#projects-section').offset().top - 110
         }, 450);
     });
+    
     /* Reset language highlighting when a project tile is clicked */
     $('.project-tile').on('click', function () {
         clearLanguageProjectHighlights();
