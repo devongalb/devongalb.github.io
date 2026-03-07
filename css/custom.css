@@ -578,6 +578,7 @@ p {
     box-shadow: 0 8px 18px var(--card-shadow);
     white-space: nowrap;
 }
+
 .award-pill span[class^="icon-"] {
     margin-right: 6px;
     vertical-align: -1px;
@@ -614,16 +615,78 @@ p {
 /* Fix education pill layout on small screens */
 @media (max-width: 576px) {
 
-  .service-item-meta {
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 6px;
-  }
+    .service-item-meta {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 6px;
+    }
 
-  .service-item-meta .award-pill {
-    align-self: flex-start;
-  }
+    .service-item-meta .award-pill {
+        align-self: flex-start;
+    }
+}
 
+/* Highlight current degree (USD) slightly more */
+.usd-education .service-item-title {
+    font-weight: 900;
+}
+
+.usd-education {
+    background: var(--card-bg);
+    border-radius: 14px;
+    border-left: 4px solid var(--brand-navy);
+    padding-left: 12px;
+}
+
+/* Education coursework dropdown */
+
+.education-meta-row {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.education-toggle {
+    margin-top: 10px;
+    border: none;
+    background: transparent;
+    color: var(--brand-navy);
+    font-weight: 700;
+    cursor: pointer;
+    font-size: 0.9rem;
+    padding: 0;
+}
+
+.education-toggle:hover {
+    text-decoration: underline;
+}
+
+.education-courses {
+    margin-top: 12px;
+}
+
+.education-course-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 14px;
+}
+
+.education-course-card {
+    background: color-mix(in srgb, var(--card-bg) 85%, transparent);
+    border: 1px solid var(--card-border);
+    border-radius: 14px;
+    padding: 14px;
+    height: 100%;
+}
+
+.course-group {
+    margin-bottom: 10px;
+}
+
+@media (max-width: 767.98px) {
+    .education-course-grid {
+        grid-template-columns: 1fr;
+    }
 }
 
 /* Inline project detail under tile */
@@ -763,4 +826,3 @@ p {
     margin-right: 6px;
     vertical-align: -1px;
 }
-

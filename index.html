@@ -181,18 +181,50 @@
             <div class="service-timeline">
 
               <!-- USD -->
-              <div class="service-item">
+              <div class="service-item usd-education">
                 <div class="service-item-header">
                   <h4 class="service-item-title mb-1">University of San Diego</h4>
                   <div class="service-item-meta">
                     <span class="service-item-unit">Bachelor of Science in Computer Science</span>
                     <span class="award-pill expected-pill">
-                    <span class="icon-clock"></span> May 2027</span>
+                      <span class="icon-clock"></span> May 2027</span>
+                  </div>
+                  <button class="education-toggle collapsed" data-toggle="collapse" data-target="#usdCourses"
+                    aria-expanded="false">
+                    View Coursework
+                  </button>
+                </div>
+
+                <div id="usdCourses" class="collapse education-courses">
+                  <div class="education-course-grid">
+
+                    <div class="education-course-card">
+                      <div class="course-group">
+                        <strong>Core Computer Science</strong>
+                        <ul class="ul-dot">
+                          <li>Programming Abstractions and Methods</li>
+                          <li>Advanced Computational Problem Modeling</li>
+                          <li>Object-Oriented Software Design</li>
+                          <li>Networking</li>
+                        </ul>
+                      </div>
+                    </div>
+
+                    <div class="education-course-card">
+                      <div class="course-group">
+                        <strong>Mathematical Foundations</strong>
+                        <ul class="ul-dot">
+                          <li>Discrete Mathematics</li>
+                          <li>Linear Algebra</li>
+                          <li>Engineering Probability &amp; Statistics</li>
+                          <li>Calculus I/II</li>
+                        </ul>
+                      </div>
+                    </div>
+
                   </div>
                 </div>
               </div>
-              <!---->
-
               <!-- UMGC -->
               <div class="service-item">
                 <div class="service-item-header">
@@ -200,7 +232,7 @@
                   <div class="service-item-meta">
                     <span class="service-item-unit">Associate of Arts in General Studies</span>
                     <span class="award-pill">
-                    <span class="icon-graduation-cap"></span> Degree Awarded</span>
+                      <span class="icon-graduation-cap"></span> Degree Awarded</span>
                   </div>
                 </div>
               </div>
@@ -213,7 +245,7 @@
                   <div class="service-item-meta">
                     <span class="service-item-unit">Associate in Applied Science in Emergency Management</span>
                     <span class="award-pill">
-                    <span class="icon-graduation-cap"></span> Degree Awarded</span>
+                      <span class="icon-graduation-cap"></span> Degree Awarded</span>
                   </div>
                 </div>
               </div>
@@ -262,8 +294,7 @@
                   aria-label="Show Java projects">
                   <i class="devicon-java-plain"></i> Java
                 </button>
-                <button type="button" class="skill-pill skill-filter" data-language="c" 
-                  aria-label="Show C projects">
+                <button type="button" class="skill-pill skill-filter" data-language="c" aria-label="Show C projects">
                   <i class="devicon-c-plain"></i>
                 </button>
                 <button type="button" class="skill-pill skill-filter" data-language="cpp"
@@ -316,7 +347,7 @@
                   <h3 class="project-tile-title">Birthday Paradox Simulation Engine</h3>
                 </div>
                 <p class="project-tile-blurb">
-                  Simulation framework to compare experimental convergence 
+                  Simulation framework to compare experimental convergence
                   against theoretical probability.
                 </p>
                 <div class="project-tile-cta">View details</div>
@@ -336,13 +367,13 @@
                   <h3 class="project-tile-title">Real-Time Multi-Modal Control System</h3>
                 </div>
                 <p class="project-tile-blurb">
-                  Incorporated keyboard, gesture, color, finger, and head 
+                  Incorporated keyboard, gesture, color, finger, and head
                   tracking inputs for a grid-based game.</p>
-                  <div class="project-tile-cta">View details</div>
-                  <div class="project-tile-tags">
-                    <span class="tag" title="Python"><i class="devicon-python-plain"></i> </span>
-                    <span class="tag" title="OpenCV"><i class="devicon-opencv-plain"></i> </span>
-                  </div>
+                <div class="project-tile-cta">View details</div>
+                <div class="project-tile-tags">
+                  <span class="tag" title="Python"><i class="devicon-python-plain"></i> </span>
+                  <span class="tag" title="OpenCV"><i class="devicon-opencv-plain"></i> </span>
+                </div>
               </div>
             </button>
           </div>
@@ -356,12 +387,12 @@
                   <h3 class="project-tile-title">Workflow Automation – U.S. Air Force</h3>
                 </div>
                 <p class="project-tile-blurb">
-                  Microsoft Power Automate and Power Apps workflows to 
+                  Microsoft Power Automate and Power Apps workflows to
                   streamline time-sensitive operational coordination. </p>
-                  <div class="project-tile-cta">View details</div>
-                  <div class="project-tile-tags">
-                  </div>
+                <div class="project-tile-cta">View details</div>
+                <div class="project-tile-tags">
                 </div>
+              </div>
             </button>
           </div>
 
@@ -374,7 +405,7 @@
                   <h3 class="project-tile-title">Personnel Readiness Dashboard – U.S. Air Force</h3>
                 </div>
                 <p class="project-tile-blurb">
-                  SharePoint-based dashboard with JSON-driven status indicators 
+                  SharePoint-based dashboard with JSON-driven status indicators
                   to improve readiness tracking and reporting accuracy.
                 </p>
                 <div class="project-tile-cta">View details</div>
@@ -394,7 +425,7 @@
                   <h3 class="project-tile-title">Distributed Time Sync Protocol</h3>
                 </div>
                 <p class="project-tile-blurb">
-                  Custom client–server protocol to transmit time-synchronized 
+                  Custom client–server protocol to transmit time-synchronized
                   messages using low-level sockets.
                 </p>
                 <div class="project-tile-cta">View details</div>
@@ -414,7 +445,7 @@
                   <h3 class="project-tile-title">Finite-State Code Analyzer</h3>
                 </div>
                 <p class="project-tile-blurb">
-                  Deterministic parser to compute SLOC/statement metrics 
+                  Deterministic parser to compute SLOC/statement metrics
                   across multiple files.
                 </p>
                 <div class="project-tile-cta">View details</div>
@@ -434,7 +465,7 @@
                   <h3 class="project-tile-title">Binary Record Decoder</h3>
                 </div>
                 <p class="project-tile-blurb">
-                  Decoded structured binary records using packed layouts, 
+                  Decoded structured binary records using packed layouts,
                   bit fields, and masking logic.
                 </p>
                 <div class="project-tile-cta">View details</div>
@@ -454,7 +485,7 @@
                   <h3 class="project-tile-title">Data Structures Library</h3>
                 </div>
                 <p class="project-tile-blurb">
-                  Custom generic lists and measured runtime performance 
+                  Custom generic lists and measured runtime performance
                   against expected Big-O behavior.
                 </p>
                 <div class="project-tile-cta">View details</div>
@@ -474,7 +505,7 @@
                   <h3 class="project-tile-title">Search Structures & Heaps</h3>
                 </div>
                 <p class="project-tile-blurb">
-                  Implemented trees and priority queues, analyzing performance 
+                  Implemented trees and priority queues, analyzing performance
                   tradeoffs and structural edge cases.
                 </p>
                 <div class="project-tile-cta">View details</div>
