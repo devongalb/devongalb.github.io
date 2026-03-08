@@ -8,8 +8,8 @@
     --site-text: #1f2937;
 
     --card-bg: #ffffff;
-    --card-border: rgba(0, 0, 0, 0.06);
-    --card-shadow: rgba(0, 0, 0, 0.06);
+    --card-border: rgba(15, 23, 42, 0.12);
+    --card-shadow: rgba(15, 23, 42, 0.10);
 
     --heading-text: #0f172a;
     --muted-text: #5b6472;
@@ -21,7 +21,7 @@
 
     --active-tile-bg: #eef2ff;
 
-    --section-divider: rgba(0, 0, 0, 0.08);
+    --section-divider: rgba(15, 23, 42, 0.12);
     --strip-mid: #f1f3f8;
     --strip-fade: rgba(247, 248, 251, 0);
 }
@@ -68,6 +68,31 @@
         /* dark fallback */
     }
 
+}
+
+/* Stronger light-mode separation for Windows / lower-contrast displays */
+@media (prefers-color-scheme: light) {
+    .skill-group,
+    .project-tile-inner,
+    .project-detail-card,
+    .service-timeline,
+    .service-awards,
+    .education-course-card,
+    .featured-pill {
+        border-color: rgba(15, 23, 42, 0.12);
+        box-shadow: 0 12px 30px rgba(15, 23, 42, 0.08);
+    }
+
+    .service-subitem,
+    .project-inline-detail .project-detail-card {
+        border-color: rgba(15, 23, 42, 0.12);
+        box-shadow: 0 8px 22px rgba(15, 23, 42, 0.06);
+    }
+
+    .site-navbar {
+        border-bottom-color: rgba(15, 23, 42, 0.12);
+        box-shadow: 0 4px 16px rgba(15, 23, 42, 0.05);
+    }
 }
 
 .site-navbar {
