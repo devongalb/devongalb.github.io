@@ -272,6 +272,7 @@ p {
     transition: color .15s ease;
     line-height: 1;
 }
+
 .skill-pill span[class^="icon-"] {
     font-size: 1.05rem;
     color: var(--brand-navy);
@@ -425,6 +426,22 @@ p {
 .project-details-col {
     flex: 0 0 100%;
     max-width: 100%;
+}
+
+/* Smoother project detail expand/collapse */
+[id^="projectDetails"].collapsing {
+    transition: height 0.42s ease-in-out;
+}
+
+[id^="projectDetails"] .project-detail-card {
+    opacity: 0;
+    transform: translateY(-6px);
+    transition: opacity 0.28s ease, transform 0.28s ease;
+}
+
+[id^="projectDetails"].show .project-detail-card {
+    opacity: 1;
+    transform: translateY(0);
 }
 
 /* De-emphasize GitHub button */

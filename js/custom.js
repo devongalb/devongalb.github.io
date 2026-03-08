@@ -39,6 +39,30 @@ $(document).ready(function () {
         });
     }
 
+    function updateProjectTileLabels() {
+        $('.project-tile').each(function () {
+            const $tile = $(this);
+            const targetSel = $tile.data('target');
+            const $details = $(targetSel);
+            const isOpen = $tile.hasClass('is-active') && $details.length && $details.hasClass('show');
+
+            $tile.attr('aria-expanded', isOpen ? 'true' : 'false');
+            $tile.toggleClass('collapsed', !isOpen);
+            $tile.find('.project-tile-cta').text(isOpen ? 'Hide details' : 'View details');
+        });
+    }
+
+    function resetProjectDetailsAndHighlights() {
+        closeAllProjectDetails();
+        $('.project-tile').removeClass('is-active');
+        clearLanguageProjectHighlights();
+        updateProjectTileLabels();
+    }
+
+    $('[id^="projectDetails"]').removeClass('show').attr('aria-expanded', 'false');
+    $('.project-tile').addClass('collapsed').attr('aria-expanded', 'false');
+    updateProjectTileLabels();
+
     // Create/reuse a wrapper so we can remove it later (prevents "empty gap" cols)
     function ensureDetailsWrapper($details) {
         let $wrapper = $details.data('detailsWrapper');
@@ -91,12 +115,20 @@ $(document).ready(function () {
         $('.project-tile').removeClass('is-active');
 
         if (isOpen) {
+            $tile.removeClass('is-active');
+
+            // update label immediately for responsiveness
+            $tile.find('.project-tile-cta').text('View details');
+
             $details.collapse('hide');
+            updateProjectTileLabels();
             return;
         }
 
-        // Mark clicked as active
         $tile.addClass('is-active');
+
+        // update label immediately for responsiveness
+        $tile.find('.project-tile-cta').text('Hide details');
 
         // Insert details AFTER the last tile in the clicked visual row
         const $grid = $tile.closest('.project-grid');
@@ -129,6 +161,11 @@ $(document).ready(function () {
         }
 
         parkDetailsInHost($details);
+        updateProjectTileLabels();
+    });
+
+    $(document).on('shown.bs.collapse', '[id^="projectDetails"]', function () {
+    updateProjectTileLabels();
     });
 
     // On resize, park any hidden details back in host (and remove wrappers)
@@ -182,9 +219,52 @@ $(document).ready(function () {
             scrollTop: $('#projects-section').offset().top - 110
         }, 450);
     });
-    
+
     /* Reset language highlighting when a project tile is clicked */
     $('.project-tile').on('click', function () {
         clearLanguageProjectHighlights();
     });
+
+    /* Coursework toggle button text */
+    $('#usdCourses').on('show.bs.collapse', function () {
+        $('.education-toggle[data-target="#usdCourses"]').text('Hide Coursework');
+    });
+
+    $('#usdCourses').on('hide.bs.collapse', function () {
+        $('.education-toggle[data-target="#usdCourses"]').text('View Coursework');
+    });
+
+    /* Close open project details / clear language filters when clicking outside relevant UI */
+    $(document).on('click', function (e) {
+        const $target = $(e.target);
+
+        const clickedInsideTile = $target.closest('.project-tile').length > 0;
+        const clickedInsideOpenDetail = $target.closest('.project-detail-card').length > 0;
+        const clickedInsideSkillFilter = $target.closest('.skill-filter').length > 0;
+        const clickedNavbar = $target.closest('.site-navbar').length > 0;
+
+        const hasOpenDetails = $('[id^="projectDetails"].collapse.show').length > 0;
+        const hasActiveFilter = $('.skill-filter.is-active').length > 0;
+
+        if (clickedInsideTile || clickedInsideOpenDetail || clickedInsideSkillFilter || clickedNavbar) {
+            return;
+        }
+
+        if (hasOpenDetails || hasActiveFilter) {
+            resetProjectDetailsAndHighlights();
+        }
+    });
+
+    /* Escape clears open project details and active language filters */
+    $(document).on('keydown', function (e) {
+        if (e.key === 'Escape') {
+            const hasOpenDetails = $('[id^="projectDetails"].collapse.show').length > 0;
+            const hasActiveFilter = $('.skill-filter.is-active').length > 0;
+
+            if (hasOpenDetails || hasActiveFilter) {
+                resetProjectDetailsAndHighlights();
+            }
+        }
+    });
+
 });
