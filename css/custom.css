@@ -867,11 +867,6 @@ p {
     transition: opacity 180ms ease, transform 180ms ease;
 }
 
-
-.project-grid.language-filter-active .project-card[data-languages] {
-    opacity: 1;
-}
-
 .project-grid.language-filter-active .project-card.language-match {
     opacity: 1;
 }

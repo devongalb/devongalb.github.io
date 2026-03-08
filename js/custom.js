@@ -93,10 +93,6 @@ $(document).ready(function () {
         }
     }
 
-    // Start closed (prevents one being open on load)
-    $('[id^="projectDetails"]').removeClass('show').attr('aria-expanded', 'false');
-    $('.project-tile').addClass('collapsed').attr('aria-expanded', 'false');
-
     $('.project-tile').on('click', function (e) {
         e.preventDefault();
 
