@@ -375,6 +375,7 @@
 
             <div class="projects-grid">
 
+              <!-- Card: Fitness Tracker Web Application -->
               <div class="project-card" data-languages="javascript sql react postgresql">
                 <button class="project-tile collapsed" type="button" data-toggle="collapse"
                   data-target="#projectDetails10" aria-expanded="false" aria-controls="projectDetails10">
@@ -398,6 +399,7 @@
                 </button>
               </div>
 
+              <!-- Card: Readiness Tracker -->
               <div class="project-card" data-languages="sharepoint json powerapps power-automate">
                 <button class="project-tile collapsed" type="button" data-toggle="collapse"
                   data-target="#projectDetails9" aria-expanded="false" aria-controls="projectDetails9">
@@ -419,23 +421,24 @@
                 </button>
               </div>
 
-              <div class="project-card" data-languages="infrastructure operations systems">
+              <!-- Card: Quiet Hours Waiver Workflow -->
+              <div class="project-card" data-languages="sharepoint powerapps power-automate outlook">
                 <button class="project-tile collapsed" type="button" data-toggle="collapse"
                   data-target="#projectDetails11" aria-expanded="false" aria-controls="projectDetails11">
                   <div class="project-tile-inner">
                     <div class="project-tile-top">
-                      <h3 class="project-tile-title">Mission Systems Support</h3>
+                      <h3 class="project-tile-title">Quiet Hours Waiver Workflow</h3>
                       <span class="project-badge">Deployed System</span>
                     </div>
                     <p class="project-tile-blurb">
-                      Operational improvements to mission systems and communications infrastructure in Air Force
-                      environments.
+                      Automated SharePoint-based waiver workflow integrating Power Apps, Power Automate, and Outlook.
                     </p>
                     <div class="project-tile-cta">View details</div>
                     <div class="project-tile-tags">
-                      <span class="tag" title="Infrastructure"><i class="devicon-infrastructure-plain"></i></span>
-                      <span class="tag" title="Operations"><i class="devicon-operations-plain"></i></span>
-                      <span class="tag" title="Systems"><i class="devicon-systems-plain"></i></span>
+                      <span class="tag" title="SharePoint"><i class="devicon-sharepoint-plain"></i></span>
+                      <span class="tag" title="Power Apps"><span>PA</span></span>
+                      <span class="tag" title="Power Automate"><i class="devicon-powerautomate-plain"></i></span>
+                      <span class="tag" title="Outlook"><span>Outlook</span></span>
                     </div>
                   </div>
                 </button>
@@ -603,7 +606,7 @@
           <div class="col-lg-12" id="projectsDetailsGroup">
 
             <!-- PROJECT DETAILS: Fitness Tracker Web Application -->
-            <div id="projectDetails10" class="collapse" data-parent="#projectsDetailsGroup">
+            <div id="projectDetails10" class="collapse">
               <div class="project-detail-card" data-aos="fade-up">
                 <div class="project-detail-header">
                   <h3 class="mb-1">Fitness Tracker Web Application</h3>
@@ -727,42 +730,60 @@
             </div>
 
             <!-- PROJECT DETAILS: Mission Monitoring & Infrastructure Improvements -->
-            <div id="projectDetails11" class="collapse" data-parent="#projectsDetailsGroup">
+            <div id="projectDetails11" class="collapse">
               <div class="project-detail-card" data-aos="fade-up">
                 <div class="project-detail-header">
-                  <h3 class="mb-1">Mission Monitoring & Infrastructure Improvements</h3>
+                  <h3 class="mb-1">Quiet Hours Waiver Workflow</h3>
                   <div class="project-tags">
-                    <span class="tag">Infrastructure</span>
-                    <span class="tag">Operations</span>
-                    <span class="tag">Reliability</span>
+                    <span class="tag">SharePoint</span>
+                    <span class="tag">Power Apps</span>
+                    <span class="tag">Power Automate</span>
+                    <span class="tag">Outlook</span>
                   </div>
                 </div>
 
-                <p class="mb-2"><strong>Work Performed</strong></p>
+                <p class="mb-2"><strong>Problem</strong></p>
+                <p class="mb-3">
+                  Quiet hours waiver requests relied on a manual process that made submission, routing, approval,
+                  and notification slower and harder to track. The workflow lacked a centralized system for visibility,
+                  consistent approvals, and reliable communication between requestors and decision-makers.
+                </p>
+
+                <p class="mb-2"><strong>Approach</strong></p>
                 <ul class="ul-dot mb-3">
-                  <li>Rebuilt operational monitoring checklists and reporting workflows</li>
-                  <li>Supported command-and-control communications infrastructure</li>
-                  <li>Installed and configured mission communication systems</li>
-                  <li>Improved operational monitoring processes used by mission teams</li>
+                  <li>Designed a SharePoint-based workflow to centralize waiver intake and tracking</li>
+                  <li>Used Power Apps to create a structured front-end submission experience</li>
+                  <li>Used Power Automate to route requests, trigger approvals, and send notifications</li>
+                  <li>Integrated Outlook so stakeholders received updates and approval actions through email</li>
+                </ul>
+
+                <p class="mb-2"><strong>What I Built</strong></p>
+                <ul class="ul-dot mb-3">
+                  <li>SharePoint list and workflow structure to manage quiet hours waiver requests</li>
+                  <li>Power Apps form for standardized request submission</li>
+                  <li>Power Automate approval flow for routing, status changes, and notifications</li>
+                  <li>Outlook-connected messaging to keep requestors and approvers informed throughout the process</li>
                 </ul>
 
                 <p class="mb-2"><strong>Results / Impact</strong></p>
                 <ul class="ul-dot mb-3">
-                  <li>Improved reliability and clarity of operational monitoring procedures</li>
-                  <li>Supported mission-critical communications systems</li>
-                  <li>Reduced operational friction during mission monitoring</li>
+                  <li>Reduced manual coordination and improved consistency of waiver processing</li>
+                  <li>Created a clearer approval trail and better visibility into request status</li>
+                  <li>Improved turnaround and communication through automation and email integration</li>
                 </ul>
 
                 <p class="mb-2"><strong>What I Learned</strong></p>
                 <ul class="ul-dot mb-0">
-                  <li>How operational reliability depends on both technical systems and clear human workflows</li>
-                  <li>How infrastructure improvements can create outsized impact in time-sensitive environments</li>
+                  <li>How to translate an operational approval process into a structured software workflow</li>
+                  <li>How SharePoint, Power Apps, Power Automate, and Outlook can be integrated into a usable internal
+                    system</li>
+                  <li>How workflow design improves reliability, transparency, and process efficiency</li>
                 </ul>
               </div>
             </div>
 
             <!-- PROJECT DETAILS: Personnel Readiness Dashboard -->
-            <div id="projectDetails9" class="collapse" data-parent="#projectsDetailsGroup">
+            <div id="projectDetails9" class="collapse">
               <div class="project-detail-card" data-aos="fade-up">
                 <div class="project-detail-header">
                   <h3 class="mb-1">Personnel Readiness Dashboard – U.S. Air Force</h3>
@@ -817,7 +838,7 @@
             </div>
 
             <!-- Birthday Paradox details -->
-            <div id="projectDetails1" class="collapse" data-parent="#projectsDetailsGroup">
+            <div id="projectDetails1" class="collapse">
               <div class="project-detail-card" data-aos="fade-up">
                 <div class="project-detail-header">
                   <h3 class="mb-1">Birthday Paradox Simulation Engine</h3>
@@ -863,7 +884,7 @@
             </div>
 
             <!-- Game Controller System details -->
-            <div id="projectDetails2" class="collapse" data-parent="#projectsDetailsGroup">
+            <div id="projectDetails2" class="collapse">
               <div class="project-detail-card" data-aos="fade-up">
                 <div class="project-detail-header">
                   <h3 class="mb-1">Real-Time Multi-Modal Control System</h3>
@@ -913,7 +934,7 @@
 
 
             <!-- PROJECT DETAILS: Distributed Time Synchronization Protocol (C) -->
-            <div id="projectDetails4" class="collapse" data-parent="#projectsDetailsGroup">
+            <div id="projectDetails4" class="collapse">
               <div class="project-detail-card" data-aos="fade-up">
                 <div class="project-detail-header">
                   <h3 class="mb-1">Distributed Time Sync Protocol</h3>
@@ -960,7 +981,7 @@
             </div>
 
             <!-- PROJECT DETAILS: Finite-State Source Code Analyzer (C) -->
-            <div id="projectDetails5" class="collapse" data-parent="#projectsDetailsGroup">
+            <div id="projectDetails5" class="collapse">
               <div class="project-detail-card" data-aos="fade-up">
                 <div class="project-detail-header">
                   <h3 class="mb-1">Finite-State Code Analyzer</h3>
@@ -1007,7 +1028,7 @@
             </div>
 
             <!-- PROJECT DETAILS: Binary Record Decoder (C) -->
-            <div id="projectDetails6" class="collapse" data-parent="#projectsDetailsGroup">
+            <div id="projectDetails6" class="collapse">
               <div class="project-detail-card" data-aos="fade-up">
                 <div class="project-detail-header">
                   <h3 class="mb-1">Binary Record Decoder</h3>
@@ -1054,7 +1075,7 @@
             </div>
 
             <!-- PROJECT DETAILS: Data Structures Library (Java) -->
-            <div id="projectDetails7" class="collapse" data-parent="#projectsDetailsGroup">
+            <div id="projectDetails7" class="collapse">
               <div class="project-detail-card" data-aos="fade-up">
                 <div class="project-detail-header">
                   <h3 class="mb-1">Data Structures Library</h3>
@@ -1101,7 +1122,7 @@
             </div>
 
             <!-- PROJECT DETAILS: Search Structures & Heaps (Java) -->
-            <div id="projectDetails8" class="collapse" data-parent="#projectsDetailsGroup">
+            <div id="projectDetails8" class="collapse">
               <div class="project-detail-card" data-aos="fade-up">
                 <div class="project-detail-header">
                   <h3 class="mb-1">Search Structures & Heaps</h3>
