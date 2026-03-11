@@ -310,16 +310,20 @@
                   <i class="devicon-javascript-plain"></i> JavaScript
                 </button>
                 <button type="button" class="skill-pill skill-filter" data-language="c" aria-label="Show C projects">
-                  <i class="devicon-c-plain"></i>
+                  <i class="devicon-c-plain"></i> C
                 </button>
                 <button type="button" class="skill-pill skill-filter" data-language="cpp"
                   aria-label="Show C++ projects">
-                  <i class="devicon-cplusplus-plain"></i>
+                  <i class="devicon-cplusplus-plain"></i> C++
                 </button>
               </div>
               <p class="skill-filter-hint">Select a language to view related projects</p>
             </div>
           </div>
+
+        </div>
+
+        <div class="row skills-row" data-aos="fade-up">
 
           <div class="col-lg-6 mb-4">
             <div class="skill-group">
@@ -377,7 +381,7 @@
             <div class="projects-grid">
 
               <div class="project-card" data-languages="javascript sql react postgresql">
-                <button class="project-tile collapsed" type="button" data-target="#projectDetails10"
+                <button class="project-tile collapsed" type="button" data-toggle="collapse" data-target="#projectDetails10"
                   aria-expanded="false" aria-controls="projectDetails10">
                   <div class="project-tile-inner">
                     <div class="project-tile-top">
@@ -399,7 +403,7 @@
               </div>
 
               <div class="project-card" data-languages="sharepoint json powerapps power-automate">
-                <button class="project-tile collapsed" type="button" data-target="#projectDetails9"
+                <button class="project-tile collapsed" type="button" data-toggle="collapse" data-target="#projectDetails9"
                   aria-expanded="false" aria-controls="projectDetails9">
                   <div class="project-tile-inner">
                     <div class="project-tile-top">
@@ -420,7 +424,7 @@
               </div>
 
               <div class="project-card" data-languages="infrastructure operations systems">
-                <button class="project-tile collapsed" type="button" data-target="#projectDetails11"
+                <button class="project-tile collapsed" type="button" data-toggle="collapse" data-target="#projectDetails11"
                   aria-expanded="false" aria-controls="projectDetails11">
                   <div class="project-tile-inner">
                     <div class="project-tile-top">
@@ -454,7 +458,7 @@
 
               <!-- Card: Birthday Paradox -->
               <div class="project-card" data-languages="java">
-                <button class="project-tile collapsed" type="button" data-target="#projectDetails1"
+                <button class="project-tile collapsed" type="button" data-toggle="collapse" data-target="#projectDetails1"
                   aria-expanded="false" aria-controls="projectDetails1">
                   <div class="project-tile-inner">
                     <div class="project-tile-top">
@@ -474,7 +478,7 @@
 
               <!-- Card: Game Controller System -->
               <div class="project-card" data-languages="python">
-                <button class="project-tile collapsed" type="button" data-target="#projectDetails2"
+                <button class="project-tile collapsed" type="button" data-toggle="collapse" data-target="#projectDetails2"
                   aria-expanded="false" aria-controls="projectDetails2">
                   <div class="project-tile-inner">
                     <div class="project-tile-top">
@@ -494,7 +498,7 @@
 
               <!-- PROJECT CARD: Distributed Time Synchronization Protocol (C) -->
               <div class="project-card" data-languages="c">
-                <button class="project-tile collapsed" type="button" data-target="#projectDetails4"
+                <button class="project-tile collapsed" type="button" data-toggle="collapse" data-target="#projectDetails4"
                   aria-expanded="false" aria-controls="projectDetails4">
                   <div class="project-tile-inner">
                     <div class="project-tile-top">
@@ -514,7 +518,7 @@
 
               <!-- PROJECT CARD: Finite-State Source Code Analyzer (C) -->
               <div class="project-card" data-languages="c">
-                <button class="project-tile collapsed" type="button" data-target="#projectDetails5"
+                <button class="project-tile collapsed" type="button" data-toggle="collapse" data-target="#projectDetails5"
                   aria-expanded="false" aria-controls="projectDetails5">
                   <div class="project-tile-inner">
                     <div class="project-tile-top">
@@ -534,7 +538,7 @@
 
               <!-- PROJECT CARD: Binary Record Decoder (C) -->
               <div class="project-card" data-languages="c">
-                <button class="project-tile collapsed" type="button" data-target="#projectDetails6"
+                <button class="project-tile collapsed" type="button" data-toggle="collapse" data-target="#projectDetails6"
                   aria-expanded="false" aria-controls="projectDetails6">
                   <div class="project-tile-inner">
                     <div class="project-tile-top">
@@ -554,7 +558,7 @@
 
               <!-- PROJECT CARD: Data Structures Library (Java) -->
               <div class="project-card" data-languages="java">
-                <button class="project-tile collapsed" type="button" data-target="#projectDetails7"
+                <button class="project-tile collapsed" type="button" data-toggle="collapse" data-target="#projectDetails7"
                   aria-expanded="false" aria-controls="projectDetails7">
                   <div class="project-tile-inner">
                     <div class="project-tile-top">
@@ -574,7 +578,7 @@
 
               <!-- PROJECT CARD: BST + Heap Implementations (Java) -->
               <div class="project-card" data-languages="java">
-                <button class="project-tile collapsed" type="button" data-target="#projectDetails8"
+                <button class="project-tile collapsed" type="button" data-toggle="collapse" data-target="#projectDetails8"
                   aria-expanded="false" aria-controls="projectDetails8">
                   <div class="project-tile-inner">
                     <div class="project-tile-top">
@@ -601,7 +605,7 @@
               <div class="col-lg-12" id="projectsDetailsGroup">
 
                 <!-- PROJECT DETAILS: Fitness Tracker Web Application -->
-                <div id="projectDetails10" class="collapse">
+                <div id="projectDetails10" class="collapse" data-parent="#projectsDetailsGroup">
                   <div class="project-detail-card" data-aos="fade-up">
                     <div class="project-detail-header">
                       <h3 class="mb-1">Fitness Tracker Web Application</h3>
@@ -661,7 +665,7 @@
                 </div>
 
                 <!-- PROJECT DETAILS: Mission Monitoring & Infrastructure Improvements -->
-                <div id="projectDetails11" class="collapse">
+                <div id="projectDetails11" class="collapse" data-parent="#projectsDetailsGroup">
                   <div class="project-detail-card" data-aos="fade-up">
                     <div class="project-detail-header">
                       <h3 class="mb-1">Mission Monitoring & Infrastructure Improvements</h3>
@@ -696,7 +700,7 @@
                 </div>
 
                 <!-- PROJECT DETAILS: Personnel Readiness Dashboard -->
-                <div id="projectDetails9" class="collapse">
+                <div id="projectDetails9" class="collapse" data-parent="#projectsDetailsGroup">
                   <div class="project-detail-card" data-aos="fade-up">
                     <div class="project-detail-header">
                       <h3 class="mb-1">Personnel Readiness Dashboard – U.S. Air Force</h3>
@@ -751,7 +755,7 @@
                 </div>
 
                 <!-- Birthday Paradox details -->
-                <div id="projectDetails1" class="collapse">
+                <div id="projectDetails1" class="collapse" data-parent="#projectsDetailsGroup">
                   <div class="project-detail-card" data-aos="fade-up">
                     <div class="project-detail-header">
                       <h3 class="mb-1">Birthday Paradox Simulation Engine</h3>
@@ -797,7 +801,7 @@
                 </div>
 
                 <!-- Game Controller System details -->
-                <div id="projectDetails2" class="collapse">
+                <div id="projectDetails2" class="collapse" data-parent="#projectsDetailsGroup">
                   <div class="project-detail-card" data-aos="fade-up">
                     <div class="project-detail-header">
                       <h3 class="mb-1">Real-Time Multi-Modal Control System</h3>
@@ -847,7 +851,7 @@
 
 
                 <!-- PROJECT DETAILS: Distributed Time Synchronization Protocol (C) -->
-                <div id="projectDetails4" class="collapse">
+                <div id="projectDetails4" class="collapse" data-parent="#projectsDetailsGroup">
                   <div class="project-detail-card" data-aos="fade-up">
                     <div class="project-detail-header">
                       <h3 class="mb-1">Distributed Time Sync Protocol</h3>
@@ -894,7 +898,7 @@
                 </div>
 
                 <!-- PROJECT DETAILS: Finite-State Source Code Analyzer (C) -->
-                <div id="projectDetails5" class="collapse">
+                <div id="projectDetails5" class="collapse" data-parent="#projectsDetailsGroup">
                   <div class="project-detail-card" data-aos="fade-up">
                     <div class="project-detail-header">
                       <h3 class="mb-1">Finite-State Code Analyzer</h3>
@@ -941,7 +945,7 @@
                 </div>
 
                 <!-- PROJECT DETAILS: Binary Record Decoder (C) -->
-                <div id="projectDetails6" class="collapse">
+                <div id="projectDetails6" class="collapse" data-parent="#projectsDetailsGroup">
                   <div class="project-detail-card" data-aos="fade-up">
                     <div class="project-detail-header">
                       <h3 class="mb-1">Binary Record Decoder</h3>
@@ -988,7 +992,7 @@
                 </div>
 
                 <!-- PROJECT DETAILS: Data Structures Library (Java) -->
-                <div id="projectDetails7" class="collapse">
+                <div id="projectDetails7" class="collapse" data-parent="#projectsDetailsGroup">
                   <div class="project-detail-card" data-aos="fade-up">
                     <div class="project-detail-header">
                       <h3 class="mb-1">Data Structures Library</h3>
@@ -1035,7 +1039,7 @@
                 </div>
 
                 <!-- PROJECT DETAILS: Search Structures & Heaps (Java) -->
-                <div id="projectDetails8" class="collapse">
+                <div id="projectDetails8" class="collapse" data-parent="#projectsDetailsGroup">
                   <div class="project-detail-card" data-aos="fade-up">
                     <div class="project-detail-header">
                       <h3 class="mb-1">Search Structures & Heaps</h3>
