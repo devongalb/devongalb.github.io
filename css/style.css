@@ -10,7 +10,7 @@ body {
   font-weight: 400;
   font-size: 1rem;
   background-color: #f7f8fb;
-  padding-top: 65px;
+  padding-top: 0;
 }
 
 ::-moz-selection {
@@ -411,6 +411,10 @@ body:after {
   background: #ffffff;
   border-bottom: 1px solid rgba(0, 0, 0, 0.05);
   transition: transform 0.3s ease-in-out;
+}
+
+#about-section {
+  padding-top: calc(3em + 65px);
 }
 
 /* Hide navbar on scroll down */
