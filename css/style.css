@@ -3035,3 +3035,61 @@ figure figcaption {
   display: block;
   margin-top: 24px;
 }
+/* Projects: keep expanded details full-width under the whole section */
+#projects-section {
+  overflow: visible;
+}
+
+#projects-section .project-grid {
+  display: block;
+}
+
+#projects-section .project-grid > .col-lg-12 {
+  max-width: 100%;
+  flex: 0 0 100%;
+}
+
+#projects-section #projectsDetailsGroup {
+  display: block;
+  width: 100%;
+  max-width: 100%;
+  flex: 0 0 100%;
+  padding-left: 15px;
+  padding-right: 15px;
+}
+
+#projects-section #projectsDetailsGroup > .collapse,
+#projects-section #projectsDetailsGroup > .collapsing {
+  display: block;
+  width: 100%;
+  max-width: 100%;
+}
+
+#projects-section #projectsDetailsGroup .project-detail-card {
+  display: block;
+  width: 100%;
+  max-width: 100%;
+  margin: 24px 0 0 0;
+  box-sizing: border-box;
+}
+
+/* Skills: two-by-two layout that fills the section on desktop */
+@media (min-width: 992px) {
+  #skills-section .skills-row {
+    display: flex;
+    flex-wrap: nowrap;
+    margin-left: -15px;
+    margin-right: -15px;
+  }
+
+  #skills-section .skills-row > .col-lg-6 {
+    flex: 0 0 50%;
+    max-width: 50%;
+    display: flex;
+  }
+
+  #skills-section .skill-group {
+    width: 100%;
+    height: 100%;
+  }
+}
