@@ -986,3 +986,102 @@ p {
 .scroll-top-btn:hover {
     transform: translateY(-3px);
 }
+
+.project-detail-media {
+    margin-bottom: 20px;
+}
+
+.project-detail-image {
+    width: 100%;
+    border-radius: 14px;
+    border: 1px solid var(--card-border);
+    box-shadow: 0 10px 28px var(--card-shadow);
+    display: block;
+}
+
+.project-detail-media-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 16px;
+    margin-bottom: 20px;
+}
+
+@media (max-width: 767.98px) {
+    .project-detail-media-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* =========================================
+    PROJECT DETAIL MEDIA (IMAGES / VIDEOS)
+========================================= */
+
+.project-carousel {
+    margin-bottom: 24px;
+}
+
+.project-carousel .carousel-inner {
+    border-radius: 14px;
+    overflow: hidden;
+    border: 1px solid var(--card-border);
+    box-shadow: 0 12px 30px var(--card-shadow);
+    background: var(--card-bg-2);
+}
+
+.project-carousel-img {
+    display: block;
+    width: 100%;
+    max-height: 640px;
+    object-fit: contain;
+    background: #06142d;
+}
+
+.project-carousel-caption {
+    padding: 12px 16px 14px;
+    font-size: 0.95rem;
+    color: var(--muted-text);
+    background: var(--card-bg);
+    border-top: 1px solid var(--card-border);
+}
+
+.project-carousel-indicators {
+    position: static;
+    margin: 14px 0 12px;
+}
+
+.project-carousel-indicators li {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background-color: rgba(255, 255, 255, 0.28);
+    border: none;
+}
+
+.project-carousel-indicators .active {
+    background-color: var(--brand-navy);
+}
+
+.project-carousel .carousel-control-prev,
+.project-carousel .carousel-control-next {
+    width: 52px;
+    opacity: 0.95;
+}
+
+.project-carousel .carousel-control-prev-icon,
+.project-carousel .carousel-control-next-icon {
+    width: 34px;
+    height: 34px;
+    border-radius: 50%;
+    background-color: rgba(0, 0, 0, 0.45);
+    background-size: 55% 55%;
+}
+
+@media (max-width: 767.98px) {
+    .project-carousel-img {
+        max-height: 520px;
+    }
+
+    .project-carousel-caption {
+        font-size: 0.9rem;
+    }
+}
