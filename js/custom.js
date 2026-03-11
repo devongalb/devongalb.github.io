@@ -53,11 +53,16 @@ $(document).ready(function () {
 
     function ensureInlineWrapper($details) {
         let $wrapper = $details.data('inlineWrapper');
-        if ($wrapper && $wrapper.length) return $wrapper;
 
-        $wrapper = $('<div class="project-inline-detail"></div>');
-        $details.data('inlineWrapper', $wrapper);
-        $wrapper.append($details);
+        if (!$wrapper || !$wrapper.length) {
+            $wrapper = $('<div class="project-inline-detail"></div>');
+            $details.data('inlineWrapper', $wrapper);
+        }
+
+        if (!$details.parent().is($wrapper)) {
+            $details.detach().appendTo($wrapper);
+        }
+
         return $wrapper;
     }
 
