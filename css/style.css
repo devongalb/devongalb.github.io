@@ -3011,3 +3011,27 @@ figure figcaption {
   max-width: 100%;
   margin-top: 24px;
 }
+
+/* Force project detail panels to span the full projects section width */
+#projects-section .row.project-grid {
+  margin-left: 0;
+  margin-right: 0;
+}
+
+#projects-section #projectsDetailsGroup {
+  width: 100%;
+  max-width: 100%;
+  flex: 0 0 100%;
+}
+
+#projects-section #projectsDetailsGroup .collapse,
+#projects-section #projectsDetailsGroup .collapsing,
+#projects-section #projectsDetailsGroup .project-detail-card {
+  width: 100%;
+  max-width: 100%;
+}
+
+#projects-section #projectsDetailsGroup .project-detail-card {
+  display: block;
+  margin-top: 24px;
+}
