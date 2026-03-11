@@ -1,4 +1,3 @@
-
 $(document).ready(function () {
 
     /* Auto-collapse mobile navbar after clicking a link */
@@ -28,7 +27,7 @@ $(document).ready(function () {
         lastScrollTop = currentScroll <= 0 ? 0 : currentScroll;
     });
 
-    /* Projects: keep same-row tiles in place; details insert after last tile in row */
+    /* Projects: shared full-width details area */
     const $detailsHost = $('#projectsDetailsGroup');
 
     function closeAllProjectDetails(exceptId) {
@@ -44,54 +43,28 @@ $(document).ready(function () {
             const $tile = $(this);
             const targetSel = $tile.data('target');
             const $details = $(targetSel);
-            const isOpen = $tile.hasClass('is-active') && $details.length && $details.hasClass('show');
+            const isOpen = $details.length && $details.hasClass('show');
 
             $tile.attr('aria-expanded', isOpen ? 'true' : 'false');
             $tile.toggleClass('collapsed', !isOpen);
+            $tile.toggleClass('is-active', isOpen);
+            $tile.closest('.project-card').toggleClass('project-card-active', isOpen);
             $tile.find('.project-tile-cta').text(isOpen ? 'Hide details' : 'View details');
         });
     }
 
     function resetProjectDetailsAndHighlights() {
         closeAllProjectDetails();
-        $('.project-tile').removeClass('is-active');
+        $('.project-tile').removeClass('is-active collapsed').addClass('collapsed');
+        $('.project-card').removeClass('project-card-active');
         clearLanguageProjectHighlights();
         updateProjectTileLabels();
     }
 
-    $('[id^="projectDetails"]').removeClass('show').attr('aria-expanded', 'false');
+    $('[id^="projectDetails"]').removeClass('show').attr('aria-expanded', 'false').appendTo($detailsHost);
     $('.project-tile').addClass('collapsed').attr('aria-expanded', 'false');
+    $('.project-card').removeClass('project-card-active');
     updateProjectTileLabels();
-
-    // Create/reuse a wrapper so we can remove it later (prevents "empty gap" cols)
-    function ensureDetailsWrapper($details) {
-        let $wrapper = $details.data('detailsWrapper');
-        if ($wrapper && $wrapper.length) return $wrapper;
-
-        $wrapper = $('<div class="col-12 project-details-col"></div>');
-        $details.data('detailsWrapper', $wrapper);
-        $wrapper.append($details);
-        return $wrapper;
-    }
-
-    // When parking details back in the hidden host, remove the wrapper too
-    function parkDetailsInHost($details) {
-        const $wrapper = $details.data('detailsWrapper');
-
-        // Remove wrapper from grid if it exists
-        if ($wrapper && $wrapper.length) {
-            $wrapper.detach();
-        }
-
-        // Put the details back into the shared host
-        $details.detach().appendTo($detailsHost);
-
-        // Cleanup wrapper so it doesn't leave a blank col behind
-        if ($wrapper && $wrapper.length) {
-            $wrapper.remove();
-            $details.removeData('detailsWrapper');
-        }
-    }
 
     $('.project-tile').on('click', function (e) {
         e.preventDefault();
@@ -104,74 +77,28 @@ $(document).ready(function () {
         const detailId = $details.attr('id');
         const isOpen = $details.hasClass('show');
 
-        // Close any other open detail
         closeAllProjectDetails(detailId);
 
-        // Clear active state from all tiles
-        $('.project-tile').removeClass('is-active');
-
         if (isOpen) {
-            $tile.removeClass('is-active');
-
-            // update label immediately for responsiveness
-            $tile.find('.project-tile-cta').text('View details');
-
             $details.collapse('hide');
-            updateProjectTileLabels();
             return;
         }
 
-        $tile.addClass('is-active');
-
-        // update label immediately for responsiveness
-        $tile.find('.project-tile-cta').text('Hide details');
-
-        // Insert details AFTER the last tile in the clicked visual row
-        const $grid = $tile.closest('.project-grid');
-        const $col = $tile.closest('.col-md-6, .col-lg-4');
-
-        const $wrapper = ensureDetailsWrapper($details.detach()); // wrapper now owns details
-
-        if ($grid.length && $col.length) {
-            const clickedTop = $col[0].getBoundingClientRect().top;
-
-            const $sameRowCols = $grid.children('div').filter(function () {
-                if (!this.className || this.className.indexOf('col-') === -1) return false;
-                return Math.abs(this.getBoundingClientRect().top - clickedTop) < 2;
-            });
-
-            const $lastColInRow = $sameRowCols.length ? $sameRowCols.last() : $col;
-            $wrapper.insertAfter($lastColInRow);
-        } else {
-            $wrapper.insertAfter($tile);
-        }
-
-        $details.collapse('show');
+        $details.appendTo($detailsHost).collapse('show');
     });
 
     $(document).on('hidden.bs.collapse', '[id^="projectDetails"]', function () {
-        const $details = $(this);
-
-        if ($('[id^="projectDetails"].collapse.show').length === 0) {
-            $('.project-tile').removeClass('is-active');
-        }
-
-        parkDetailsInHost($details);
         updateProjectTileLabels();
     });
 
     $(document).on('shown.bs.collapse', '[id^="projectDetails"]', function () {
-    updateProjectTileLabels();
-    });
+        updateProjectTileLabels();
 
-    // On resize, park any hidden details back in host (and remove wrappers)
-    $(window).on('resize', function () {
-        $('[id^="projectDetails"]').each(function () {
-            const $d = $(this);
-            if (!$d.hasClass('show')) {
-                parkDetailsInHost($d);
-            }
-        });
+        if ($detailsHost.length) {
+            $('html, body').animate({
+                scrollTop: $detailsHost.offset().top - 110
+            }, 450);
+        }
     });
 
     /* Language pills -> scroll to projects and highlight matching cards */
