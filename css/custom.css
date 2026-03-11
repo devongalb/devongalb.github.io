@@ -473,6 +473,11 @@ p {
     padding: 22px;
 }
 
+.project-inline-detail {
+    width: 100%;
+    grid-column: 1 / -1;
+}
+
 .project-detail-header {
     display: flex;
     flex-wrap: wrap;
@@ -935,40 +940,4 @@ p {
 .btn .icon-envelope {
     margin-right: 6px;
     vertical-align: -1px;
-}
-
-/* Shared project details should span the full section width */
-#projects-section {
-    overflow: visible;
-}
-
-#projects-section .row.project-grid,
-#projects-section .projects-grid {
-    overflow: visible;
-}
-
-#projects-section #projectsDetailsGroup {
-    display: block !important;
-    width: 100% !important;
-    max-width: 100% !important;
-    flex: 0 0 100% !important;
-    clear: both;
-    margin-left: 0 !important;
-    margin-right: 0 !important;
-    padding-left: 15px !important;
-    padding-right: 15px !important;
-}
-
-#projects-section #projectsDetailsGroup > .collapse,
-#projects-section #projectsDetailsGroup > .collapsing,
-#projects-section #projectsDetailsGroup .project-detail-card {
-    display: block;
-    width: 100% !important;
-    max-width: 100% !important;
-    min-width: 100% !important;
-    box-sizing: border-box;
-}
-
-#projects-section #projectsDetailsGroup .project-detail-card {
-    margin: 24px 0 0 0 !important;
 }

@@ -27,9 +27,7 @@ $(document).ready(function () {
         lastScrollTop = currentScroll <= 0 ? 0 : currentScroll;
     });
 
-    /* Projects: shared full-width details area */
-    const $detailsHost = $('#projectsDetailsGroup');
-
+    /* Projects: inline details under the selected card */
     function closeAllProjectDetails(exceptId) {
         $('[id^="projectDetails"].collapse.show').each(function () {
             if (!exceptId || this.id !== exceptId) {
@@ -53,15 +51,41 @@ $(document).ready(function () {
         });
     }
 
+    function ensureInlineWrapper($details) {
+        let $wrapper = $details.data('inlineWrapper');
+        if ($wrapper && $wrapper.length) return $wrapper;
+
+        $wrapper = $('<div class="project-inline-detail"></div>');
+        $details.data('inlineWrapper', $wrapper);
+        $wrapper.append($details);
+        return $wrapper;
+    }
+
+    function parkDetailsBackInHost($details) {
+        const $host = $('#projectsDetailsGroup');
+        const $wrapper = $details.data('inlineWrapper');
+
+        if ($wrapper && $wrapper.length) {
+            $wrapper.detach();
+        }
+
+        $details.detach().appendTo($host);
+    }
+
     function resetProjectDetailsAndHighlights() {
         closeAllProjectDetails();
+        $('[id^="projectDetails"]').each(function () {
+            parkDetailsBackInHost($(this));
+        });
         $('.project-tile').removeClass('is-active collapsed').addClass('collapsed');
         $('.project-card').removeClass('project-card-active');
         clearLanguageProjectHighlights();
         updateProjectTileLabels();
     }
 
-    $('[id^="projectDetails"]').removeClass('show').attr('aria-expanded', 'false').appendTo($detailsHost);
+    $('[id^="projectDetails"]').each(function () {
+        $(this).removeClass('show').attr('aria-expanded', 'false').appendTo($('#projectsDetailsGroup'));
+    });
     $('.project-tile').addClass('collapsed').attr('aria-expanded', 'false');
     $('.project-card').removeClass('project-card-active');
     updateProjectTileLabels();
@@ -79,25 +103,34 @@ $(document).ready(function () {
 
         closeAllProjectDetails(detailId);
 
+        $('[id^="projectDetails"]').not($details).each(function () {
+            parkDetailsBackInHost($(this));
+        });
+
         if (isOpen) {
             $details.collapse('hide');
+            parkDetailsBackInHost($details);
             return;
         }
 
-        $details.appendTo($detailsHost).collapse('show');
+        const $wrapper = ensureInlineWrapper($details);
+        $wrapper.insertAfter($tile.closest('.project-card'));
+        $details.collapse('show');
     });
 
     $(document).on('hidden.bs.collapse', '[id^="projectDetails"]', function () {
+        const $details = $(this);
+        parkDetailsBackInHost($details);
         updateProjectTileLabels();
     });
 
     $(document).on('shown.bs.collapse', '[id^="projectDetails"]', function () {
         updateProjectTileLabels();
-
-        if ($detailsHost.length) {
+        const $wrapper = $(this).data('inlineWrapper');
+        if ($wrapper && $wrapper.length) {
             $('html, body').animate({
-                scrollTop: $detailsHost.offset().top - 110
-            }, 450);
+                scrollTop: $wrapper.offset().top - 110
+            }, 350);
         }
     });
 
