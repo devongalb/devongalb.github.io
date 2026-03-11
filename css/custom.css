@@ -961,7 +961,7 @@ p {
     justify-content: center;
 
     background: var(--brand-navy);
-    color: white;
+    color: var(--site-bg);
 
     border: none;
     cursor: pointer;
