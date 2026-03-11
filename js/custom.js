@@ -252,4 +252,32 @@ $(document).ready(function () {
         }
     });
 
+    /* Return to top button */
+
+    const scrollTopBtn = document.getElementById('scrollTopBtn');
+    const aboutSection = document.getElementById('about-section');
+
+    if (scrollTopBtn && aboutSection) {
+
+        window.addEventListener('scroll', function () {
+
+            const aboutBottom =
+                aboutSection.offsetTop + aboutSection.offsetHeight;
+
+            if (window.scrollY > aboutBottom) {
+                scrollTopBtn.classList.add('visible');
+            } else {
+                scrollTopBtn.classList.remove('visible');
+            }
+
+        });
+
+        scrollTopBtn.addEventListener('click', function () {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        });
+
+    }
 });

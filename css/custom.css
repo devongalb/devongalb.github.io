@@ -72,6 +72,7 @@
 
 /* Stronger light-mode separation for Windows / lower-contrast displays */
 @media (prefers-color-scheme: light) {
+
     .skill-group,
     .project-tile-inner,
     .project-detail-card,
@@ -261,8 +262,8 @@ p {
     font-size: 0.9rem;
 
     transition: transform .15s ease,
-                box-shadow .15s ease,
-                border-color .15s ease;
+        box-shadow .15s ease,
+        border-color .15s ease;
 }
 
 .skill-pill i,
@@ -300,7 +301,7 @@ p {
         margin-right: -15px;
     }
 
-    #skills-section .skills-row > .col-lg-6 {
+    #skills-section .skills-row>.col-lg-6 {
         flex: 0 0 50%;
         max-width: 50%;
         display: flex;
@@ -940,4 +941,48 @@ p {
 .btn .icon-envelope {
     margin-right: 6px;
     vertical-align: -1px;
+}
+
+/* =========================================
+        RETURN TO TOP BUTTON
+========================================= */
+
+.scroll-top-btn {
+    position: fixed;
+    bottom: 28px;
+    right: 28px;
+
+    width: 46px;
+    height: 46px;
+    border-radius: 50%;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    background: var(--brand-navy);
+    color: white;
+
+    border: none;
+    cursor: pointer;
+
+    box-shadow: 0 10px 24px var(--card-shadow);
+
+    opacity: 0;
+    transform: translateY(10px);
+    pointer-events: none;
+
+    transition: opacity .25s ease, transform .25s ease;
+
+    z-index: 9999;
+}
+
+.scroll-top-btn.visible {
+    opacity: 1;
+    transform: translateY(0);
+    pointer-events: auto;
+}
+
+.scroll-top-btn:hover {
+    transform: translateY(-3px);
 }
