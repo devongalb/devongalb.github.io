@@ -114,7 +114,20 @@ $(document).ready(function () {
         }
 
         const $wrapper = ensureInlineWrapper($details);
-        $wrapper.insertAfter($tile.closest('.project-card'));
+        const $card = $tile.closest('.project-card');
+        const $grid = $card.closest('.projects-grid');
+
+        if ($grid.length && $card.length) {
+            const clickedTop = Math.round($card[0].getBoundingClientRect().top);
+            const $rowCards = $grid.children('.project-card').filter(function () {
+                return Math.round(this.getBoundingClientRect().top) === clickedTop;
+            });
+            const $lastCardInRow = $rowCards.length ? $rowCards.last() : $card;
+            $wrapper.insertAfter($lastCardInRow);
+        } else {
+            $wrapper.insertAfter($card);
+        }
+
         $details.collapse('show');
     });
 
@@ -125,8 +138,24 @@ $(document).ready(function () {
     });
 
     $(document).on('shown.bs.collapse', '[id^="projectDetails"]', function () {
+        const $details = $(this);
+        const $wrapper = $details.data('inlineWrapper');
+        const detailId = $details.attr('id');
+        const $activeTile = $('.project-tile[data-target="#' + detailId + '"]');
+        const $activeCard = $activeTile.closest('.project-card');
+        const $grid = $activeCard.closest('.projects-grid');
+
+        if ($wrapper && $wrapper.length && $grid.length && $activeCard.length) {
+            const clickedTop = Math.round($activeCard[0].getBoundingClientRect().top);
+            const $rowCards = $grid.children('.project-card').filter(function () {
+                return Math.round(this.getBoundingClientRect().top) === clickedTop;
+            });
+            const $lastCardInRow = $rowCards.length ? $rowCards.last() : $activeCard;
+            $wrapper.insertAfter($lastCardInRow);
+        }
+
         updateProjectTileLabels();
-        const $wrapper = $(this).data('inlineWrapper');
+
         if ($wrapper && $wrapper.length) {
             $('html, body').animate({
                 scrollTop: $wrapper.offset().top - 110
