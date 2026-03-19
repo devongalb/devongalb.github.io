@@ -1085,3 +1085,30 @@ p {
         font-size: 0.9rem;
     }
 }
+
+.experience-impact {
+    margin-top: 10px;
+}
+
+.experience-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    margin-top: 6px;
+    font-weight: 500;
+    color: var(--accent-color);
+}
+
+.experience-link:hover {
+    text-decoration: underline;
+}
+
+.experience-pill.featured {
+    margin-left: 8px;
+    font-size: 0.75rem;
+    padding: 3px 8px;
+    border-radius: 999px;
+    background: rgba(255, 215, 0, 0.12);
+    color: #d4a017;
+    border: 1px solid rgba(255, 215, 0, 0.3);
+}
