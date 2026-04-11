@@ -504,6 +504,26 @@
 
             <div class="projects-grid">
 
+              <!-- PROJECT CARD: Elevator Simulation System (Java) -->
+              <div class="project-card" data-languages="java">
+                <button class="project-tile collapsed" type="button" data-toggle="collapse"
+                  data-target="#projectDetails12" aria-expanded="false" aria-controls="projectDetails12">
+                  <div class="project-tile-inner">
+                    <div class="project-tile-top">
+                      <h3 class="project-tile-title">Elevator Simulation System</h3>
+                    </div>
+                    <p class="project-tile-blurb">
+                      Object-oriented elevator simulation modeling multiple elevator types, scheduling strategies, and
+                      discrete event updates across a building.
+                    </p>
+                    <div class="project-tile-cta">View details</div>
+                    <div class="project-tile-tags">
+                      <span class="tag" title="Java"><i class="devicon-java-plain"></i></span>
+                    </div>
+                  </div>
+                </button>
+              </div>
+
               <!-- Card: Birthday Paradox -->
               <div class="project-card" data-languages="java">
                 <button class="project-tile collapsed" type="button" data-toggle="collapse"
@@ -884,6 +904,57 @@
                 </ul>
               </div>
             </div>
+
+            <!-- PROJECT DETAILS: Elevator Simulation System (Java) -->
+            <div id="projectDetails12" class="collapse">
+              <div class="project-detail-card" data-aos="fade-up">
+                <div class="project-detail-header">
+                  <h3 class="mb-1">Elevator Simulation System</h3>
+                  <div class="project-tags">
+                    <span class="tag">Java</span>
+                    <span class="tag">Object-Oriented Design</span>
+                    <span class="tag">Simulation</span>
+                    <span class="tag">Scheduling</span>
+                  </div>
+                </div>
+                <p class="mb-2"><strong>Problem</strong></p>
+                <p class="mb-3">
+                  Model a realistic elevator system where multiple elevator types follow different constraints while
+                  responding to calls across a building. The challenge was designing a system that correctly handles
+                  scheduling, movement, and state changes over time while keeping the design clean and extensible.
+                </p>
+
+                <p class="mb-2"><strong>Approach</strong></p>
+                <ul class="ul-dot mb-3">
+                  <li>Designed the system around object-oriented principles with a shared abstract elevator base class</li>
+                  <li>Separated scheduling logic behind a scheduler interface with both simple and complex strategies</li>
+                  <li>Simulated the system in discrete rounds where calls are assigned and elevators update state over time</li>
+                </ul>
+
+                <p class="mb-2"><strong>What I Built</strong></p>
+                <ul class="ul-dot mb-3">
+                  <li>Abstract elevator framework handling shared state and movement behavior</li>
+                  <li>Four specialized elevator types: standard, freight, penthouse, and express</li>
+                  <li>Two scheduling strategies for assigning calls based on order or efficiency</li>
+                  <li>Central simulator coordinating rounds, assignments, and system state updates</li>
+                </ul>
+
+                <p class="mb-2"><strong>Results / Impact</strong></p>
+                <ul class="ul-dot mb-3">
+                  <li>Created a flexible system that supports multiple elevator behaviors without changing core logic</li>
+                  <li>Demonstrated how different scheduling strategies impact overall system efficiency</li>
+                  <li>Ensured consistent and correct elevator movement and call handling across all scenarios</li>
+                </ul>
+
+                <p class="mb-2"><strong>What I Learned</strong></p>
+                <ul class="ul-dot mb-0">
+                  <li>Applying abstraction, inheritance, and polymorphism to model real-world systems</li>
+                  <li>Designing systems that follow SOLID principles and remain easy to extend</li>
+                  <li>Structuring simulations that balance correctness, clarity, and maintainability</li>
+                </ul>
+              </div>
+            </div>
+
 
             <!-- Birthday Paradox details -->
             <div id="projectDetails1" class="collapse">
