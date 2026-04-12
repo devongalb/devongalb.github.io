@@ -1112,3 +1112,46 @@ p {
     color: #d4a017;
     border: 1px solid rgba(255, 215, 0, 0.3);
 }
+
+.project-diagram {
+    margin: 24px 0;
+    text-align: center;
+}
+
+.uml-diagram {
+    width: 100%;
+    max-width: 450px;
+    /* controls preview size */
+    height: auto;
+    border-radius: 6px;
+    cursor: zoom-in;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.uml-diagram:hover {
+    transform: scale(1.03);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.25);
+}
+
+.diagram-caption {
+    font-size: 0.85rem;
+    color: var(--muted-text);
+    margin-top: 8px;
+}
+
+.uml-modal {
+    display: none;
+    position: fixed;
+    z-index: 9999;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.9);
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+}
+
+.uml-modal-content {
+    max-width: 95%;
+    max-height: 95%;
+    border-radius: 8px;
+}

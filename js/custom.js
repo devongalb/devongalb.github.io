@@ -231,12 +231,13 @@ $(document).ready(function () {
         const clickedInsideTile = $target.closest('.project-tile').length > 0;
         const clickedInsideOpenDetail = $target.closest('.project-detail-card').length > 0;
         const clickedInsideSkillFilter = $target.closest('.skill-filter').length > 0;
+        const clickedInsideUML = $target.closest('.project-diagram, .uml-modal, .uml-modal-content').length > 0;
         const clickedNavbar = $target.closest('.site-navbar').length > 0;
 
         const hasOpenDetails = $('[id^="projectDetails"].collapse.show').length > 0;
         const hasActiveFilter = $('.skill-filter.is-active').length > 0;
 
-        if (clickedInsideTile || clickedInsideOpenDetail || clickedInsideSkillFilter || clickedNavbar) {
+        if (clickedInsideTile || clickedInsideOpenDetail || clickedInsideSkillFilter || clickedInsideUML || clickedNavbar) {
             return;
         }
 
@@ -283,6 +284,18 @@ $(document).ready(function () {
                 behavior: 'smooth'
             });
         });
-
     }
+
+
 });
+
+function openUMLModal(src) {
+    const modal = document.getElementById("umlModal");
+    const img = document.getElementById("umlModalImg");
+    img.src = src;
+    modal.style.display = "flex";
+}
+
+function closeUMLModal() {
+    document.getElementById("umlModal").style.display = "none";
+}

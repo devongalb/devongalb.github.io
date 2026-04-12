@@ -939,6 +939,16 @@
                   <li>Central simulator coordinating rounds, assignments, and system state updates</li>
                 </ul>
 
+                <div class="project-diagram">
+                  <img src="images/projects/elevator-uml.png" 
+                      alt="Elevator Simulation UML Diagram"
+                      class="uml-diagram"
+                      onclick="openUMLModal(this.src)">
+                  <div class="diagram-caption">
+                    UML class diagram showing elevator hierarchy, scheduling strategy pattern, and simulator coordination.
+                  </div>
+                </div>
+
                 <p class="mb-2"><strong>Results / Impact</strong></p>
                 <ul class="ul-dot mb-3">
                   <li>Created a flexible system that supports multiple elevator behaviors without changing core logic</li>
@@ -1483,6 +1493,10 @@
     <span class="icon-arrow-up"></span>
   </button>
 
-</body>
+  <!-- UML Modal -->
+  <div id="umlModal" class="uml-modal" onclick="closeUMLModal()">
+    <img class="uml-modal-content" id="umlModalImg">
+  </div>
 
+</body>
 </html>
