@@ -82,7 +82,7 @@ $(document).ready(function () {
         $('[id^="projectDetails"]').each(function () {
             parkDetailsBackInHost($(this));
         });
-        $('.project-tile').removeClass('is-active collapsed').addClass('collapsed');
+        $('.project-tile').removeClass('is-active').addClass('collapsed');
         $('.project-card').removeClass('project-card-active');
         clearLanguageProjectHighlights();
         updateProjectTileLabels();
@@ -114,7 +114,6 @@ $(document).ready(function () {
 
         if (isOpen) {
             $details.collapse('hide');
-            parkDetailsBackInHost($details);
             return;
         }
 

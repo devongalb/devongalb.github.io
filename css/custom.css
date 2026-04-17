@@ -493,6 +493,7 @@ p {
     max-width: 100%;
 }
 
+
 /* Smoother project detail expand/collapse */
 [id^="projectDetails"].collapsing {
     transition: height 0.42s ease-in-out;
@@ -1154,4 +1155,11 @@ p {
     max-width: 95%;
     max-height: 95%;
     border-radius: 8px;
+}
+
+.uml-modal-content img {
+    max-width: 90%;
+    max-height: 80vh;
+    object-fit: contain;
+    cursor: zoom-in;
 }
