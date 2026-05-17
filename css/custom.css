@@ -1164,14 +1164,16 @@ p {
     cursor: zoom-in;
 }
 
-.project-terminal-output {
-    max-width: 520px;
-    margin-left: auto;
-    margin-right: auto;
+.project-video {
+    margin: 20px 0;
+    text-align: center;
 }
 
-.terminal-output-img {
-    max-height: 520px;
-    object-fit: contain;
-    cursor: zoom-in;
+.project-demo-video {
+    width: 100%;
+    max-width: 720px;
+    border-radius: 12px;
+    border: 1px solid var(--card-border);
+    box-shadow: 0 10px 28px var(--card-shadow);
+    background: #000;
 }
