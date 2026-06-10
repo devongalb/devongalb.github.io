@@ -1737,9 +1737,17 @@
             card.classList.remove('project-card--hidden');
             card.classList.add('project-card--expanded');
           } else {
-            card.style.display = 'none';
-            card.classList.add('project-card--hidden');
             card.classList.remove('project-card--expanded');
+            card.style.opacity = '0';
+            card.style.transition = 'opacity 0.25s ease';
+            setTimeout(function (c) {
+              return function () {
+                c.style.display = 'none';
+                c.style.opacity = '';
+                c.style.transition = '';
+                c.classList.add('project-card--hidden');
+              };
+            }(card), 260);
           }
         });
         btn.textContent = expanded ? 'Hide projects' : 'Show all projects';

@@ -1184,6 +1184,23 @@ p {
 
 .project-card--hidden {
     display: none;
+    opacity: 0;
+}
+
+.project-card--expanded {
+    animation: fadeInCard 0.35s ease forwards;
+}
+
+@keyframes fadeInCard {
+    from {
+        opacity: 0;
+        transform: translateY(8px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
 }
 
 .show-more-row {
