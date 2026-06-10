@@ -1725,13 +1725,26 @@
     }
   </script>
   <script>
-    document.getElementById('showMoreProjects').addEventListener('click', function () {
-      document.querySelectorAll('.project-card--hidden').forEach(function (card) {
-        card.style.display = '';
-        card.classList.remove('project-card--hidden');
+    (function () {
+      var btn = document.getElementById('showMoreProjects');
+      var expanded = false;
+
+      btn.addEventListener('click', function () {
+        expanded = !expanded;
+        document.querySelectorAll('.project-card--hidden, .project-card--expanded').forEach(function (card) {
+          if (expanded) {
+            card.style.display = '';
+            card.classList.remove('project-card--hidden');
+            card.classList.add('project-card--expanded');
+          } else {
+            card.style.display = 'none';
+            card.classList.add('project-card--hidden');
+            card.classList.remove('project-card--expanded');
+          }
+        });
+        btn.textContent = expanded ? 'Hide projects' : 'Show all projects';
       });
-      this.closest('.show-more-row').remove();
-    });
+    })();
   </script>
 
   <!-- Return to Top Button -->
