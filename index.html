@@ -425,7 +425,7 @@
 
             <div class="projects-grid">
 
-              <!-- Card: Fitness Tracker Web Application -->
+              <!-- PROJECT CARD: Fitness Tracker Web Application -->
               <div class="project-card" data-languages="javascript sql react postgresql">
                 <button class="project-tile collapsed" type="button" data-toggle="collapse"
                   data-target="#projectDetails10" aria-expanded="false" aria-controls="projectDetails10">
@@ -449,7 +449,7 @@
                 </button>
               </div>
 
-              <!-- Card: Readiness Tracker -->
+              <!-- PROJECT CARD: Readiness Tracker -->
               <div class="project-card" data-languages="sharepoint json powerapps power-automate">
                 <button class="project-tile collapsed" type="button" data-toggle="collapse"
                   data-target="#projectDetails9" aria-expanded="false" aria-controls="projectDetails9">
@@ -470,7 +470,7 @@
                 </button>
               </div>
 
-              <!-- Card: Quiet Hours Waiver Workflow -->
+              <!-- PROJECT CARD: Quiet Hours Waiver Workflow -->
               <div class="project-card" data-languages="sharepoint powerapps power-automate outlook">
                 <button class="project-tile collapsed" type="button" data-toggle="collapse"
                   data-target="#projectDetails11" aria-expanded="false" aria-controls="projectDetails11">
@@ -501,7 +501,7 @@
             </h3>
             <div class="projects-grid">
 
-              <!-- Additional project cards can be added -->
+              <!-- Additional project cards to be added -->
 
               <!-- PROJECT CARD: TCP Music Streaming System (C++ / Java) -->
               <div class="project-card" data-languages="cpp java">
@@ -563,7 +563,7 @@
                 </button>
               </div>
 
-              <!-- Card: Birthday Paradox -->
+              <!-- PROJECT CARD: Birthday Paradox -->
               <div class="project-card" data-languages="java">
                 <button class="project-tile collapsed" type="button" data-toggle="collapse"
                   data-target="#projectDetails1" aria-expanded="false" aria-controls="projectDetails1">
@@ -583,7 +583,7 @@
                 </button>
               </div>
 
-              <!-- Card: Game Controller System -->
+              <!-- PROJECT CARD: Game Controller System -->
               <div class="project-card" data-languages="python">
                 <button class="project-tile collapsed" type="button" data-toggle="collapse"
                   data-target="#projectDetails2" aria-expanded="false" aria-controls="projectDetails2">
@@ -624,7 +624,7 @@
               </div>
 
               <!-- PROJECT CARD: Finite-State Source Code Analyzer (C) -->
-              <div class="project-card" data-languages="c">
+              <div class="project-card project-card--hidden" data-languages="c">
                 <button class="project-tile collapsed" type="button" data-toggle="collapse"
                   data-target="#projectDetails5" aria-expanded="false" aria-controls="projectDetails5">
                   <div class="project-tile-inner">
@@ -644,7 +644,7 @@
               </div>
 
               <!-- PROJECT CARD: Binary Record Decoder (C) -->
-              <div class="project-card" data-languages="c">
+              <div class="project-card project-card--hidden" data-languages="c">
                 <button class="project-tile collapsed" type="button" data-toggle="collapse"
                   data-target="#projectDetails6" aria-expanded="false" aria-controls="projectDetails6">
                   <div class="project-tile-inner">
@@ -664,7 +664,7 @@
               </div>
 
               <!-- PROJECT CARD: Data Structures Library (Java) -->
-              <div class="project-card" data-languages="java">
+              <div class="project-card project-card--hidden" data-languages="java">
                 <button class="project-tile collapsed" type="button" data-toggle="collapse"
                   data-target="#projectDetails7" aria-expanded="false" aria-controls="projectDetails7">
                   <div class="project-tile-inner">
@@ -684,7 +684,7 @@
               </div>
 
               <!-- PROJECT CARD: BST + Heap Implementations (Java) -->
-              <div class="project-card" data-languages="java">
+              <div class="project-card project-card--hidden" data-languages="java">
                 <button class="project-tile collapsed" type="button" data-toggle="collapse"
                   data-target="#projectDetails8" aria-expanded="false" aria-controls="projectDetails8">
                   <div class="project-tile-inner">
@@ -708,6 +708,12 @@
             </div>
           </div>
         </div>
+        <div class="show-more-row">
+          <button id="showMoreProjects" class="btn btn-outline-secondary">
+            Show all projects
+          </button>
+        </div>
+
         <!-- Shared details area (expands under grid; only one open at a time via data-parent) -->
         <div class="row">
           <div class="col-lg-12" id="projectsDetailsGroup">
@@ -1171,7 +1177,7 @@
             </div>
 
 
-            <!-- Birthday Paradox details -->
+            <!-- PROJECT DETAILS: Birthday Paradox -->
             <div id="projectDetails1" class="collapse">
               <div class="project-detail-card" data-aos="fade-up">
                 <div class="project-detail-body">
@@ -1219,7 +1225,7 @@
               </div>
             </div>
 
-            <!-- Game Controller System details -->
+            <!-- PROJECT DETAILS: Game Controller System -->
             <div id="projectDetails2" class="collapse">
               <div class="project-detail-card" data-aos="fade-up">
                 <div class="project-detail-body">
@@ -1268,8 +1274,6 @@
                 </div>
               </div>
             </div>
-
-
 
             <!-- PROJECT DETAILS: Distributed Time Synchronization Protocol (C) -->
             <div id="projectDetails4" class="collapse">
@@ -1719,6 +1723,15 @@
         setTimeout(function () { btn.innerHTML = original; }, 2000);
       });
     }
+  </script>
+  <script>
+    document.getElementById('showMoreProjects').addEventListener('click', function () {
+      document.querySelectorAll('.project-card--hidden').forEach(function (card) {
+        card.style.display = '';
+        card.classList.remove('project-card--hidden');
+      });
+      this.closest('.show-more-row').remove();
+    });
   </script>
 
   <!-- Return to Top Button -->
