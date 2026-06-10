@@ -179,8 +179,7 @@
                   <span class="icon-file-text"></span> View Resume
                 </a>
 
-                <a href="resume/Devon_Galbraith.pdf" download="Devon_Galbraith_Resume.pdf"
-                  class="btn btn-primary m-1">
+                <a href="resume/Devon_Galbraith.pdf" download="Devon_Galbraith_Resume.pdf" class="btn btn-primary m-1">
                   <span class="icon-download"></span> Resume PDF
                 </a>
 
@@ -503,6 +502,27 @@
             <div class="projects-grid">
 
               <!-- Additional project cards can be added -->
+
+              <!-- PROJECT CARD: TCP Music Streaming System (C++ / Java) -->
+              <div class="project-card" data-languages="cpp java">
+                <button class="project-tile collapsed" type="button" data-toggle="collapse"
+                  data-target="#projectDetails14" aria-expanded="false" aria-controls="projectDetails14">
+                  <div class="project-tile-inner">
+                    <div class="project-tile-top">
+                      <h3 class="project-tile-title">TCP Music Streaming System</h3>
+                    </div>
+                    <p class="project-tile-blurb">
+                      Custom TCP protocol between a C++ server and Java client for reliable,
+                      on-demand audio streaming over a network.
+                    </p>
+                    <div class="project-tile-cta">View details</div>
+                    <div class="project-tile-tags">
+                      <span class="tag" title="C++"><i class="devicon-cplusplus-plain"></i></span>
+                      <span class="tag" title="Java"><i class="devicon-java-plain"></i></span>
+                    </div>
+                  </div>
+                </button>
+              </div>
 
               <!-- PROJECT CARD: DC Draft Simulation System (Java) -->
               <div class="project-card" data-languages="java">
@@ -930,6 +950,74 @@
                     <li>How to self-teach JSON formatting to extend SharePoint usability</li>
                     <li>How interface design and visual logic improve operational decision-making</li>
                     <li>How to structure tracking systems for both usability and reporting accuracy</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+
+            <!-- PROJECT DETAILS: TCP Music Streaming System -->
+            <div id="projectDetails14" class="collapse">
+              <div class="project-detail-card" data-aos="fade-up">
+                <div class="project-detail-body">
+                  <div class="project-detail-header">
+                    <h3 class="mb-1">TCP Music Streaming System</h3>
+                    <div class="project-tags">
+                      <span class="tag">C++</span>
+                      <span class="tag">Java</span>
+                      <span class="tag">TCP/IP</span>
+                      <span class="tag">Sockets</span>
+                      <span class="tag">Networking</span>
+                    </div>
+                  </div>
+
+                  <p class="mb-2"><strong>Problem</strong></p>
+                  <p class="mb-3">
+                    Needed to design and implement a reliable music streaming protocol from scratch,
+                    where a C++ server could accept client connections, handle song requests, and
+                    deliver audio data correctly over TCP without using any existing streaming libraries.
+                  </p>
+
+                  <p class="mb-2"><strong>Approach</strong></p>
+                  <ul class="ul-dot mb-3">
+                    <li>Designed a custom application-layer protocol on top of TCP defining message
+                      types, framing, and sequencing for control and data traffic</li>
+                    <li>Built the server in C++ to handle connection setup, catalog lookup, and
+                      chunked audio delivery</li>
+                    <li>Built the Java client to connect, browse available songs, issue requests,
+                      and reassemble received data</li>
+                    <li>Handled partial reads, framing edge cases, and connection teardown cleanly
+                      on both sides</li>
+                  </ul>
+
+                  <p class="mb-2"><strong>What I Built</strong></p>
+                  <ul class="ul-dot mb-3">
+                    <li>C++ TCP server with socket setup, client accept loop, and request dispatch</li>
+                    <li>Custom wire protocol with defined message headers, type codes, and payload
+                      framing</li>
+                    <li>Java client with connection management, catalog display, and audio data
+                      reassembly</li>
+                    <li>Reliable delivery logic handling buffering, partial reads, and graceful
+                      shutdown</li>
+                  </ul>
+
+                  <p class="mb-2"><strong>Results / Impact</strong></p>
+                  <ul class="ul-dot mb-3">
+                    <li>Successfully streamed audio between a C++ server and Java client over a
+                      real TCP connection</li>
+                    <li>Protocol correctly handled framing, sequencing, and teardown across all
+                      tested cases</li>
+                    <li>Reinforced how transport-layer guarantees and application-layer protocol
+                      design interact in practice</li>
+                  </ul>
+
+                  <p class="mb-2"><strong>What I Learned</strong></p>
+                  <ul class="ul-dot mb-0">
+                    <li>How to design a stateful application protocol on top of a stream-oriented
+                      transport</li>
+                    <li>Why framing, message boundaries, and partial I/O handling are non-trivial
+                      in real socket programming</li>
+                    <li>How cross-language systems (C++ server, Java client) require careful
+                      agreement on wire format and byte ordering</li>
                   </ul>
                 </div>
               </div>
@@ -1594,6 +1682,10 @@
             <span class="icon-envelope"></span> Email
           </a>
 
+          <button id="copyEmailBtn" class="btn btn-primary m-1" onclick="copyEmail()">
+            <span class="icon-copy"></span> Copy Email
+          </button>
+
         </p>
       </div>
     </section>
@@ -1611,13 +1703,23 @@
 
   </div>
 
-  <!-- Scripts (Bootstrap 4 needs Popper) -->
+  <!-- Scripts -->
   <script src="js/jquery-3.3.1.min.js"></script>
   <script src="js/popper.min.js"></script>
   <script src="js/bootstrap.min.js"></script>
   <script src="js/aos.js"></script>
   <script src="js/main.js"></script>
   <script src="js/custom.js"></script>
+  <script>
+    function copyEmail() {
+      navigator.clipboard.writeText('dgalbraith@sandiego.edu').then(function () {
+        const btn = document.getElementById('copyEmailBtn');
+        const original = btn.innerHTML;
+        btn.innerHTML = '<span class="icon-check"></span> Copied!';
+        setTimeout(function () { btn.innerHTML = original; }, 2000);
+      });
+    }
+  </script>
 
   <!-- Return to Top Button -->
   <button id="scrollTopBtn" class="scroll-top-btn" aria-label="Return to top">
