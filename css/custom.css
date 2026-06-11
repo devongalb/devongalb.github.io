@@ -1190,50 +1190,6 @@ p {
 }
 
 /* =========================================
-    PROJECTS: SHOW MORE
-   ========================================= */
-
-.project-card--hidden {
-    /* visibility managed by Isotope filter; class kept as JS marker */
-}
-
-.project-card--expanded {
-    animation: fadeInCard 0.35s ease forwards;
-}
-
-@keyframes fadeInCard {
-    from {
-        opacity: 0;
-        transform: translateY(8px);
-    }
-
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
-}
-
-.show-more-row {
-    text-align: center;
-    margin-top: 28px;
-}
-
-#showMoreProjects {
-    transition: opacity .2s ease;
-    border-radius: 999px;
-    padding: 10px 28px;
-    font-weight: 700;
-    border-color: var(--card-border);
-    color: var(--site-text);
-    background: var(--card-bg);
-}
-
-#showMoreProjects:hover {
-    border-color: var(--brand-navy);
-    color: var(--brand-navy);
-}
-
-/* =========================================
     PROJECT FILTER BAR
    ========================================= */
 
