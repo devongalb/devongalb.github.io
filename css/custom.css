@@ -1233,14 +1233,15 @@ p {
 }
 
 /* =========================================
-   PROJECT FILTER BAR
+    PROJECT FILTER BAR
    ========================================= */
 
 .project-filter-bar {
     display: flex;
     flex-wrap: wrap;
     gap: 8px;
-    margin-bottom: 24px;
+    margin-bottom: 0;
+    justify-content: center;
 }
 
 .project-filter-btn {
