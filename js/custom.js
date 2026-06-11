@@ -25,7 +25,7 @@ $(document).ready(function () {
     });
 
     /* ============================
-       ISOTOPE — project grids
+        ISOTOPE — project grids
        ============================ */
 
     var currentLang = '';
@@ -70,7 +70,7 @@ $(document).ready(function () {
     });
 
     /* ============================
-       PROJECT MODAL
+        PROJECT MODAL
        ============================ */
 
     /* Build modal shell once */
@@ -92,14 +92,6 @@ $(document).ready(function () {
 
         /* Re-init carousels and AOS inside modal */
         $modal.find('[data-ride="carousel"]').carousel();
-        $modal.find('.fitness-gallery').magnificPopup({
-            type: 'image',
-            gallery: { enabled: true, navigateByImgClick: true, preload: [0, 1] },
-            image: { titleSrc: function (item) { return item.el.data('caption') || ''; } },
-            removalDelay: 300,
-            mainClass: 'mfp-fade'
-        });
-
 
         /* Scroll modal to top */
         $modal.find('.project-modal-container').scrollTop(0);
@@ -133,7 +125,7 @@ $(document).ready(function () {
     });
 
     /* ============================
-       TILE CLICK
+        TILE CLICK
        ============================ */
 
     $('.project-tile').on('click', function (e) {
@@ -162,9 +154,9 @@ $(document).ready(function () {
 
         /* Mark this tile active */
         $tile.attr('aria-expanded', 'true')
-             .removeClass('collapsed')
-             .addClass('is-active')
-             .find('.project-tile-cta').text('Hide details');
+            .removeClass('collapsed')
+            .addClass('is-active')
+            .find('.project-tile-cta').text('Hide details');
         $tile.closest('.project-card').addClass('project-card-active');
 
         /* Clone the detail content (not the collapse wrapper) into modal */
@@ -173,7 +165,7 @@ $(document).ready(function () {
     });
 
     /* ============================
-       LANGUAGE FILTER
+        LANGUAGE FILTER
        ============================ */
 
     function clearLangFilter(skipRefilter) {
@@ -216,7 +208,7 @@ $(document).ready(function () {
     });
 
     /* ============================
-       COURSEWORK TOGGLE
+        COURSEWORK TOGGLE
        ============================ */
 
     $('#usdCourses').on('show.bs.collapse', function () {
