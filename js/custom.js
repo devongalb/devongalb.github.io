@@ -205,7 +205,7 @@ $(document).ready(function () {
     });
 
     /* ============================
-       LANGUAGE FILTER (with Isotope)
+        LANGUAGE FILTER (with Isotope)
        ============================ */
 
     function clearLanguageProjectHighlights() {
@@ -217,6 +217,10 @@ $(document).ready(function () {
     }
 
     $('.skill-filter').attr('aria-pressed', 'false');
+    $(document).on('click', '.project-filter-clear', function () {
+        clearLanguageProjectHighlights();
+        $('html, body').animate({ scrollTop: $('#projects-section').offset().top - 110 }, 450);
+    });
 
     $('.skill-filter').on('click', function () {
         var $pill = $(this);
@@ -250,7 +254,7 @@ $(document).ready(function () {
     });
 
     /* ============================
-       COURSEWORK TOGGLE
+        COURSEWORK TOGGLE
        ============================ */
 
     $('#usdCourses').on('show.bs.collapse', function () {
@@ -267,6 +271,7 @@ $(document).ready(function () {
             $target.closest('.project-tile').length ||
             $target.closest('.project-detail-card').length ||
             $target.closest('.skill-filter').length ||
+            $target.closest('.project-filter-clear').length ||
             $target.closest('.site-navbar').length ||
             $target.closest('.mfp-container, .mfp-content').length
         ) return;

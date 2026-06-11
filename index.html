@@ -376,27 +376,12 @@
             <div class="skill-group">
               <h4 class="skill-group-title">Languages</h4>
               <div class="skill-pills">
-                <button type="button" class="skill-pill skill-filter" data-language="python"
-                  aria-label="Show Python projects">
-                  <i class="devicon-python-plain"></i> Python
-                </button>
-                <button type="button" class="skill-pill skill-filter" data-language="java"
-                  aria-label="Show Java projects">
-                  <i class="devicon-java-plain"></i> Java
-                </button>
-                <button type="button" class="skill-pill skill-filter" data-language="javascript"
-                  aria-label="Show JavaScript projects">
-                  <i class="devicon-javascript-plain"></i> JavaScript
-                </button>
-                <button type="button" class="skill-pill skill-filter" data-language="c" aria-label="Show C projects">
-                  <i class="devicon-c-plain"></i>
-                </button>
-                <button type="button" class="skill-pill skill-filter" data-language="cpp"
-                  aria-label="Show C++ projects">
-                  <i class="devicon-cplusplus-plain"></i>
-                </button>
+                <span class="skill-pill"><i class="devicon-python-plain"></i> Python</span>
+                <span class="skill-pill"><i class="devicon-java-plain"></i> Java</span>
+                <span class="skill-pill"><i class="devicon-javascript-plain"></i> JavaScript</span>
+                <span class="skill-pill"><i class="devicon-c-plain"></i> C</span>
+                <span class="skill-pill"><i class="devicon-cplusplus-plain"></i> C++</span>
               </div>
-              <p class="skill-filter-hint">Select a language to filter projects</p>
             </div>
           </div>
 
@@ -498,9 +483,33 @@
             <!-- ACADEMIC PROJECTS -->
             <!-- ================================= -->
 
-            <h3 class="project-group-title">
-              Academic Projects
-            </h3>
+            <h3 class="project-group-title">Academic Projects</h3>
+
+            <div class="project-filter-bar">
+              <button type="button" class="project-filter-btn skill-filter" data-language="python"
+                aria-label="Show Python projects">
+                <i class="devicon-python-plain"></i> Python
+              </button>
+              <button type="button" class="project-filter-btn skill-filter" data-language="java"
+                aria-label="Show Java projects">
+                <i class="devicon-java-plain"></i> Java
+              </button>
+              <button type="button" class="project-filter-btn skill-filter" data-language="javascript"
+                aria-label="Show JavaScript projects">
+                <i class="devicon-javascript-plain"></i> JavaScript
+              </button>
+              <button type="button" class="project-filter-btn skill-filter" data-language="c"
+                aria-label="Show C projects">
+                <i class="devicon-c-plain"></i> C
+              </button>
+              <button type="button" class="project-filter-btn skill-filter" data-language="cpp"
+                aria-label="Show C++ projects">
+                <i class="devicon-cplusplus-plain"></i> C++
+              </button>
+              <button type="button" class="project-filter-btn project-filter-clear" aria-label="Clear filter">
+                Clear
+              </button>
+            </div>
             <div class="projects-grid" id="academic-grid">
 
               <!-- Additional project cards to be added -->
@@ -750,7 +759,8 @@
 
                     <div class="carousel-inner">
                       <div class="carousel-item active">
-                        <a href="images/projects/01_app_overview.png" class="fitness-gallery" data-caption="Main application dashboard and navigation.">
+                        <a href="images/projects/01_app_overview.png" class="fitness-gallery"
+                          data-caption="Main application dashboard and navigation.">
                           <img src="images/projects/01_app_overview.png" class="d-block w-100 project-carousel-img"
                             alt="Fitness Tracker app overview">
                         </a>
@@ -758,7 +768,8 @@
                       </div>
 
                       <div class="carousel-item">
-                        <a href="images/projects/02_daily_log.png" class="fitness-gallery" data-caption="Structured daily workout logging for exercises, cardio, and notes.">
+                        <a href="images/projects/02_daily_log.png" class="fitness-gallery"
+                          data-caption="Structured daily workout logging for exercises, cardio, and notes.">
                           <img src="images/projects/02_daily_log.png" class="d-block w-100 project-carousel-img"
                             alt="Daily workout logging interface">
                         </a>
@@ -767,7 +778,8 @@
                       </div>
 
                       <div class="carousel-item">
-                        <a href="images/projects/04_weekly.png" class="fitness-gallery" data-caption="Weekly dashboard with automatic metrics and trend summaries.">
+                        <a href="images/projects/04_weekly.png" class="fitness-gallery"
+                          data-caption="Weekly dashboard with automatic metrics and trend summaries.">
                           <img src="images/projects/04_weekly.png" class="d-block w-100 project-carousel-img"
                             alt="Weekly progress analytics dashboard">
                         </a>
@@ -776,15 +788,18 @@
                       </div>
 
                       <div class="carousel-item">
-                        <a href="images/projects/05_monthly.png" class="fitness-gallery" data-caption="Monthly review for longer-term trends and reflection.">
+                        <a href="images/projects/05_monthly.png" class="fitness-gallery"
+                          data-caption="Monthly review for longer-term trends and reflection.">
                           <img src="images/projects/05_monthly.png" class="d-block w-100 project-carousel-img"
                             alt="Monthly review dashboard">
                         </a>
-                        <div class="project-carousel-caption">Monthly review for longer-term trends and reflection.</div>
+                        <div class="project-carousel-caption">Monthly review for longer-term trends and reflection.
+                        </div>
                       </div>
 
                       <div class="carousel-item">
-                        <a href="images/projects/06_team_dashboard.png" class="fitness-gallery" data-caption="Admin dashboard for team activity, submissions, and participation.">
+                        <a href="images/projects/06_team_dashboard.png" class="fitness-gallery"
+                          data-caption="Admin dashboard for team activity, submissions, and participation.">
                           <img src="images/projects/06_team_dashboard.png" class="d-block w-100 project-carousel-img"
                             alt="Team dashboard view">
                         </a>
@@ -793,7 +808,8 @@
                       </div>
 
                       <div class="carousel-item">
-                        <a href="images/projects/07_profile.png" class="fitness-gallery" data-caption="Profile management and alias-based account handling.">
+                        <a href="images/projects/07_profile.png" class="fitness-gallery"
+                          data-caption="Profile management and alias-based account handling.">
                           <img src="images/projects/07_profile.png" class="d-block w-100 project-carousel-img"
                             alt="Profile and alias management view">
                         </a>
@@ -1740,6 +1756,7 @@
       });
     }
   </script>
+
   <!-- Return to Top Button -->
   <button id="scrollTopBtn" class="scroll-top-btn" aria-label="Return to top">
     <span class="icon-arrow-up"></span>

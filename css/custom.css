@@ -1231,3 +1231,55 @@ p {
     border-color: var(--brand-navy);
     color: var(--brand-navy);
 }
+
+/* =========================================
+   PROJECT FILTER BAR
+   ========================================= */
+
+.project-filter-bar {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-bottom: 24px;
+}
+
+.project-filter-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 6px 14px;
+    border-radius: 999px;
+    border: 1px solid var(--pill-border);
+    background: var(--pill-bg);
+    color: var(--heading-text);
+    font-weight: 600;
+    font-size: 0.88rem;
+    cursor: pointer;
+    font-family: inherit;
+    appearance: none;
+    -webkit-appearance: none;
+    transition: border-color .15s ease, box-shadow .15s ease, background .15s ease;
+}
+
+.project-filter-btn:hover {
+    border-color: var(--brand-navy);
+    color: var(--brand-navy);
+}
+
+.project-filter-btn.is-active {
+    border-color: var(--brand-navy);
+    background: color-mix(in srgb, var(--brand-navy) 10%, var(--pill-bg));
+    box-shadow: 0 0 0 2px color-mix(in srgb, var(--brand-navy) 18%, transparent);
+    color: var(--brand-navy);
+}
+
+.project-filter-clear {
+    color: var(--muted-text);
+    border-color: var(--card-border);
+    background: transparent;
+}
+
+.project-filter-clear:hover {
+    color: var(--site-text);
+    border-color: var(--card-border);
+}
