@@ -99,12 +99,7 @@ $(document).ready(function () {
             removalDelay: 300,
             mainClass: 'mfp-fade'
         });
-        $modal.find('.uml-popup').magnificPopup({
-            type: 'image',
-            image: { titleSrc: function () { return 'UML class diagram'; } },
-            removalDelay: 300,
-            mainClass: 'mfp-fade'
-        });
+
 
         /* Scroll modal to top */
         $modal.find('.project-modal-container').scrollTop(0);
@@ -231,7 +226,7 @@ $(document).ready(function () {
     });
 
     /* ============================
-       RETURN TO TOP
+        RETURN TO TOP
        ============================ */
 
     var $scrollBtn = $('#scrollTopBtn');
@@ -246,20 +241,13 @@ $(document).ready(function () {
     }
 
     /* ============================
-       MAGNIFIC POPUP (page-level)
+        MAGNIFIC POPUP (page-level)
        ============================ */
 
     $('.fitness-gallery').magnificPopup({
         type: 'image',
         gallery: { enabled: true, navigateByImgClick: true, preload: [0, 1] },
         image: { titleSrc: function (item) { return item.el.data('caption') || ''; } },
-        removalDelay: 300,
-        mainClass: 'mfp-fade'
-    });
-
-    $('.uml-popup').magnificPopup({
-        type: 'image',
-        image: { titleSrc: function () { return 'UML class diagram — Elevator Simulation System'; } },
         removalDelay: 300,
         mainClass: 'mfp-fade'
     });

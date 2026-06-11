@@ -1150,11 +1150,8 @@ p {
 .uml-diagram {
     width: 100%;
     max-width: 450px;
-    /* controls preview size */
     height: auto;
     border-radius: 6px;
-    cursor: zoom-in;
-    transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 
 .uml-diagram:hover {
