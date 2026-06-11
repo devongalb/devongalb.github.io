@@ -159,18 +159,19 @@ jQuery(document).ready(function ($) {
 				}
 			});
 		}
-
-		$('.slide-one-item').owlCarousel({
-			center: false,
-			items: 1,
-			loop: true,
-			stagePadding: 0,
-			margin: 0,
-			autoplay: true,
-			pauseOnHover: false,
-			nav: false,
-			navText: ['<span class="icon-keyboard_arrow_left">', '<span class="icon-keyboard_arrow_right">']
-		});
+		if ($('.slide-one-item').length > 0) {
+			$('.slide-one-item').owlCarousel({
+				center: false,
+				items: 1,
+				loop: true,
+				stagePadding: 0,
+				margin: 0,
+				autoplay: true,
+				pauseOnHover: false,
+				nav: false,
+				navText: ['<span class="icon-keyboard_arrow_left">', '<span class="icon-keyboard_arrow_right">']
+			});
+		}
 
 		// $('.slide-one-item-alt').owlCarousel({
 		//   center: false,
@@ -194,43 +195,47 @@ jQuery(document).ready(function ($) {
 		//   autoplay: true,
 		//   pauseOnHover: false,
 		// });
+		if ($('.slide-one-item-alt').length > 0) {
+			$('.slide-one-item-alt').owlCarousel({
+				center: false,
+				items: 1,
+				loop: true,
+				stagePadding: 0,
+				margin: 0,
+				smartSpeed: 1000,
+				autoplay: true,
+				pauseOnHover: true,
+				onDragged: function (event) {
+					console.log('event : ', event.relatedTarget['_drag']['direction'])
+					if (event.relatedTarget['_drag']['direction'] == 'left') {
+						$('.slide-one-item-alt-text').trigger('next.owl.carousel');
+					} else {
+						$('.slide-one-item-alt-text').trigger('prev.owl.carousel');
+					}
+				}
+			});
+		}
 
-		$('.slide-one-item-alt').owlCarousel({
-			center: false,
-			items: 1,
-			loop: true,
-			stagePadding: 0,
-			margin: 0,
-			smartSpeed: 1000,
-			autoplay: true,
-			pauseOnHover: true,
-			onDragged: function (event) {
-				console.log('event : ', event.relatedTarget['_drag']['direction'])
-				if (event.relatedTarget['_drag']['direction'] == 'left') {
-					$('.slide-one-item-alt-text').trigger('next.owl.carousel');
-				} else {
-					$('.slide-one-item-alt-text').trigger('prev.owl.carousel');
+		if ($('.slide-one-item-alt-text').length > 0) {
+			$('.slide-one-item-alt-text').owlCarousel({
+				center: false,
+				items: 1,
+				loop: true,
+				stagePadding: 0,
+				margin: 0,
+				smartSpeed: 1000,
+				autoplay: true,
+				pauseOnHover: true,
+				onDragged: function (event) {
+					console.log('event : ', event.relatedTarget['_drag']['direction'])
+					if (event.relatedTarget['_drag']['direction'] == 'left') {
+						$('.slide-one-item-alt').trigger('next.owl.carousel');
+					} else {
+						$('.slide-one-item-alt').trigger('prev.owl.carousel');
+					}
 				}
-			}
-		});
-		$('.slide-one-item-alt-text').owlCarousel({
-			center: false,
-			items: 1,
-			loop: true,
-			stagePadding: 0,
-			margin: 0,
-			smartSpeed: 1000,
-			autoplay: true,
-			pauseOnHover: true,
-			onDragged: function (event) {
-				console.log('event : ', event.relatedTarget['_drag']['direction'])
-				if (event.relatedTarget['_drag']['direction'] == 'left') {
-					$('.slide-one-item-alt').trigger('next.owl.carousel');
-				} else {
-					$('.slide-one-item-alt').trigger('prev.owl.carousel');
-				}
-			}
-		});
+			});
+		}
 
 
 		$('.custom-next').click(function (e) {
@@ -260,15 +265,16 @@ jQuery(document).ready(function ($) {
 	// siteStellar();
 
 	var siteCountDown = function () {
-
-		$('#date-countdown').countdown('2020/10/10', function (event) {
-			var $this = $(this).html(event.strftime(''
-				+ '<span class="countdown-block"><span class="label">%w</span> weeks </span>'
-				+ '<span class="countdown-block"><span class="label">%d</span> days </span>'
-				+ '<span class="countdown-block"><span class="label">%H</span> hr </span>'
-				+ '<span class="countdown-block"><span class="label">%M</span> min </span>'
-				+ '<span class="countdown-block"><span class="label">%S</span> sec</span>'));
-		});
+		if ($('#date-countdown').length > 0 && typeof $.fn.countdown !== 'undefined') {
+			$('#date-countdown').countdown('2020/10/10', function (event) {
+				var $this = $(this).html(event.strftime(''
+					+ '<span class="countdown-block"><span class="label">%w</span> weeks </span>'
+					+ '<span class="countdown-block"><span class="label">%d</span> days </span>'
+					+ '<span class="countdown-block"><span class="label">%H</span> hr </span>'
+					+ '<span class="countdown-block"><span class="label">%M</span> min </span>'
+					+ '<span class="countdown-block"><span class="label">%S</span> sec</span>'));
+			});
+		}
 
 	};
 	siteCountDown();
@@ -283,8 +289,10 @@ jQuery(document).ready(function ($) {
 	siteDatePicker();
 
 	var siteSticky = function () {
-		$(".js-sticky-header").sticky({ topSpacing: 0 });
-	};
+		if ($(".js-sticky-header").length > 0 && typeof $.fn.sticky !== 'undefined') {
+			$(".js-sticky-header").sticky({ topSpacing: 0 });
+		};
+	}
 	siteSticky();
 
 	// navigation
@@ -326,27 +334,27 @@ jQuery(document).ready(function ($) {
 
 
 	var siteIstotope = function () {
-		/* activate jquery isotope */
-		var $container = $('#posts').isotope({
-			itemSelector: '.item',
-			isFitWidth: true
-		});
-
-		$(window).resize(function () {
-			$container.isotope({
-				columnWidth: '.col-sm-3'
+		if ($('#posts').length > 0) {
+			var $container = $('#posts').isotope({
+				itemSelector: '.item',
+				isFitWidth: true
 			});
-		});
 
-		$container.isotope({ filter: '*' });
+			$(window).resize(function () {
+				$container.isotope({
+					columnWidth: '.col-sm-3'
+				});
+			});
 
-		// filter items on button click
-		$('#filters').on('click', 'button', function () {
-			var filterValue = $(this).attr('data-filter');
-			$container.isotope({ filter: filterValue });
-			$('#filters button').removeClass('active');
-			$(this).addClass('active');
-		});
+			$container.isotope({ filter: '*' });
+
+			$('#filters').on('click', 'button', function () {
+				var filterValue = $(this).attr('data-filter');
+				$container.isotope({ filter: filterValue });
+				$('#filters button').removeClass('active');
+				$(this).addClass('active');
+			});
+		}
 	}
 
 	siteIstotope();

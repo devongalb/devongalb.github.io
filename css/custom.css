@@ -1314,3 +1314,37 @@ body.modal-open-project {
         padding: 20px 18px 32px;
     }
 }
+
+    /* ===== Explicit dark mode fix for Military section ===== */
+    #military-section,
+    #military-section p,
+    #military-section li,
+    #military-section .service-item-unit,
+    #military-section .service-subitem-dates {
+        color: var(--site-text) !important;
+    }
+
+    #military-section .service-item-title,
+    #military-section .service-subitem-title,
+    #military-section .service-awards-title {
+        color: var(--heading-text) !important;
+    }
+
+    #military-section .service-item-dates,
+    #military-section .award-pill {
+        background: var(--card-bg);
+        border-color: var(--card-border);
+        color: var(--site-text) !important;
+    }
+
+    #military-section .service-timeline,
+    #military-section .service-awards {
+        background: var(--card-bg);
+        border-color: var(--card-border);
+        box-shadow: 0 10px 26px var(--card-shadow);
+    }
+
+    #military-section .service-subitem {
+        background: color-mix(in srgb, var(--card-bg) 88%, transparent);
+        border-color: var(--card-border);
+    }
