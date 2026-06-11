@@ -212,19 +212,20 @@ $(document).ready(function () {
         LANGUAGE FILTER (with Isotope)
        ============================ */
 
-    function clearLanguageProjectHighlights() {
+    function clearLanguageProjectHighlights(skipHide) {
         currentLang = '';
         $('.project-grid').removeClass('language-filter-active');
         $('.project-card').removeClass('language-match');
         $('.skill-filter').removeClass('is-active').attr('aria-pressed', 'false');
-        // Re-hide cards that should be hidden (unless expanded by show more)
-        if (!projectsExpanded) {
+        if (!skipHide && !projectsExpanded) {
             $('.project-card--hidden').css('display', 'none');
             $deployedGrid.isotope('reloadItems');
             $academicGrid.isotope('reloadItems');
         }
-        refilterGrids();
-        $('#showMoreProjects').show();
+        if (!skipHide) {
+            refilterGrids();
+            $('#showMoreProjects').show();
+        }
     }
 
     $('.skill-filter').attr('aria-pressed', 'false');
@@ -239,9 +240,18 @@ $(document).ready(function () {
         if (!language) return;
 
         var alreadyActive = $pill.hasClass('is-active');
-        clearLanguageProjectHighlights();
+        var wasFiltering = !!currentLang;
+        clearLanguageProjectHighlights(wasFiltering);
 
         if (alreadyActive) {
+            // Was active — now cleared, do the full cleanup
+            if (!projectsExpanded) {
+                $('.project-card--hidden').css('display', 'none');
+                $deployedGrid.isotope('reloadItems');
+                $academicGrid.isotope('reloadItems');
+            }
+            refilterGrids();
+            $('#showMoreProjects').show();
             $('html, body').animate({ scrollTop: $('#projects-section').offset().top - 110 }, 450);
             return;
         }
@@ -256,7 +266,6 @@ $(document).ready(function () {
         $('.project-grid').addClass('language-filter-active');
         $matches.addClass('language-match');
 
-        // Temporarily expand hidden cards so filter can show them
         $('.project-card--hidden').css('display', 'block');
         refilterGrids();
         $('#showMoreProjects').hide();
