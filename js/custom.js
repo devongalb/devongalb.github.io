@@ -151,8 +151,12 @@ $(document).ready(function () {
         });
         $('.project-tile').removeClass('is-active').addClass('collapsed');
         $('.project-card').removeClass('project-card-active');
-        clearLanguageProjectHighlights();
         updateProjectTileLabels();
+        // Only clear filter if no filter is active — clicking outside
+        // should close details without disrupting an active language filter
+        if (!currentLang) {
+            clearLanguageProjectHighlights();
+        }
     }
 
     $('[id^="projectDetails"]').each(function () {
