@@ -25,7 +25,7 @@ $(document).ready(function () {
     });
 
     /* ============================
-       ISOTOPE — project grids
+        ISOTOPE — project grids
        ============================ */
 
     var currentLang = '';
@@ -59,6 +59,7 @@ $(document).ready(function () {
     /* Convert hidden class to data attribute and keep all cards display:block */
     $('.project-card--hidden')
         .attr('data-overflow', 'true')
+        .attr('data-overflow-card', 'true')
         .removeClass('project-card--hidden')
         .css('display', 'block');
 
@@ -81,11 +82,11 @@ $(document).ready(function () {
         $deployedGrid.isotope('layout');
         $academicGrid.isotope('layout');
     });
-    
+
     /* ============================
     PROJECT DETAIL EXPANSION
     ============================ */
-    
+
     function closeAllProjectDetails(exceptId) {
         $('[id^="projectDetails"].collapse.show').each(function () {
             if (!exceptId || this.id !== exceptId) {
@@ -93,28 +94,30 @@ $(document).ready(function () {
             }
         });
     }
-    
-        /* Show more / hide projects */
-        var showMoreBtn = document.getElementById('showMoreProjects');
-        if (showMoreBtn) {
-            showMoreBtn.addEventListener('click', function () {
-                projectsExpanded = !projectsExpanded;
-                if (projectsExpanded) {
-                    $('[data-overflow="true"]').removeAttr('data-overflow').addClass('project-card--expanded');
-                    $deployedGrid.isotope('reloadItems');
-                    $academicGrid.isotope('reloadItems');
-                } else {
-                    closeAllProjectDetails();
-                    $('.project-card--expanded')
-                        .removeClass('project-card--expanded')
-                        .attr('data-overflow', 'true');
-                    $deployedGrid.isotope('reloadItems');
-                    $academicGrid.isotope('reloadItems');
-                }
-                refilterGrids();
-                showMoreBtn.textContent = projectsExpanded ? 'Hide projects' : 'Show all projects';
-            });
-        }
+
+    /* Show more / hide projects */
+    var showMoreBtn = document.getElementById('showMoreProjects');
+    if (showMoreBtn) {
+        showMoreBtn.addEventListener('click', function () {
+            projectsExpanded = !projectsExpanded;
+            if (projectsExpanded) {
+                $('[data-overflow-card="true"]')
+                    .removeAttr('data-overflow')
+                    .addClass('project-card--expanded');
+                $deployedGrid.isotope('reloadItems');
+                $academicGrid.isotope('reloadItems');
+            } else {
+                closeAllProjectDetails();
+                $('[data-overflow-card="true"]')
+                    .removeClass('project-card--expanded')
+                    .attr('data-overflow', 'true');
+                $deployedGrid.isotope('reloadItems');
+                $academicGrid.isotope('reloadItems');
+            }
+            refilterGrids();
+            showMoreBtn.textContent = projectsExpanded ? 'Hide projects' : 'Show all projects';
+        });
+    }
 
     function updateProjectTileLabels() {
         $('.project-tile').each(function () {
@@ -216,7 +219,7 @@ $(document).ready(function () {
     });
 
     /* ============================
-       LANGUAGE FILTER (with Isotope)
+        LANGUAGE FILTER (with Isotope)
        ============================ */
 
     function clearLanguageProjectHighlights(skipHide) {
@@ -230,9 +233,12 @@ $(document).ready(function () {
         }
     }
 
-    $('.skill-filter').attr('aria-pressed', 'false');
-
     $(document).on('click', '.project-filter-clear', function () {
+        closeAllProjectDetails();
+        $('[id^="projectDetails"]').each(function () {
+            parkDetailsBackInHost($(this));
+        });
+        updateProjectTileLabels();
         clearLanguageProjectHighlights();
         $('html, body').animate({ scrollTop: $('#projects-section').offset().top - 110 }, 450);
     });
@@ -241,6 +247,12 @@ $(document).ready(function () {
         var $pill = $(this);
         var language = String($pill.data('language') || '').toLowerCase().trim();
         if (!language) return;
+
+        closeAllProjectDetails();
+        $('[id^="projectDetails"]').each(function () {
+            parkDetailsBackInHost($(this));
+        });
+        updateProjectTileLabels();
 
         var alreadyActive = $pill.hasClass('is-active');
         var wasFiltering = !!currentLang;
@@ -270,7 +282,7 @@ $(document).ready(function () {
     });
 
     /* ============================
-       COURSEWORK TOGGLE
+        COURSEWORK TOGGLE
        ============================ */
 
     $('#usdCourses').on('show.bs.collapse', function () {
@@ -310,7 +322,7 @@ $(document).ready(function () {
     });
 
     /* ============================
-       RETURN TO TOP
+        RETURN TO TOP
        ============================ */
 
     var scrollTopBtn = document.getElementById('scrollTopBtn');
@@ -327,7 +339,7 @@ $(document).ready(function () {
     }
 
     /* ============================
-       MAGNIFIC POPUP
+        MAGNIFIC POPUP
        ============================ */
 
     $('.fitness-gallery').magnificPopup({
