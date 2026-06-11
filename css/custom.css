@@ -1172,6 +1172,7 @@ p {
     display: flex;
     flex-wrap: wrap;
     gap: 8px;
+    margin-top: 1.25rem;
     margin-bottom: 0;
     justify-content: center;
 }
