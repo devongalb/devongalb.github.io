@@ -1276,3 +1276,106 @@ p {
         margin-right: 0;
     }
 }
+
+/* =========================================
+   PROJECT MODAL
+   ========================================= */
+
+.project-modal-overlay {
+    position: fixed;
+    inset: 0;
+    z-index: 10000;
+    background: rgba(0, 0, 0, 0.55);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.28s ease;
+}
+
+.project-modal-overlay.is-open {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+.project-modal-container {
+    position: relative;
+    background: var(--card-bg);
+    border: 1px solid var(--card-border);
+    border-radius: 20px;
+    box-shadow: 0 24px 80px rgba(0, 0, 0, 0.35);
+
+    width: 100%;
+    max-width: 780px;
+    max-height: 88vh;
+    overflow-y: auto;
+    overscroll-behavior: contain;
+
+    transform: translateY(16px) scale(0.98);
+    transition: transform 0.28s ease;
+}
+
+.project-modal-overlay.is-open .project-modal-container {
+    transform: translateY(0) scale(1);
+}
+
+.project-modal-body {
+    padding: 28px 28px 24px;
+}
+
+.project-modal-body .project-detail-card {
+    margin: 0;
+    box-shadow: none;
+    border: none;
+    padding: 0;
+}
+
+.project-modal-close {
+    position: sticky;
+    top: 14px;
+    float: right;
+    margin: 14px 14px 0 0;
+    z-index: 10;
+
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    border: 1px solid var(--card-border);
+    background: var(--card-bg);
+    color: var(--muted-text);
+    font-size: 1.3rem;
+    line-height: 1;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background 0.15s ease, color 0.15s ease;
+}
+
+.project-modal-close:hover {
+    background: var(--pill-bg);
+    color: var(--heading-text);
+}
+
+body.modal-open-project {
+    overflow: hidden;
+}
+
+@media (max-width: 575.98px) {
+    .project-modal-overlay {
+        padding: 0;
+        align-items: flex-end;
+    }
+
+    .project-modal-container {
+        border-radius: 20px 20px 0 0;
+        max-height: 92vh;
+    }
+
+    .project-modal-body {
+        padding: 20px 18px 32px;
+    }
+}
