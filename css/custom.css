@@ -1327,3 +1327,15 @@ body.modal-open-project {
 .btn-primary img {
     filter: brightness(0) invert(1);
 }
+
+.btn img {
+    width: 18px;
+    height: 18px;
+    flex-shrink: 0;
+}
+
+.btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.45rem;
+}
