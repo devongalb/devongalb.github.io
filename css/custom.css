@@ -489,6 +489,7 @@ p {
 .project-inline-detail {
     width: 100%;
 }
+
 .project-detail-inline-card {
     width: calc(100% - 16px) !important;
     margin: 0 8px 24px;

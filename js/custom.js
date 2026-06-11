@@ -25,44 +25,30 @@ $(document).ready(function () {
     });
 
     /* ============================
-        ISOTOPE — project grids
+       ISOTOPE — project grids
        ============================ */
 
     var currentLang = '';
 
     function buildFilterFn() {
         var lang = currentLang;
-
         return function () {
             var $card = $(this);
-
-            if ($card.attr('data-detail-wrapper') === 'true') {
-                return true;
-            }
-
-            if (lang) {
-                var langs = ($card.attr('data-languages') || '').toLowerCase().split(/\s+/);
-                return langs.indexOf(lang) !== -1;
-            }
-
-            return true;
+            if (!lang) return true;
+            var langs = ($card.attr('data-languages') || '').toLowerCase().split(/\s+/);
+            return langs.indexOf(lang) !== -1;
         };
     }
 
     function refilterGrids() {
         var fn = buildFilterFn();
-        $deployedGrid.isotope('reloadItems').isotope({ transitionDuration: 0, filter: fn });
-        $academicGrid.isotope('reloadItems').isotope({ transitionDuration: 0, filter: fn });
+        $deployedGrid.isotope({ transitionDuration: 0, filter: fn });
+        $academicGrid.isotope({ transitionDuration: 0, filter: fn });
         setTimeout(function () {
             $deployedGrid.isotope({ transitionDuration: '0.3s' });
             $academicGrid.isotope({ transitionDuration: '0.3s' });
         }, 50);
     }
-
-    /* Convert hidden class to data attribute and keep all cards display:block */
-    $('.project-card--hidden')
-        .removeClass('project-card--hidden')
-        .css('display', 'block');
 
     var $deployedGrid = $('#deployed-grid').isotope({
         itemSelector: '.project-card',
@@ -78,15 +64,15 @@ $(document).ready(function () {
         filter: buildFilterFn()
     });
 
-    /* Relayout Isotope on window resize (breakpoints change item widths) */
+    /* Relayout Isotope on window resize */
     $(window).on('resize', function () {
         $deployedGrid.isotope('layout');
         $academicGrid.isotope('layout');
     });
 
     /* ============================
-    PROJECT DETAIL EXPANSION
-    ============================ */
+       PROJECT DETAIL EXPANSION
+       ============================ */
 
     function closeAllProjectDetails(exceptId) {
         $('[id^="projectDetails"].collapse.show').each(function () {
@@ -113,7 +99,8 @@ $(document).ready(function () {
     function ensureInlineWrapper($details) {
         var $wrapper = $details.data('inlineWrapper');
         if (!$wrapper || !$wrapper.length) {
-            $wrapper = $('<div class="project-card project-detail-inline-card" data-detail-wrapper="true"></div>'); $details.data('inlineWrapper', $wrapper);
+            $wrapper = $('<div class="project-inline-detail"></div>');
+            $details.data('inlineWrapper', $wrapper);
         }
         if (!$details.parent().is($wrapper)) {
             $details.detach().appendTo($wrapper);
@@ -128,26 +115,6 @@ $(document).ready(function () {
             $wrapper.detach();
         }
         $details.detach().appendTo($host);
-    }
-
-    function placeDetailsBelowSelectedRow($grid, $card, $wrapper) {
-        var columns = 1;
-        if (window.innerWidth >= 992) {
-            columns = 3;
-        } else if (window.innerWidth >= 576) {
-            columns = 2;
-        }
-
-        var $cards = $grid.children('.project-card').not('[data-detail-wrapper="true"]:hidden');
-        var index = $cards.index($card);
-        var rowEndIndex = Math.min(index + (columns - 1 - (index % columns)), $cards.length - 1);
-        var $rowEndCard = $cards.eq(rowEndIndex);
-
-        if ($rowEndCard.length) {
-            $wrapper.insertAfter($rowEndCard);
-        } else {
-            $wrapper.appendTo($grid);
-        }
     }
 
     function resetProjectDetailsAndHighlights() {
@@ -195,23 +162,15 @@ $(document).ready(function () {
         var $wrapper = ensureInlineWrapper($details);
         var $card = $tile.closest('.project-card');
         var $grid = $card.closest('.projects-grid');
+        var $slot = $grid.next('.projects-detail-slot');
 
-        placeDetailsBelowSelectedRow($grid, $card, $wrapper);
+        $wrapper.appendTo($slot.length ? $slot : $grid.parent());
         $details.collapse('show');
-        $grid.isotope('reloadItems').isotope({ filter: buildFilterFn() });
     });
 
     $(document).on('hidden.bs.collapse', '[id^="projectDetails"]', function () {
-        var $details = $(this);
-        var $grid = $details.closest('.projects-grid');
-        parkDetailsBackInHost($details);
+        parkDetailsBackInHost($(this));
         updateProjectTileLabels();
-        if ($grid.length) {
-            $grid.isotope('reloadItems').isotope({ filter: buildFilterFn() });
-        } else {
-            $deployedGrid.isotope('reloadItems').isotope({ filter: buildFilterFn() });
-            $academicGrid.isotope('reloadItems').isotope({ filter: buildFilterFn() });
-        }
     });
 
     $(document).on('shown.bs.collapse', '[id^="projectDetails"]', function () {
@@ -223,18 +182,20 @@ $(document).ready(function () {
     });
 
     /* ============================
-        LANGUAGE FILTER (with Isotope)
+       LANGUAGE FILTER (with Isotope)
        ============================ */
 
-    function clearLanguageProjectHighlights(skipHide) {
+    function clearLanguageProjectHighlights(skipRefilter) {
         currentLang = '';
         $('.project-grid').removeClass('language-filter-active');
         $('.project-card').removeClass('language-match');
         $('.skill-filter').removeClass('is-active').attr('aria-pressed', 'false');
-        if (!skipHide) {
+        if (!skipRefilter) {
             refilterGrids();
         }
     }
+
+    $('.skill-filter').attr('aria-pressed', 'false');
 
     $(document).on('click', '.project-filter-clear', function () {
         closeAllProjectDetails();
@@ -283,7 +244,7 @@ $(document).ready(function () {
     });
 
     /* ============================
-        COURSEWORK TOGGLE
+       COURSEWORK TOGGLE
        ============================ */
 
     $('#usdCourses').on('show.bs.collapse', function () {
@@ -323,7 +284,7 @@ $(document).ready(function () {
     });
 
     /* ============================
-        RETURN TO TOP
+       RETURN TO TOP
        ============================ */
 
     var scrollTopBtn = document.getElementById('scrollTopBtn');
@@ -340,7 +301,7 @@ $(document).ready(function () {
     }
 
     /* ============================
-        MAGNIFIC POPUP
+       MAGNIFIC POPUP
        ============================ */
 
     $('.fitness-gallery').magnificPopup({
