@@ -240,16 +240,4 @@ $(document).ready(function () {
         });
     }
 
-    /* ============================
-        MAGNIFIC POPUP (page-level)
-       ============================ */
-
-    $('.fitness-gallery').magnificPopup({
-        type: 'image',
-        gallery: { enabled: true, navigateByImgClick: true, preload: [0, 1] },
-        image: { titleSrc: function (item) { return item.el.data('caption') || ''; } },
-        removalDelay: 300,
-        mainClass: 'mfp-fade'
-    });
-
 });

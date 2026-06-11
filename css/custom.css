@@ -486,27 +486,6 @@ p {
     padding: 22px;
 }
 
-.project-inline-detail {
-    width: 100%;
-}
-
-.project-detail-inline-card {
-    width: calc(100% - 16px) !important;
-    margin: 0 8px 24px;
-}
-
-.project-detail-inline-card .project-detail-card {
-    margin-top: 0;
-}
-
-@media (max-width: 575.98px) {
-    .project-detail-inline-card {
-        width: 100% !important;
-        margin-left: 0;
-        margin-right: 0;
-    }
-}
-
 .project-detail-header {
     display: flex;
     flex-wrap: wrap;
@@ -519,23 +498,6 @@ p {
 .project-details-col {
     flex: 0 0 100%;
     max-width: 100%;
-}
-
-
-/* Smoother project detail expand/collapse */
-[id^="projectDetails"].collapsing {
-    transition: height 0.42s ease-in-out;
-}
-
-[id^="projectDetails"] .project-detail-card {
-    opacity: 0;
-    transform: translateY(-6px);
-    transition: opacity 0.28s ease, transform 0.28s ease;
-}
-
-[id^="projectDetails"].show .project-detail-card {
-    opacity: 1;
-    transform: translateY(0);
 }
 
 /* De-emphasize GitHub button */
@@ -1154,11 +1116,6 @@ p {
     border-radius: 6px;
 }
 
-.uml-diagram:hover {
-    transform: scale(1.03);
-    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.25);
-}
-
 .diagram-caption {
     font-size: 0.85rem;
     color: var(--muted-text);
@@ -1257,25 +1214,7 @@ p {
 }
 
 /* =========================================
-    PROJECT DETAIL ROW (inline in Isotope grid)
-   ========================================= */
-
-.project-detail-row {
-    width: calc(100% - 16px);
-    margin: 0 8px 24px;
-    clear: both;
-}
-
-@media (max-width: 575.98px) {
-    .project-detail-row {
-        width: 100%;
-        margin-left: 0;
-        margin-right: 0;
-    }
-}
-
-/* =========================================
-   PROJECT MODAL
+    PROJECT MODAL
    ========================================= */
 
 .project-modal-overlay {
