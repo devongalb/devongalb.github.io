@@ -36,6 +36,10 @@ $(document).ready(function () {
         return function () {
             var $card = $(this);
 
+            if ($card.attr('data-detail-wrapper') === 'true') {
+                return true;
+            }
+
             if (lang) {
                 var langs = ($card.attr('data-languages') || '').toLowerCase().split(/\s+/);
                 return langs.indexOf(lang) !== -1;
@@ -47,8 +51,8 @@ $(document).ready(function () {
 
     function refilterGrids() {
         var fn = buildFilterFn();
-        $deployedGrid.isotope({ transitionDuration: 0, filter: fn });
-        $academicGrid.isotope({ transitionDuration: 0, filter: fn });
+        $deployedGrid.isotope('reloadItems').isotope({ transitionDuration: 0, filter: fn });
+        $academicGrid.isotope('reloadItems').isotope({ transitionDuration: 0, filter: fn });
         setTimeout(function () {
             $deployedGrid.isotope({ transitionDuration: '0.3s' });
             $academicGrid.isotope({ transitionDuration: '0.3s' });
@@ -109,8 +113,7 @@ $(document).ready(function () {
     function ensureInlineWrapper($details) {
         var $wrapper = $details.data('inlineWrapper');
         if (!$wrapper || !$wrapper.length) {
-            $wrapper = $('<div class="project-inline-detail"></div>');
-            $details.data('inlineWrapper', $wrapper);
+            $wrapper = $('<div class="project-card project-detail-inline-card" data-detail-wrapper="true"></div>'); $details.data('inlineWrapper', $wrapper);
         }
         if (!$details.parent().is($wrapper)) {
             $details.detach().appendTo($wrapper);
@@ -125,6 +128,26 @@ $(document).ready(function () {
             $wrapper.detach();
         }
         $details.detach().appendTo($host);
+    }
+
+    function placeDetailsBelowSelectedRow($grid, $card, $wrapper) {
+        var columns = 1;
+        if (window.innerWidth >= 992) {
+            columns = 3;
+        } else if (window.innerWidth >= 576) {
+            columns = 2;
+        }
+
+        var $cards = $grid.children('.project-card').not('[data-detail-wrapper="true"]:hidden');
+        var index = $cards.index($card);
+        var rowEndIndex = Math.min(index + (columns - 1 - (index % columns)), $cards.length - 1);
+        var $rowEndCard = $cards.eq(rowEndIndex);
+
+        if ($rowEndCard.length) {
+            $wrapper.insertAfter($rowEndCard);
+        } else {
+            $wrapper.appendTo($grid);
+        }
     }
 
     function resetProjectDetailsAndHighlights() {
@@ -172,15 +195,23 @@ $(document).ready(function () {
         var $wrapper = ensureInlineWrapper($details);
         var $card = $tile.closest('.project-card');
         var $grid = $card.closest('.projects-grid');
-        var $slot = $grid.next('.projects-detail-slot');
 
-        $wrapper.appendTo($slot.length ? $slot : $grid.parent());
+        placeDetailsBelowSelectedRow($grid, $card, $wrapper);
         $details.collapse('show');
+        $grid.isotope('reloadItems').isotope({ filter: buildFilterFn() });
     });
 
     $(document).on('hidden.bs.collapse', '[id^="projectDetails"]', function () {
-        parkDetailsBackInHost($(this));
+        var $details = $(this);
+        var $grid = $details.closest('.projects-grid');
+        parkDetailsBackInHost($details);
         updateProjectTileLabels();
+        if ($grid.length) {
+            $grid.isotope('reloadItems').isotope({ filter: buildFilterFn() });
+        } else {
+            $deployedGrid.isotope('reloadItems').isotope({ filter: buildFilterFn() });
+            $academicGrid.isotope('reloadItems').isotope({ filter: buildFilterFn() });
+        }
     });
 
     $(document).on('shown.bs.collapse', '[id^="projectDetails"]', function () {
