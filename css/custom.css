@@ -79,7 +79,7 @@
     }
 
     .service-subitem,
-    .project-inline-detail .project-detail-card {
+    .project-detail-card {
         border-color: rgba(15, 23, 42, 0.12);
         box-shadow: 0 8px 22px rgba(15, 23, 42, 0.06);
     }
@@ -490,11 +490,6 @@ p {
     justify-content: space-between;
     gap: 10px;
     margin-bottom: 10px;
-}
-
-.project-details-col {
-    flex: 0 0 100%;
-    max-width: 100%;
 }
 
 /* De-emphasize GitHub button */
@@ -1084,7 +1079,7 @@ p {
     gap: 6px;
     margin-top: 6px;
     font-weight: 500;
-    color: var(--accent-color);
+    color: var(--brand-navy);
 }
 
 .experience-link:hover {
@@ -1117,30 +1112,6 @@ p {
     font-size: 0.85rem;
     color: var(--muted-text);
     margin-top: 8px;
-}
-
-.uml-modal {
-    display: none;
-    position: fixed;
-    z-index: 9999;
-    inset: 0;
-    background: rgba(0, 0, 0, 0.9);
-    justify-content: center;
-    align-items: center;
-    padding: 20px;
-}
-
-.uml-modal-content {
-    max-width: 95%;
-    max-height: 95%;
-    border-radius: 8px;
-}
-
-.uml-modal-content img {
-    max-width: 90%;
-    max-height: 80vh;
-    object-fit: contain;
-    cursor: zoom-in;
 }
 
 .project-video {
