@@ -48,8 +48,12 @@ $(document).ready(function () {
 
     function refilterGrids() {
         var fn = buildFilterFn();
-        $deployedGrid.isotope({ filter: fn });
-        $academicGrid.isotope({ filter: fn });
+        $deployedGrid.isotope({ transitionDuration: 0, filter: fn });
+        $academicGrid.isotope({ transitionDuration: 0, filter: fn });
+        setTimeout(function () {
+            $deployedGrid.isotope({ transitionDuration: '0.3s' });
+            $academicGrid.isotope({ transitionDuration: '0.3s' });
+        }, 50);
     }
 
     /* Convert hidden class to data attribute and keep all cards display:block */
