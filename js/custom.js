@@ -87,11 +87,23 @@ $(document).ready(function () {
 
     function openModal(detailsHtml) {
         $modalBody.html(detailsHtml);
+
+        /* Fix duplicate carousel IDs — remap any carousel inside the modal */
+        $modalBody.find('.carousel').each(function () {
+            var oldId = $(this).attr('id');
+            if (!oldId) return;
+            var newId = oldId + '-modal';
+            $(this).attr('id', newId);
+            /* Update all data-target and href references inside the modal */
+            $modalBody.find('[data-target="#' + oldId + '"]').attr('data-target', '#' + newId);
+            $modalBody.find('[href="#' + oldId + '"]').attr('href', '#' + newId);
+        });
+
         $modal.addClass('is-open');
         $('body').addClass('modal-open-project');
 
-        /* Re-init carousels and AOS inside modal */
-        $modal.find('[data-ride="carousel"]').carousel();
+        /* Re-init carousel after ID fix */
+        $modalBody.find('[data-ride="carousel"]').carousel();
 
         /* Scroll modal to top */
         $modal.find('.project-modal-container').scrollTop(0);
