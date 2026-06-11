@@ -1321,3 +1321,8 @@ body.modal-open-project {
         padding: 20px 18px 32px;
     }
 }
+
+/* Make devicon SVGs white inside primary buttons */
+.btn-primary img {
+    filter: brightness(0) invert(1);
+}
