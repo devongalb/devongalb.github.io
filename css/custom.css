@@ -57,12 +57,6 @@
         /* dark fallback */
     }
 
-
-    .project-inline-detail .project-detail-card {
-        background: rgba(16, 26, 46, 0.85);
-        /* dark fallback */
-    }
-
     .service-subitem {
         background: rgba(16, 26, 46, 0.85);
         /* dark fallback */
@@ -419,12 +413,6 @@ p {
         margin-left: 0;
         margin-right: 0;
     }
-}
-
-/* Detail slot — sits below the grid, full width */
-.projects-detail-slot {
-    width: 100%;
-    clear: both;
 }
 
 .project-tile[aria-expanded="true"] .project-tile-title {
@@ -1256,7 +1244,7 @@ p {
     box-shadow: 0 24px 80px rgba(0, 0, 0, 0.35);
 
     width: 100%;
-    max-width: 780px;
+    max-width: 1000px;
     max-height: 88vh;
     overflow-y: auto;
     overscroll-behavior: contain;
