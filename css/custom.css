@@ -1239,7 +1239,7 @@ p {
     opacity: 0;
     pointer-events: none;
     visibility: hidden;
-    transition: opacity 0.28s ease;
+    transition: opacity 0.28s ease, visibility 0.28s ease;
 }
 
 .project-modal-overlay.is-open {
