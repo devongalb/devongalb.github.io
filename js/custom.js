@@ -148,7 +148,7 @@ $(document).ready(function () {
         if ($anchor.length) {
             $detailRow.insertAfter($anchor);
         } else {
-            $grid.children('.projects-grid').append($detailRow);
+            $grid.element.append($detailRow);
         }
     }
 
@@ -207,15 +207,18 @@ $(document).ready(function () {
             return;
         }
 
-        // Place detail row after the card's visual row
+        // Place detail row after the card's visual row, inside the grid element
         var $detailRow = getDetailRow($details);
         var $gridEl = $card.closest('.projects-grid');
         insertDetailAfterRow($isotope || $deployedGrid, $card, $detailRow);
 
-        // Tell Isotope about the new item
+        // Use 'insert' not 'appended' — insert respects DOM order for layout
         if ($isotope) {
-            $isotope.isotope('appended', $detailRow).isotope({ transitionDuration: 0, filter: buildFilterFn() });
+            $isotope.isotope('insert', $detailRow);
+            $isotope.isotope({ transitionDuration: 0, filter: buildFilterFn() });
         }
+
+        $details.collapse('show');
 
         $details.collapse('show');
     });
@@ -246,7 +249,7 @@ $(document).ready(function () {
     });
 
     /* ============================
-       LANGUAGE FILTER (with Isotope)
+        LANGUAGE FILTER (with Isotope)
        ============================ */
 
     function clearLanguageProjectHighlights(skipRefilter) {
@@ -307,7 +310,7 @@ $(document).ready(function () {
     });
 
     /* ============================
-       COURSEWORK TOGGLE
+        COURSEWORK TOGGLE
        ============================ */
 
     $('#usdCourses').on('show.bs.collapse', function () {
@@ -347,7 +350,7 @@ $(document).ready(function () {
     });
 
     /* ============================
-       RETURN TO TOP
+        RETURN TO TOP
        ============================ */
 
     var scrollTopBtn = document.getElementById('scrollTopBtn');
@@ -364,7 +367,7 @@ $(document).ready(function () {
     }
 
     /* ============================
-       MAGNIFIC POPUP
+        MAGNIFIC POPUP
        ============================ */
 
     $('.fitness-gallery').magnificPopup({
