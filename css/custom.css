@@ -1219,6 +1219,7 @@ p {
 }
 
 #showMoreProjects {
+    transition: opacity .2s ease;
     border-radius: 999px;
     padding: 10px 28px;
     font-weight: 700;

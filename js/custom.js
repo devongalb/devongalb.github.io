@@ -25,7 +25,7 @@ $(document).ready(function () {
     });
 
     /* ============================
-       ISOTOPE — project grids
+        ISOTOPE — project grids
        ============================ */
 
     var currentLang = '';
@@ -36,7 +36,7 @@ $(document).ready(function () {
         var expanded = projectsExpanded;
         return function () {
             var $card = $(this);
-            if (!expanded && $card.hasClass('project-card--hidden')) return false;
+            if (!lang && !expanded && $card.hasClass('project-card--hidden')) return false;
             if (!lang) return true;
             var langs = ($card.attr('data-languages') || '').toLowerCase().split(/\s+/);
             return langs.indexOf(lang) !== -1;
@@ -213,7 +213,14 @@ $(document).ready(function () {
         $('.project-grid').removeClass('language-filter-active');
         $('.project-card').removeClass('language-match');
         $('.skill-filter').removeClass('is-active').attr('aria-pressed', 'false');
+        // Re-hide cards that should be hidden (unless expanded by show more)
+        if (!projectsExpanded) {
+            $('.project-card--hidden').css('display', 'none');
+            $deployedGrid.isotope('reloadItems');
+            $academicGrid.isotope('reloadItems');
+        }
         refilterGrids();
+        $('#showMoreProjects').show();
     }
 
     $('.skill-filter').attr('aria-pressed', 'false');
@@ -244,13 +251,13 @@ $(document).ready(function () {
         $pill.addClass('is-active').attr('aria-pressed', 'true');
         $('.project-grid').addClass('language-filter-active');
         $matches.addClass('language-match');
+
+        // Temporarily expand hidden cards so filter can show them
+        $('.project-card--hidden').css('display', 'block');
         refilterGrids();
+        $('#showMoreProjects').hide();
 
         $('html, body').animate({ scrollTop: $('#projects-section').offset().top - 110 }, 450);
-    });
-
-    $('.project-tile').on('click', function () {
-        clearLanguageProjectHighlights();
     });
 
     /* ============================
