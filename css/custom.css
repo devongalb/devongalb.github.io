@@ -1258,3 +1258,21 @@ p {
     color: var(--site-text);
     border-color: var(--card-border);
 }
+
+/* =========================================
+    PROJECT DETAIL ROW (inline in Isotope grid)
+   ========================================= */
+
+.project-detail-row {
+    width: calc(100% - 16px);
+    margin: 0 8px 24px;
+    clear: both;
+}
+
+@media (max-width: 575.98px) {
+    .project-detail-row {
+        width: 100%;
+        margin-left: 0;
+        margin-right: 0;
+    }
+}
