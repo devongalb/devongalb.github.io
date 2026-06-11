@@ -81,33 +81,11 @@ $(document).ready(function () {
         $deployedGrid.isotope('layout');
         $academicGrid.isotope('layout');
     });
-
-    /* Show more / hide projects */
-    var showMoreBtn = document.getElementById('showMoreProjects');
-    if (showMoreBtn) {
-        showMoreBtn.addEventListener('click', function () {
-            projectsExpanded = !projectsExpanded;
-            if (projectsExpanded) {
-                $('[data-overflow="true"]').removeAttr('data-overflow').addClass('project-card--expanded');
-                $deployedGrid.isotope('reloadItems');
-                $academicGrid.isotope('reloadItems');
-            } else {
-                closeAllProjectDetails();
-                $('.project-card--expanded')
-                    .removeClass('project-card--expanded')
-                    .attr('data-overflow', 'true');
-                $deployedGrid.isotope('reloadItems');
-                $academicGrid.isotope('reloadItems');
-            }
-            refilterGrids();
-            showMoreBtn.textContent = projectsExpanded ? 'Hide projects' : 'Show all projects';
-        });
-    }
-
+    
     /* ============================
-       PROJECT DETAIL EXPANSION
-       ============================ */
-
+    PROJECT DETAIL EXPANSION
+    ============================ */
+    
     function closeAllProjectDetails(exceptId) {
         $('[id^="projectDetails"].collapse.show').each(function () {
             if (!exceptId || this.id !== exceptId) {
@@ -115,6 +93,28 @@ $(document).ready(function () {
             }
         });
     }
+    
+        /* Show more / hide projects */
+        var showMoreBtn = document.getElementById('showMoreProjects');
+        if (showMoreBtn) {
+            showMoreBtn.addEventListener('click', function () {
+                projectsExpanded = !projectsExpanded;
+                if (projectsExpanded) {
+                    $('[data-overflow="true"]').removeAttr('data-overflow').addClass('project-card--expanded');
+                    $deployedGrid.isotope('reloadItems');
+                    $academicGrid.isotope('reloadItems');
+                } else {
+                    closeAllProjectDetails();
+                    $('.project-card--expanded')
+                        .removeClass('project-card--expanded')
+                        .attr('data-overflow', 'true');
+                    $deployedGrid.isotope('reloadItems');
+                    $academicGrid.isotope('reloadItems');
+                }
+                refilterGrids();
+                showMoreBtn.textContent = projectsExpanded ? 'Hide projects' : 'Show all projects';
+            });
+        }
 
     function updateProjectTileLabels() {
         $('.project-tile').each(function () {
