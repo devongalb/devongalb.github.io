@@ -387,23 +387,35 @@ p {
     opacity: 0.85;
 }
 
-/* Projects grid */
+/* Projects grid — layout managed by Isotope fitRows */
 .projects-grid {
-    display: grid;
-    grid-template-columns: repeat(3, minmax(0, 1fr));
-    gap: 24px;
+    position: relative;
+}
+
+/* Each card: 3-col → 2-col → 1-col, with 16px total horizontal gutter */
+.project-card {
+    width: calc(33.333% - 16px);
+    margin: 0 8px 24px;
 }
 
 @media (max-width: 991.98px) {
-    .projects-grid {
-        grid-template-columns: repeat(2, minmax(0, 1fr));
+    .project-card {
+        width: calc(50% - 16px);
     }
 }
 
 @media (max-width: 575.98px) {
-    .projects-grid {
-        grid-template-columns: 1fr;
+    .project-card {
+        width: 100%;
+        margin-left: 0;
+        margin-right: 0;
     }
+}
+
+/* Detail slot — sits below the grid, full width */
+.projects-detail-slot {
+    width: 100%;
+    clear: both;
 }
 
 .project-tile[aria-expanded="true"] .project-tile-title {
@@ -476,7 +488,6 @@ p {
 
 .project-inline-detail {
     width: 100%;
-    grid-column: 1 / -1;
 }
 
 .project-detail-header {
@@ -1183,8 +1194,7 @@ p {
    ========================================= */
 
 .project-card--hidden {
-    display: none;
-    opacity: 0;
+    /* visibility managed by Isotope filter; class kept as JS marker */
 }
 
 .project-card--expanded {

@@ -62,6 +62,7 @@
   <link rel="stylesheet" href="css/aos.css">
   <link rel="stylesheet" href="css/style.css">
   <link rel="stylesheet" href="css/custom.css">
+  <link rel="stylesheet" href="css/magnific-popup.css">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/devicon.min.css">
 
   <link rel="icon" href="/favicon.ico">
@@ -395,7 +396,7 @@
                   <i class="devicon-cplusplus-plain"></i>
                 </button>
               </div>
-              <p class="skill-filter-hint">Select a language to view related projects</p>
+              <p class="skill-filter-hint">Select a language to filter projects</p>
             </div>
           </div>
 
@@ -423,7 +424,7 @@
 
             <h3 class="project-group-title">Deployed Systems</h3>
 
-            <div class="projects-grid">
+            <div class="projects-grid" id="deployed-grid">
 
               <!-- PROJECT CARD: Fitness Tracker Web Application -->
               <div class="project-card" data-languages="javascript sql react postgresql">
@@ -491,6 +492,7 @@
               </div>
 
             </div>
+            <div class="projects-detail-slot" id="deployed-detail-slot"></div>
 
             <!-- ================================= -->
             <!-- ACADEMIC PROJECTS -->
@@ -499,7 +501,7 @@
             <h3 class="project-group-title">
               Academic Projects
             </h3>
-            <div class="projects-grid">
+            <div class="projects-grid" id="academic-grid">
 
               <!-- Additional project cards to be added -->
 
@@ -706,6 +708,7 @@
               <!-- Additional project cards can be added -->
 
             </div>
+            <div class="projects-detail-slot" id="academic-detail-slot"></div>
           </div>
         </div>
         <div class="show-more-row">
@@ -747,44 +750,53 @@
 
                     <div class="carousel-inner">
                       <div class="carousel-item active">
-                        <img src="images/projects/01_app_overview.png" class="d-block w-100 project-carousel-img"
-                          alt="Fitness Tracker app overview">
+                        <a href="images/projects/01_app_overview.png" class="fitness-gallery" data-caption="Main application dashboard and navigation.">
+                          <img src="images/projects/01_app_overview.png" class="d-block w-100 project-carousel-img"
+                            alt="Fitness Tracker app overview">
+                        </a>
                         <div class="project-carousel-caption">Main application dashboard and navigation.</div>
                       </div>
 
                       <div class="carousel-item">
-                        <img src="images/projects/02_daily_log.png" class="d-block w-100 project-carousel-img"
-                          alt="Daily workout logging interface">
+                        <a href="images/projects/02_daily_log.png" class="fitness-gallery" data-caption="Structured daily workout logging for exercises, cardio, and notes.">
+                          <img src="images/projects/02_daily_log.png" class="d-block w-100 project-carousel-img"
+                            alt="Daily workout logging interface">
+                        </a>
                         <div class="project-carousel-caption">Structured daily workout logging for exercises, cardio,
-                          and
-                          notes.</div>
+                          and notes.</div>
                       </div>
 
                       <div class="carousel-item">
-                        <img src="images/projects/04_weekly.png" class="d-block w-100 project-carousel-img"
-                          alt="Weekly progress analytics dashboard">
+                        <a href="images/projects/04_weekly.png" class="fitness-gallery" data-caption="Weekly dashboard with automatic metrics and trend summaries.">
+                          <img src="images/projects/04_weekly.png" class="d-block w-100 project-carousel-img"
+                            alt="Weekly progress analytics dashboard">
+                        </a>
                         <div class="project-carousel-caption">Weekly dashboard with automatic metrics and trend
-                          summaries.
-                        </div>
+                          summaries.</div>
                       </div>
 
                       <div class="carousel-item">
-                        <img src="images/projects/05_monthly.png" class="d-block w-100 project-carousel-img"
-                          alt="Monthly review dashboard">
-                        <div class="project-carousel-caption">Monthly review for longer-term trends and reflection.
-                        </div>
+                        <a href="images/projects/05_monthly.png" class="fitness-gallery" data-caption="Monthly review for longer-term trends and reflection.">
+                          <img src="images/projects/05_monthly.png" class="d-block w-100 project-carousel-img"
+                            alt="Monthly review dashboard">
+                        </a>
+                        <div class="project-carousel-caption">Monthly review for longer-term trends and reflection.</div>
                       </div>
 
                       <div class="carousel-item">
-                        <img src="images/projects/06_team_dashboard.png" class="d-block w-100 project-carousel-img"
-                          alt="Team dashboard view">
+                        <a href="images/projects/06_team_dashboard.png" class="fitness-gallery" data-caption="Admin dashboard for team activity, submissions, and participation.">
+                          <img src="images/projects/06_team_dashboard.png" class="d-block w-100 project-carousel-img"
+                            alt="Team dashboard view">
+                        </a>
                         <div class="project-carousel-caption">Admin dashboard for team activity, submissions, and
                           participation.</div>
                       </div>
 
                       <div class="carousel-item">
-                        <img src="images/projects/07_profile.png" class="d-block w-100 project-carousel-img"
-                          alt="Profile and alias management view">
+                        <a href="images/projects/07_profile.png" class="fitness-gallery" data-caption="Profile management and alias-based account handling.">
+                          <img src="images/projects/07_profile.png" class="d-block w-100 project-carousel-img"
+                            alt="Profile and alias management view">
+                        </a>
                         <div class="project-carousel-caption">Profile management and alias-based account handling.</div>
                       </div>
                     </div>
@@ -1150,8 +1162,10 @@
                   </ul>
 
                   <div class="project-diagram">
-                    <img src="images/projects/elevator-uml.png" alt="Elevator Simulation UML Diagram"
-                      class="uml-diagram" onclick="openUMLModal(this.src)">
+                    <a href="images/projects/elevator-uml.png" class="uml-popup">
+                      <img src="images/projects/elevator-uml.png" alt="Elevator Simulation UML Diagram"
+                        class="uml-diagram">
+                    </a>
                     <div class="diagram-caption">
                       UML class diagram showing elevator hierarchy, scheduling strategy pattern, and simulator
                       coordination.
@@ -1713,6 +1727,8 @@
   <script src="js/bootstrap.min.js"></script>
   <script src="js/aos.js"></script>
   <script src="js/main.js"></script>
+  <script src="js/isotope.pkgd.min.js"></script>
+  <script src="js/jquery.magnific-popup.min.js"></script>
   <script src="js/custom.js"></script>
   <script>
     function copyEmail() {
@@ -1724,46 +1740,11 @@
       });
     }
   </script>
-  <script>
-    (function () {
-      var btn = document.getElementById('showMoreProjects');
-      var expanded = false;
-
-      btn.addEventListener('click', function () {
-        expanded = !expanded;
-        document.querySelectorAll('.project-card--hidden, .project-card--expanded').forEach(function (card) {
-          if (expanded) {
-            card.style.display = '';
-            card.classList.remove('project-card--hidden');
-            card.classList.add('project-card--expanded');
-          } else {
-            card.classList.remove('project-card--expanded');
-            card.style.opacity = '0';
-            card.style.transition = 'opacity 0.25s ease';
-            setTimeout(function (c) {
-              return function () {
-                c.style.display = 'none';
-                c.style.opacity = '';
-                c.style.transition = '';
-                c.classList.add('project-card--hidden');
-              };
-            }(card), 260);
-          }
-        });
-        btn.textContent = expanded ? 'Hide projects' : 'Show all projects';
-      });
-    })();
-  </script>
-
   <!-- Return to Top Button -->
   <button id="scrollTopBtn" class="scroll-top-btn" aria-label="Return to top">
     <span class="icon-arrow-up"></span>
   </button>
 
-  <!-- UML Modal -->
-  <div id="umlModal" class="uml-modal" onclick="closeUMLModal()">
-    <img class="uml-modal-content" id="umlModalImg">
-  </div>
 
 </body>
 

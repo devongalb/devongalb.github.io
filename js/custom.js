@@ -8,26 +8,99 @@ $(document).ready(function () {
     });
 
     /* Hide navbar on scroll down, show on scroll up */
-    let lastScrollTop = 0;
-    const navbar = document.querySelector('.site-navbar');
+    var lastScrollTop = 0;
+    var navbar = document.querySelector('.site-navbar');
 
     window.addEventListener('scroll', function () {
-        const currentScroll = window.pageYOffset || document.documentElement.scrollTop;
-
+        var currentScroll = window.pageYOffset || document.documentElement.scrollTop;
         if (currentScroll > lastScrollTop && currentScroll > 100) {
             navbar.classList.add('nav-hidden');
             if ($('.navbar-toggler').is(':visible')) {
                 $('#mainNav').collapse('hide');
             }
-
         } else {
             navbar.classList.remove('nav-hidden');
         }
-
         lastScrollTop = currentScroll <= 0 ? 0 : currentScroll;
     });
 
-    /* Projects: inline details under the selected card */
+    /* ============================
+       ISOTOPE — project grids
+       ============================ */
+
+    var currentLang = '';
+    var projectsExpanded = false;
+
+    function buildFilterFn() {
+        var lang = currentLang;
+        var expanded = projectsExpanded;
+        return function () {
+            var $card = $(this);
+            if (!expanded && $card.hasClass('project-card--hidden')) return false;
+            if (!lang) return true;
+            var langs = ($card.attr('data-languages') || '').toLowerCase().split(/\s+/);
+            return langs.indexOf(lang) !== -1;
+        };
+    }
+
+    function refilterGrids() {
+        var fn = buildFilterFn();
+        $deployedGrid.isotope({ filter: fn });
+        $academicGrid.isotope({ filter: fn });
+    }
+
+    /* Make CSS-hidden cards measurable by Isotope before init */
+    $('.project-card--hidden').css('display', 'block');
+
+    var $deployedGrid = $('#deployed-grid').isotope({
+        itemSelector: '.project-card',
+        layoutMode: 'fitRows',
+        percentPosition: true,
+        filter: buildFilterFn()
+    });
+
+    var $academicGrid = $('#academic-grid').isotope({
+        itemSelector: '.project-card',
+        layoutMode: 'fitRows',
+        percentPosition: true,
+        filter: buildFilterFn()
+    });
+
+    /* Relayout Isotope on window resize (breakpoints change item widths) */
+    $(window).on('resize', function () {
+        $deployedGrid.isotope('layout');
+        $academicGrid.isotope('layout');
+    });
+
+    /* Show more / hide projects */
+    var showMoreBtn = document.getElementById('showMoreProjects');
+    if (showMoreBtn) {
+        showMoreBtn.addEventListener('click', function () {
+            projectsExpanded = !projectsExpanded;
+            if (projectsExpanded) {
+                $('.project-card--hidden')
+                    .css('display', 'block')
+                    .removeClass('project-card--hidden')
+                    .addClass('project-card--expanded');
+                $deployedGrid.isotope('reloadItems');
+                $academicGrid.isotope('reloadItems');
+            } else {
+                closeAllProjectDetails();
+                $('.project-card--expanded')
+                    .removeClass('project-card--expanded')
+                    .addClass('project-card--hidden');
+                $deployedGrid.isotope('reloadItems');
+                $academicGrid.isotope('reloadItems');
+            }
+            refilterGrids();
+            showMoreBtn.textContent = projectsExpanded ? 'Hide projects' : 'Show all projects';
+        });
+    }
+
+    /* ============================
+       PROJECT DETAIL EXPANSION
+       ============================ */
+
     function closeAllProjectDetails(exceptId) {
         $('[id^="projectDetails"].collapse.show').each(function () {
             if (!exceptId || this.id !== exceptId) {
@@ -38,11 +111,10 @@ $(document).ready(function () {
 
     function updateProjectTileLabels() {
         $('.project-tile').each(function () {
-            const $tile = $(this);
-            const targetSel = $tile.data('target');
-            const $details = $(targetSel);
-            const isOpen = $details.length && $details.hasClass('show');
-
+            var $tile = $(this);
+            var targetSel = $tile.data('target');
+            var $details = $(targetSel);
+            var isOpen = $details.length && $details.hasClass('show');
             $tile.attr('aria-expanded', isOpen ? 'true' : 'false');
             $tile.toggleClass('collapsed', !isOpen);
             $tile.toggleClass('is-active', isOpen);
@@ -52,28 +124,23 @@ $(document).ready(function () {
     }
 
     function ensureInlineWrapper($details) {
-        let $wrapper = $details.data('inlineWrapper');
-
+        var $wrapper = $details.data('inlineWrapper');
         if (!$wrapper || !$wrapper.length) {
             $wrapper = $('<div class="project-inline-detail"></div>');
             $details.data('inlineWrapper', $wrapper);
         }
-
         if (!$details.parent().is($wrapper)) {
             $details.detach().appendTo($wrapper);
         }
-
         return $wrapper;
     }
 
     function parkDetailsBackInHost($details) {
-        const $host = $('#projectsDetailsGroup');
-        const $wrapper = $details.data('inlineWrapper');
-
+        var $host = $('#projectsDetailsGroup');
+        var $wrapper = $details.data('inlineWrapper');
         if ($wrapper && $wrapper.length) {
             $wrapper.detach();
         }
-
         $details.detach().appendTo($host);
     }
 
@@ -97,17 +164,15 @@ $(document).ready(function () {
 
     $('.project-tile').on('click', function (e) {
         e.preventDefault();
-
-        const $tile = $(this);
-        const targetSel = $tile.data('target');
-        const $details = $(targetSel);
+        var $tile = $(this);
+        var targetSel = $tile.data('target');
+        var $details = $(targetSel);
         if (!$details.length) return;
 
-        const detailId = $details.attr('id');
-        const isOpen = $details.hasClass('show');
+        var detailId = $details.attr('id');
+        var isOpen = $details.hasClass('show');
 
         closeAllProjectDetails(detailId);
-
         $('[id^="projectDetails"]').not($details).each(function () {
             parkDetailsBackInHost($(this));
         });
@@ -117,184 +182,160 @@ $(document).ready(function () {
             return;
         }
 
-        const $wrapper = ensureInlineWrapper($details);
-        const $card = $tile.closest('.project-card');
-        const $grid = $card.closest('.projects-grid');
+        var $wrapper = ensureInlineWrapper($details);
+        var $card = $tile.closest('.project-card');
+        var $grid = $card.closest('.projects-grid');
+        var $slot = $grid.next('.projects-detail-slot');
 
-        if ($grid.length && $card.length) {
-            const clickedTop = Math.round($card[0].getBoundingClientRect().top);
-            const $rowCards = $grid.children('.project-card').filter(function () {
-                return Math.round(this.getBoundingClientRect().top) === clickedTop;
-            });
-            const $lastCardInRow = $rowCards.length ? $rowCards.last() : $card;
-            $wrapper.insertAfter($lastCardInRow);
-        } else {
-            $wrapper.insertAfter($card);
-        }
-
+        $wrapper.appendTo($slot.length ? $slot : $grid.parent());
         $details.collapse('show');
     });
 
     $(document).on('hidden.bs.collapse', '[id^="projectDetails"]', function () {
-        const $details = $(this);
-        parkDetailsBackInHost($details);
+        parkDetailsBackInHost($(this));
         updateProjectTileLabels();
     });
 
     $(document).on('shown.bs.collapse', '[id^="projectDetails"]', function () {
-        const $details = $(this);
-        const $wrapper = $details.data('inlineWrapper');
-        const detailId = $details.attr('id');
-        const $activeTile = $('.project-tile[data-target="#' + detailId + '"]');
-        const $activeCard = $activeTile.closest('.project-card');
-        const $grid = $activeCard.closest('.projects-grid');
-
-        if ($wrapper && $wrapper.length && $grid.length && $activeCard.length) {
-            const clickedTop = Math.round($activeCard[0].getBoundingClientRect().top);
-            const $rowCards = $grid.children('.project-card').filter(function () {
-                return Math.round(this.getBoundingClientRect().top) === clickedTop;
-            });
-            const $lastCardInRow = $rowCards.length ? $rowCards.last() : $activeCard;
-            $wrapper.insertAfter($lastCardInRow);
-        }
-
+        var $wrapper = $(this).data('inlineWrapper');
         updateProjectTileLabels();
-
         if ($wrapper && $wrapper.length) {
-            $('html, body').animate({
-                scrollTop: $wrapper.offset().top - 110
-            }, 350);
+            $('html, body').animate({ scrollTop: $wrapper.offset().top - 110 }, 350);
         }
     });
 
-    /* Language pills -> scroll to projects and highlight matching cards */
+    /* ============================
+       LANGUAGE FILTER (with Isotope)
+       ============================ */
+
     function clearLanguageProjectHighlights() {
+        currentLang = '';
         $('.project-grid').removeClass('language-filter-active');
         $('.project-card').removeClass('language-match');
         $('.skill-filter').removeClass('is-active').attr('aria-pressed', 'false');
+        refilterGrids();
     }
 
     $('.skill-filter').attr('aria-pressed', 'false');
 
     $('.skill-filter').on('click', function () {
-        const $pill = $(this);
-        const language = String($pill.data('language') || '').toLowerCase().trim();
-        const $grid = $('.project-grid');
-        const $cards = $('.project-card');
+        var $pill = $(this);
+        var language = String($pill.data('language') || '').toLowerCase().trim();
+        if (!language) return;
 
-        if (!language || !$grid.length || !$cards.length) return;
-
-        const alreadyActive = $pill.hasClass('is-active');
-
+        var alreadyActive = $pill.hasClass('is-active');
         clearLanguageProjectHighlights();
 
         if (alreadyActive) {
-            $('html, body').animate({
-                scrollTop: $('#projects-section').offset().top - 110
-            }, 450);
+            $('html, body').animate({ scrollTop: $('#projects-section').offset().top - 110 }, 450);
             return;
         }
 
-        const $matches = $cards.filter(function () {
-            const langs = String($(this).attr('data-languages') || '').toLowerCase().split(/\s+/);
-            return langs.includes(language);
+        currentLang = language;
+        var $matches = $('.project-card').filter(function () {
+            var langs = String($(this).attr('data-languages') || '').toLowerCase().split(/\s+/);
+            return langs.indexOf(language) !== -1;
         });
 
         $pill.addClass('is-active').attr('aria-pressed', 'true');
-        $grid.addClass('language-filter-active');
+        $('.project-grid').addClass('language-filter-active');
         $matches.addClass('language-match');
+        refilterGrids();
 
-        $('html, body').animate({
-            scrollTop: $('#projects-section').offset().top - 110
-        }, 450);
+        $('html, body').animate({ scrollTop: $('#projects-section').offset().top - 110 }, 450);
     });
 
-    /* Reset language highlighting when a project tile is clicked */
     $('.project-tile').on('click', function () {
         clearLanguageProjectHighlights();
     });
 
-    /* Coursework toggle button text */
+    /* ============================
+       COURSEWORK TOGGLE
+       ============================ */
+
     $('#usdCourses').on('show.bs.collapse', function () {
         $('.education-toggle[data-target="#usdCourses"]').text('Hide Coursework');
     });
-
     $('#usdCourses').on('hide.bs.collapse', function () {
         $('.education-toggle[data-target="#usdCourses"]').text('View Coursework');
     });
 
-    /* Close open project details / clear language filters when clicking outside relevant UI */
+    /* Close open details / clear filters when clicking outside */
     $(document).on('click', function (e) {
-        const $target = $(e.target);
+        var $target = $(e.target);
+        if (
+            $target.closest('.project-tile').length ||
+            $target.closest('.project-detail-card').length ||
+            $target.closest('.skill-filter').length ||
+            $target.closest('.site-navbar').length ||
+            $target.closest('.mfp-container, .mfp-content').length
+        ) return;
 
-        const clickedInsideTile = $target.closest('.project-tile').length > 0;
-        const clickedInsideOpenDetail = $target.closest('.project-detail-card').length > 0;
-        const clickedInsideSkillFilter = $target.closest('.skill-filter').length > 0;
-        const clickedInsideUML = $target.closest('.project-diagram, .uml-modal, .uml-modal-content').length > 0;
-        const clickedNavbar = $target.closest('.site-navbar').length > 0;
-
-        const hasOpenDetails = $('[id^="projectDetails"].collapse.show').length > 0;
-        const hasActiveFilter = $('.skill-filter.is-active').length > 0;
-
-        if (clickedInsideTile || clickedInsideOpenDetail || clickedInsideSkillFilter || clickedInsideUML || clickedNavbar) {
-            return;
-        }
-
+        var hasOpenDetails = $('[id^="projectDetails"].collapse.show').length > 0;
+        var hasActiveFilter = $('.skill-filter.is-active').length > 0;
         if (hasOpenDetails || hasActiveFilter) {
             resetProjectDetailsAndHighlights();
         }
     });
 
-    /* Escape clears open project details and active language filters */
     $(document).on('keydown', function (e) {
         if (e.key === 'Escape') {
-            const hasOpenDetails = $('[id^="projectDetails"].collapse.show').length > 0;
-            const hasActiveFilter = $('.skill-filter.is-active').length > 0;
-
+            var hasOpenDetails = $('[id^="projectDetails"].collapse.show').length > 0;
+            var hasActiveFilter = $('.skill-filter.is-active').length > 0;
             if (hasOpenDetails || hasActiveFilter) {
                 resetProjectDetailsAndHighlights();
             }
         }
     });
 
-    /* Return to top button */
+    /* ============================
+       RETURN TO TOP
+       ============================ */
 
-    const scrollTopBtn = document.getElementById('scrollTopBtn');
-    const aboutSection = document.getElementById('about-section');
+    var scrollTopBtn = document.getElementById('scrollTopBtn');
+    var aboutSection = document.getElementById('about-section');
 
     if (scrollTopBtn && aboutSection) {
-
         window.addEventListener('scroll', function () {
-
-            const aboutBottom =
-                aboutSection.offsetTop + aboutSection.offsetHeight;
-
-            if (window.scrollY > aboutBottom) {
-                scrollTopBtn.classList.add('visible');
-            } else {
-                scrollTopBtn.classList.remove('visible');
-            }
-
+            var aboutBottom = aboutSection.offsetTop + aboutSection.offsetHeight;
+            scrollTopBtn.classList.toggle('visible', window.scrollY > aboutBottom);
         });
-
         scrollTopBtn.addEventListener('click', function () {
-            window.scrollTo({
-                top: 0,
-                behavior: 'smooth'
-            });
+            window.scrollTo({ top: 0, behavior: 'smooth' });
         });
     }
 
+    /* ============================
+       MAGNIFIC POPUP
+       ============================ */
+
+    /* Fitness tracker screenshot gallery */
+    $('.fitness-gallery').magnificPopup({
+        type: 'image',
+        gallery: {
+            enabled: true,
+            navigateByImgClick: true,
+            preload: [0, 1]
+        },
+        image: {
+            titleSrc: function (item) {
+                return item.el.data('caption') || '';
+            }
+        },
+        removalDelay: 300,
+        mainClass: 'mfp-fade'
+    });
+
+    /* UML diagram lightbox */
+    $('.uml-popup').magnificPopup({
+        type: 'image',
+        image: {
+            titleSrc: function () {
+                return 'UML class diagram — Elevator Simulation System';
+            }
+        },
+        removalDelay: 300,
+        mainClass: 'mfp-fade'
+    });
 
 });
-
-function openUMLModal(src) {
-    const modal = document.getElementById("umlModal");
-    const img = document.getElementById("umlModalImg");
-    img.src = src;
-    modal.style.display = "flex";
-}
-
-function closeUMLModal() {
-    document.getElementById("umlModal").style.display = "none";
-}
