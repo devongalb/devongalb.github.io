@@ -129,6 +129,15 @@
     opacity: 1 !important;
 }
 
+.site-navbar.nav-hidden {
+    transform: translateY(-100%);
+    transition: transform 0.3s ease;
+}
+
+.site-navbar {
+    transition: transform 0.3s ease;
+}
+
 /* Section titles (e.g., About / Education / Skills) */
 .section-title,
 .section-title.mb-3,
@@ -1229,12 +1238,14 @@ p {
 
     opacity: 0;
     pointer-events: none;
+    visibility: hidden;
     transition: opacity 0.28s ease;
 }
 
 .project-modal-overlay.is-open {
     opacity: 1;
     pointer-events: auto;
+    visibility: visible;
 }
 
 .project-modal-container {
