@@ -305,7 +305,7 @@ jQuery(document).ready(function ($) {
 
 			$('html, body').animate({
 				'scrollTop': $(hash).offset().top
-			}, 600, 'easeInOutExpo', function () {
+			}, 600, 'swing', function () {
 				window.location.hash = hash;
 			});
 
