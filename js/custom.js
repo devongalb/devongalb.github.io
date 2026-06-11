@@ -185,10 +185,9 @@ $(document).ready(function () {
         var $row = getDetailRow($details);
         placeDetailRow($iso || $deployedGrid, $card, $row);
 
-        /* Register with Isotope then show */
+        /* Let Isotope discover the row in its correct DOM position */
         if ($iso) {
-            $iso.isotope('insert', $row);
-            $iso.isotope({ transitionDuration: 0, filter: buildFilterFn() });
+            $iso.isotope('reloadItems').isotope({ transitionDuration: 0, filter: buildFilterFn() });
         }
 
         $details.collapse('show');
