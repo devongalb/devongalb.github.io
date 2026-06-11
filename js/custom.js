@@ -33,11 +33,10 @@ $(document).ready(function () {
     function buildFilterFn() {
         var lang = currentLang;
         return function () {
-            var $card = $(this);
-            // Always show detail wrappers
-            if ($card.hasClass('project-detail-row')) return true;
+            var $el = $(this);
+            if ($el.hasClass('project-detail-row')) return true;
             if (!lang) return true;
-            var langs = ($card.attr('data-languages') || '').toLowerCase().split(/\s+/);
+            var langs = ($el.attr('data-languages') || '').toLowerCase().split(/\s+/);
             return langs.indexOf(lang) !== -1;
         };
     }
@@ -66,7 +65,6 @@ $(document).ready(function () {
         filter: buildFilterFn()
     });
 
-    /* Relayout Isotope on window resize */
     $(window).on('resize', function () {
         $deployedGrid.isotope('layout');
         $academicGrid.isotope('layout');
@@ -76,130 +74,106 @@ $(document).ready(function () {
        PROJECT DETAIL EXPANSION
        ============================ */
 
-    function closeAllProjectDetails(exceptId) {
-        $('[id^="projectDetails"].collapse.show').each(function () {
-            if (!exceptId || this.id !== exceptId) {
-                $(this).collapse('hide');
-            }
-        });
+    function getIsoFor($card) {
+        var id = $card.closest('.projects-grid').attr('id');
+        if (id === 'deployed-grid') return $deployedGrid;
+        if (id === 'academic-grid') return $academicGrid;
+        return null;
     }
 
-    function updateProjectTileLabels() {
-        $('.project-tile').each(function () {
-            var $tile = $(this);
-            var targetSel = $tile.data('target');
-            var $details = $(targetSel);
-            var isOpen = $details.length && $details.hasClass('show');
-            $tile.attr('aria-expanded', isOpen ? 'true' : 'false');
-            $tile.toggleClass('collapsed', !isOpen);
-            $tile.toggleClass('is-active', isOpen);
-            $tile.closest('.project-card').toggleClass('project-card-active', isOpen);
-            $tile.find('.project-tile-cta').text(isOpen ? 'Hide details' : 'View details');
-        });
-    }
-
-    // Get or create the full-width row wrapper for a detail panel
     function getDetailRow($details) {
         var $row = $details.data('detailRow');
         if (!$row || !$row.length) {
             $row = $('<div class="project-detail-row"></div>');
             $details.data('detailRow', $row);
             $details.detach().appendTo($row);
+        } else if (!$details.parent().is($row)) {
+            $details.detach().appendTo($row);
         }
         return $row;
     }
 
-    function removeDetailRow($details) {
+    function parkDetails($details) {
         var $row = $details.data('detailRow');
-        if ($row && $row.length) {
-            $row.detach();
-        }
+        if ($row && $row.length) $row.detach();
         $details.detach().appendTo($('#projectsDetailsGroup'));
     }
 
-    // Find which grid the card belongs to
-    function getGridFor($card) {
-        var gridId = $card.closest('.projects-grid').attr('id');
-        if (gridId === 'deployed-grid') return $deployedGrid;
-        if (gridId === 'academic-grid') return $academicGrid;
-        return null;
-    }
-
-    // Insert detail row after the last card in the same visual row as $card
-    function insertDetailAfterRow($grid, $card, $detailRow) {
-        var cols = 3;
-        if (window.innerWidth < 576) cols = 1;
-        else if (window.innerWidth < 992) cols = 2;
-
-        // Get all visible project cards (not detail rows)
-        var $visibleCards = $grid.isotope('getFilteredItemElements').filter(function () {
+    function placeDetailRow($iso, $card, $row) {
+        var cols = (window.innerWidth < 576) ? 1 : (window.innerWidth < 992) ? 2 : 3;
+        var filtered = $iso.isotope('getFilteredItemElements').filter(function () {
             return !$(this).hasClass('project-detail-row');
         });
-        $visibleCards = $($visibleCards);
-
-        var idx = $visibleCards.index($card);
+        var $cards = $(filtered);
+        var idx = $cards.index($card);
         if (idx === -1) idx = 0;
-
-        // Last card index in this visual row
-        var rowEnd = Math.floor(idx / cols) * cols + cols - 1;
-        rowEnd = Math.min(rowEnd, $visibleCards.length - 1);
-
-        var $anchor = $visibleCards.eq(rowEnd);
-        if ($anchor.length) {
-            $detailRow.insertAfter($anchor);
-        } else {
-            $grid.element.append($detailRow);
-        }
+        var rowEnd = Math.min(Math.floor(idx / cols) * cols + cols - 1, $cards.length - 1);
+        $row.insertAfter($cards.eq(rowEnd));
     }
 
-    function resetProjectDetailsAndHighlights() {
-        closeAllProjectDetails();
+    function closeAllDetails(exceptId) {
+        $('[id^="projectDetails"].show').each(function () {
+            if (!exceptId || this.id !== exceptId) {
+                $(this).collapse('hide');
+            }
+        });
+    }
+
+    function updateTileLabels() {
+        $('.project-tile').each(function () {
+            var $t = $(this);
+            var $d = $($t.data('target'));
+            var open = $d.length && $d.hasClass('show');
+            $t.attr('aria-expanded', open ? 'true' : 'false')
+              .toggleClass('collapsed', !open)
+              .toggleClass('is-active', open)
+              .find('.project-tile-cta').text(open ? 'Hide details' : 'View details');
+            $t.closest('.project-card').toggleClass('project-card-active', open);
+        });
+    }
+
+    function resetAll() {
+        closeAllDetails();
         setTimeout(function () {
-            $('[id^="projectDetails"]').each(function () {
-                removeDetailRow($(this));
-            });
-            // Tell Isotope to re-scan after removals
+            $('[id^="projectDetails"]').each(function () { parkDetails($(this)); });
             $deployedGrid.isotope('reloadItems').isotope({ filter: buildFilterFn() });
             $academicGrid.isotope('reloadItems').isotope({ filter: buildFilterFn() });
             $('.project-tile').removeClass('is-active').addClass('collapsed');
             $('.project-card').removeClass('project-card-active');
-            updateProjectTileLabels();
-            if (!currentLang) {
-                clearLanguageProjectHighlights();
-            }
+            updateTileLabels();
+            if (!currentLang) clearLangFilter();
         }, 420);
     }
 
+    /* Park all details on init */
     $('[id^="projectDetails"]').each(function () {
-        $(this).removeClass('show').attr('aria-expanded', 'false').appendTo($('#projectsDetailsGroup'));
+        $(this).removeClass('show').appendTo($('#projectsDetailsGroup'));
     });
     $('.project-tile').addClass('collapsed').attr('aria-expanded', 'false');
-    $('.project-card').removeClass('project-card-active');
-    updateProjectTileLabels();
+    updateTileLabels();
+
+    /* ============================
+       TILE CLICK — fully manual, no Bootstrap data-toggle
+       ============================ */
 
     $('.project-tile').on('click', function (e) {
         e.preventDefault();
+        e.stopPropagation();
+
         var $tile = $(this);
-        var targetSel = $tile.data('target');
-        var $details = $(targetSel);
+        var $details = $($tile.data('target'));
         if (!$details.length) return;
 
         var detailId = $details.attr('id');
         var isOpen = $details.hasClass('show');
         var $card = $tile.closest('.project-card');
-        var $isotope = getGridFor($card);
+        var $iso = getIsoFor($card);
 
-        // Close all others and remove their rows
-        closeAllProjectDetails(detailId);
-        $('[id^="projectDetails"]').not($details).each(function () {
-            var $other = $(this);
-            removeDetailRow($other);
-        });
-        if ($isotope) {
-            $isotope.isotope('reloadItems').isotope({ transitionDuration: 0, filter: buildFilterFn() });
-        } else {
-            $deployedGrid.isotope('reloadItems').isotope({ transitionDuration: 0, filter: buildFilterFn() });
-            $academicGrid.isotope('reloadItems').isotope({ transitionDuration: 0, filter: buildFilterFn() });
+        /* Close + park any other open detail */
+        closeAllDetails(detailId);
+        $('[id^="projectDetails"]').not($details).each(function () { parkDetails($(this)); });
+        if ($iso) {
+            $iso.isotope('reloadItems').isotope({ transitionDuration: 0, filter: buildFilterFn() });
         }
 
         if (isOpen) {
@@ -207,40 +181,38 @@ $(document).ready(function () {
             return;
         }
 
-        // Place detail row after the card's visual row, inside the grid element
-        var $detailRow = getDetailRow($details);
-        var $gridEl = $card.closest('.projects-grid');
-        insertDetailAfterRow($isotope || $deployedGrid, $card, $detailRow);
+        /* Insert detail row into the grid at the right position */
+        var $row = getDetailRow($details);
+        placeDetailRow($iso || $deployedGrid, $card, $row);
 
-        // Use 'insert' not 'appended' — insert respects DOM order for layout
-        if ($isotope) {
-            $isotope.isotope('insert', $detailRow);
-            $isotope.isotope({ transitionDuration: 0, filter: buildFilterFn() });
+        /* Register with Isotope then show */
+        if ($iso) {
+            $iso.isotope('insert', $row);
+            $iso.isotope({ transitionDuration: 0, filter: buildFilterFn() });
         }
-
-        $details.collapse('show');
 
         $details.collapse('show');
     });
 
+    /* Sync labels on Bootstrap collapse events */
     $(document).on('hidden.bs.collapse', '[id^="projectDetails"]', function () {
-        var $details = $(this);
-        var $row = $details.data('detailRow');
-        var $grid = $row ? $row.closest('.projects-grid') : null;
-        removeDetailRow($details);
-        if ($grid && $grid.length) {
-            var $iso = getGridFor($grid.find('.project-card').first());
+        var $d = $(this);
+        var $row = $d.data('detailRow');
+        var $gridEl = $row ? $row.closest('.projects-grid') : null;
+        parkDetails($d);
+        if ($gridEl && $gridEl.length) {
+            var $iso = getIsoFor($gridEl.find('.project-card').first());
             if ($iso) $iso.isotope('reloadItems').isotope({ transitionDuration: 0, filter: buildFilterFn() });
         } else {
             $deployedGrid.isotope('reloadItems').isotope({ transitionDuration: 0, filter: buildFilterFn() });
             $academicGrid.isotope('reloadItems').isotope({ transitionDuration: 0, filter: buildFilterFn() });
         }
-        updateProjectTileLabels();
+        updateTileLabels();
     });
 
     $(document).on('shown.bs.collapse', '[id^="projectDetails"]', function () {
+        updateTileLabels();
         var $row = $(this).data('detailRow');
-        updateProjectTileLabels();
         if ($row && $row.length) {
             setTimeout(function () {
                 $('html, body').animate({ scrollTop: $row.offset().top - 110 }, 350);
@@ -249,150 +221,113 @@ $(document).ready(function () {
     });
 
     /* ============================
-        LANGUAGE FILTER (with Isotope)
+       LANGUAGE FILTER
        ============================ */
 
-    function clearLanguageProjectHighlights(skipRefilter) {
+    function clearLangFilter(skipRefilter) {
         currentLang = '';
         $('.project-grid').removeClass('language-filter-active');
         $('.project-card').removeClass('language-match');
         $('.skill-filter').removeClass('is-active').attr('aria-pressed', 'false');
-        if (!skipRefilter) {
-            refilterGrids();
-        }
+        if (!skipRefilter) refilterGrids();
     }
 
-    $('.skill-filter').attr('aria-pressed', 'false');
-
     $(document).on('click', '.project-filter-clear', function () {
-        closeAllProjectDetails();
-        $('[id^="projectDetails"]').each(function () { removeDetailRow($(this)); });
+        closeAllDetails();
+        $('[id^="projectDetails"]').each(function () { parkDetails($(this)); });
         $deployedGrid.isotope('reloadItems').isotope({ transitionDuration: 0, filter: buildFilterFn() });
         $academicGrid.isotope('reloadItems').isotope({ transitionDuration: 0, filter: buildFilterFn() });
-        updateProjectTileLabels();
-        clearLanguageProjectHighlights();
+        updateTileLabels();
+        clearLangFilter();
         $('html, body').animate({ scrollTop: $('#projects-section').offset().top - 110 }, 450);
     });
 
-    $('.skill-filter').on('click', function () {
+    $('.skill-filter').attr('aria-pressed', 'false').on('click', function () {
         var $pill = $(this);
-        var language = String($pill.data('language') || '').toLowerCase().trim();
-        if (!language) return;
+        var lang = String($pill.data('language') || '').toLowerCase().trim();
+        if (!lang) return;
 
-        closeAllProjectDetails();
-        $('[id^="projectDetails"]').each(function () { removeDetailRow($(this)); });
+        closeAllDetails();
+        $('[id^="projectDetails"]').each(function () { parkDetails($(this)); });
         $deployedGrid.isotope('reloadItems').isotope({ transitionDuration: 0, filter: buildFilterFn() });
         $academicGrid.isotope('reloadItems').isotope({ transitionDuration: 0, filter: buildFilterFn() });
-        updateProjectTileLabels();
+        updateTileLabels();
 
-        var alreadyActive = $pill.hasClass('is-active');
-        var wasFiltering = !!currentLang;
-        clearLanguageProjectHighlights(wasFiltering);
+        var wasActive = $pill.hasClass('is-active');
+        clearLangFilter(!!currentLang);
 
-        if (alreadyActive) {
+        if (wasActive) {
             refilterGrids();
             $('html, body').animate({ scrollTop: $('#projects-section').offset().top - 110 }, 450);
             return;
         }
 
-        currentLang = language;
+        currentLang = lang;
         var $matches = $('.project-card').filter(function () {
-            var langs = String($(this).attr('data-languages') || '').toLowerCase().split(/\s+/);
-            return langs.indexOf(language) !== -1;
+            return $(this).attr('data-languages')
+                && $(this).attr('data-languages').toLowerCase().split(/\s+/).indexOf(lang) !== -1;
         });
-
         $pill.addClass('is-active').attr('aria-pressed', 'true');
         $('.project-grid').addClass('language-filter-active');
         $matches.addClass('language-match');
-
         refilterGrids();
         $('html, body').animate({ scrollTop: $('#projects-section').offset().top - 110 }, 450);
     });
 
     /* ============================
-        COURSEWORK TOGGLE
+       COURSEWORK TOGGLE
        ============================ */
 
     $('#usdCourses').on('show.bs.collapse', function () {
         $('.education-toggle[data-target="#usdCourses"]').text('Hide Coursework');
-    });
-    $('#usdCourses').on('hide.bs.collapse', function () {
+    }).on('hide.bs.collapse', function () {
         $('.education-toggle[data-target="#usdCourses"]').text('View Coursework');
     });
 
-    /* Close open details / clear filters when clicking outside */
-    $(document).on('click', function (e) {
-        var $target = $(e.target);
-        if (
-            $target.closest('.project-tile').length ||
-            $target.closest('.project-detail-card').length ||
-            $target.closest('.skill-filter').length ||
-            $target.closest('.project-filter-clear').length ||
-            $target.closest('.site-navbar').length ||
-            $target.closest('.mfp-container, .mfp-content').length
-        ) return;
+    /* ============================
+       CLICK OUTSIDE / ESCAPE
+       ============================ */
 
-        var hasOpenDetails = $('[id^="projectDetails"].collapse.show').length > 0;
-        var hasActiveFilter = $('.skill-filter.is-active').length > 0;
-        if (hasOpenDetails || hasActiveFilter) {
-            resetProjectDetailsAndHighlights();
-        }
+    $(document).on('click', function (e) {
+        var $t = $(e.target);
+        if ($t.closest('.project-tile, .project-detail-card, .project-detail-row, .skill-filter, .project-filter-clear, .site-navbar, .mfp-container, .mfp-content').length) return;
+        if ($('[id^="projectDetails"].show').length || $('.skill-filter.is-active').length) resetAll();
     });
 
     $(document).on('keydown', function (e) {
-        if (e.key === 'Escape') {
-            var hasOpenDetails = $('[id^="projectDetails"].collapse.show').length > 0;
-            var hasActiveFilter = $('.skill-filter.is-active').length > 0;
-            if (hasOpenDetails || hasActiveFilter) {
-                resetProjectDetailsAndHighlights();
-            }
-        }
+        if (e.key === 'Escape' && ($('[id^="projectDetails"].show').length || $('.skill-filter.is-active').length)) resetAll();
     });
 
     /* ============================
-        RETURN TO TOP
+       RETURN TO TOP
        ============================ */
 
-    var scrollTopBtn = document.getElementById('scrollTopBtn');
-    var aboutSection = document.getElementById('about-section');
-
-    if (scrollTopBtn && aboutSection) {
+    var $scrollBtn = $('#scrollTopBtn');
+    var aboutEl = document.getElementById('about-section');
+    if ($scrollBtn.length && aboutEl) {
         window.addEventListener('scroll', function () {
-            var aboutBottom = aboutSection.offsetTop + aboutSection.offsetHeight;
-            scrollTopBtn.classList.toggle('visible', window.scrollY > aboutBottom);
+            $scrollBtn.toggleClass('visible', window.scrollY > aboutEl.offsetTop + aboutEl.offsetHeight);
         });
-        scrollTopBtn.addEventListener('click', function () {
+        $scrollBtn[0].addEventListener('click', function () {
             window.scrollTo({ top: 0, behavior: 'smooth' });
         });
     }
 
     /* ============================
-        MAGNIFIC POPUP
+       MAGNIFIC POPUP
        ============================ */
 
     $('.fitness-gallery').magnificPopup({
         type: 'image',
-        gallery: {
-            enabled: true,
-            navigateByImgClick: true,
-            preload: [0, 1]
-        },
-        image: {
-            titleSrc: function (item) {
-                return item.el.data('caption') || '';
-            }
-        },
+        gallery: { enabled: true, navigateByImgClick: true, preload: [0, 1] },
+        image: { titleSrc: function (item) { return item.el.data('caption') || ''; } },
         removalDelay: 300,
         mainClass: 'mfp-fade'
     });
 
     $('.uml-popup').magnificPopup({
         type: 'image',
-        image: {
-            titleSrc: function () {
-                return 'UML class diagram — Elevator Simulation System';
-            }
-        },
+        image: { titleSrc: function () { return 'UML class diagram — Elevator Simulation System'; } },
         removalDelay: 300,
         mainClass: 'mfp-fade'
     });
