@@ -1,5 +1,33 @@
 $(document).ready(function () {
 
+    /* =========================================
+    SMOOTH NAVIGATION SCROLLING
+   ========================================= */
+
+    $('#mainNav a.nav-link[href^="#"]').on('click', function (e) {
+        var targetId = $(this).attr('href');
+        var $target = $(targetId);
+
+        if (!$target.length) return;
+
+        // Prevent the browser from jumping immediately
+        e.preventDefault();
+
+        // Account for the sticky navbar
+        var headerHeight = $('.site-navbar').outerHeight() || 0;
+        var destination = Math.max(
+            0,
+            $target.offset().top - headerHeight - 12
+        );
+
+        // Smoothly animate to the section
+        $('html, body').stop(true).animate(
+            { scrollTop: destination },
+            window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 0 : 650,
+            'swing'
+        );
+    });
+
     /* Auto-collapse mobile navbar after clicking a link */
     $('#mainNav .nav-link').on('click', function () {
         if ($('.navbar-toggler').is(':visible')) {
