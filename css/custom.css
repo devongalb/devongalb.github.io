@@ -418,6 +418,20 @@ p {
     }
 }
 
+/* Real-world applications */
+.project-badge.project-badge-real-world {
+    color: #b8f0d2;
+    background-color: rgba(31, 133, 91, 0.20);
+    border: 1px solid rgba(100, 218, 158, 0.48);
+}
+
+/* Academic projects */
+.project-badge.project-badge-academic {
+    color: #d5dce9;
+    background-color: rgba(116, 133, 158, 0.18);
+    border: 1px solid rgba(160, 174, 195, 0.42);
+}
+
 .project-group-title {
     margin-top: 1rem;
     margin-bottom: 18px;
