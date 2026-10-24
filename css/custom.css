@@ -424,16 +424,16 @@ p {
 
 /* Real-world applications */
 .project-badge.project-badge-real-world {
-    color: #16603f;
-    background-color: #e5f5eb;
-    border: 1px solid #80bea0;
+    color: #06452b;
+    background-color: #ccebd9;
+    border: 1px solid #408763;
 }
 
 /* Academic projects */
 .project-badge.project-badge-academic {
-    color: #34445c;
-    background-color: #e9eef5;
-    border: 1px solid #a9b8cb;
+    color: #172c4a;
+    background-color: #d5e0ef;
+    border: 1px solid #6884a6;
 }
 
 /* =========================================
@@ -976,11 +976,11 @@ p {
     transition: opacity 180ms ease, transform 180ms ease;
 }
 
-.project-grid.language-filter-active .project-card.language-match {
+.projects-grid.language-filter-active .project-card.language-match {
     opacity: 1;
 }
 
-.project-grid.language-filter-active .project-card.language-match .project-tile-inner {
+.projects-grid.language-filter-active .project-card.language-match .project-tile-inner {
     border-color: var(--brand-navy);
     box-shadow: 0 0 0 3px color-mix(in srgb, var(--brand-navy) 22%, transparent), 0 18px 52px var(--card-shadow);
     transform: translateY(-2px);
@@ -991,7 +991,7 @@ p {
         box-shadow: 0 0 0 2px rgba(0, 0, 95, 0.18);
     }
 
-    .project-grid.language-filter-active .project-card.language-match .project-tile-inner {
+    .projects-grid.language-filter-active .project-card.language-match .project-tile-inner {
         box-shadow: 0 0 0 3px rgba(0, 0, 95, 0.18), 0 18px 52px var(--card-shadow);
     }
 }
