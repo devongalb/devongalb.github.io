@@ -51,6 +51,33 @@ $(document).ready(function () {
         });
     });
 
+    /* =========================================
+        PROJECT CATEGORY VISIBILITY
+       ========================================= */
+
+    function updateProjectGroupVisibility() {
+        $projectGrids.each(function () {
+            var $grid = $(this);
+
+            // Check whether this category contains matching projects
+            var hasVisibleProjects = $grid.find('.project-card').filter(function () {
+                return !currentLang ||
+                    ($(this).attr('data-languages') || '')
+                        .toLowerCase()
+                        .split(/\s+/)
+                        .indexOf(currentLang) !== -1;
+            }).length > 0;
+
+            // Hide the heading and grid when no projects match
+            $grid.prev('.project-group-title').toggle(hasVisibleProjects);
+            $grid.toggle(hasVisibleProjects);
+        });
+    }
+
+    /* =========================================
+        FILTER PROJECT GRIDS
+       ========================================= */
+
     function refilterGrids() {
         var fn = buildFilterFn();
 
@@ -60,6 +87,9 @@ $(document).ready(function () {
                 filter: fn
             });
         });
+
+        // Update category visibility after filtering
+        updateProjectGroupVisibility();
 
         setTimeout(function () {
             $projectGrids.each(function () {
