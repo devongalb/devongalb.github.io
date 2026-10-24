@@ -1,30 +1,65 @@
 $(document).ready(function () {
 
+    var isNavigating = false;
+
     /* =========================================
-    SMOOTH NAVIGATION SCROLLING
-   ========================================= */
+        SMOOTH NAVIGATION SCROLLING
+       ========================================= */
 
     $('#mainNav a.nav-link[href^="#"]').on('click', function (e) {
-        var targetId = $(this).attr('href');
-        var $target = $(targetId);
 
+        var targetId = $(this).attr('href');
+
+        // Ignore invalid navigation links
+        if (!targetId || targetId === '#') return;
+
+        var $target = $(targetId);
         if (!$target.length) return;
 
-        // Prevent the browser from jumping immediately
         e.preventDefault();
 
-        // Account for the sticky navbar
+        // Indicate that automatic navigation is happening
+        isNavigating = true;
+
+        // Keep navbar visible during navigation
+        navbar.classList.remove('nav-hidden');
+
+        // Calculate destination with navbar offset
         var headerHeight = $('.site-navbar').outerHeight() || 0;
         var destination = Math.max(
             0,
             $target.offset().top - headerHeight - 12
         );
 
-        // Smoothly animate to the section
+        // Respect reduced-motion accessibility settings
+        var reducedMotion = window.matchMedia(
+            '(prefers-reduced-motion: reduce)'
+        ).matches;
+
+        // Calculate distance between current and target position
+        var distance = Math.abs(
+            $(window).scrollTop() - destination
+        );
+
+        // Dynamic duration: minimum 500ms, maximum 900ms
+        var duration = reducedMotion
+            ? 0
+            : Math.min(900, Math.max(500, distance * 0.45));
+
+        // Perform smooth scrolling
         $('html, body').stop(true).animate(
             { scrollTop: destination },
-            window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 0 : 650,
-            'swing'
+            duration,
+            'swing',
+            function () {
+
+                // Resume normal navbar behavior
+                isNavigating = false;
+
+                // Reset scroll position tracking
+                lastScrollTop = window.pageYOffset ||
+                    document.documentElement.scrollTop;
+            }
         );
     });
 
@@ -35,20 +70,31 @@ $(document).ready(function () {
         }
     });
 
-    /* Hide navbar on scroll down, show on scroll up */
+    /* =========================================
+        NAVBAR VISIBILITY
+       ========================================= */
+
     var lastScrollTop = 0;
     var navbar = document.querySelector('.site-navbar');
 
     window.addEventListener('scroll', function () {
-        var currentScroll = window.pageYOffset || document.documentElement.scrollTop;
+
+        // Don't hide the navbar during automatic navigation
+        if (isNavigating) return;
+
+        var currentScroll = window.pageYOffset ||
+            document.documentElement.scrollTop;
+
         if (currentScroll > lastScrollTop && currentScroll > 100) {
             navbar.classList.add('nav-hidden');
+
             if ($('.navbar-toggler').is(':visible')) {
                 $('#mainNav').collapse('hide');
             }
         } else {
             navbar.classList.remove('nav-hidden');
         }
+
         lastScrollTop = currentScroll <= 0 ? 0 : currentScroll;
     });
 
