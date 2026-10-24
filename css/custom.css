@@ -418,18 +418,43 @@ p {
     }
 }
 
+/* =========================================
+    PROJECT BADGES — LIGHT MODE
+   ========================================= */
+
 /* Real-world applications */
 .project-badge.project-badge-real-world {
-    color: #b8f0d2;
-    background-color: rgba(31, 133, 91, 0.20);
-    border: 1px solid rgba(100, 218, 158, 0.48);
+    color: #16603f;
+    background-color: #e5f5eb;
+    border: 1px solid #80bea0;
 }
 
 /* Academic projects */
 .project-badge.project-badge-academic {
-    color: #d5dce9;
-    background-color: rgba(116, 133, 158, 0.18);
-    border: 1px solid rgba(160, 174, 195, 0.42);
+    color: #34445c;
+    background-color: #e9eef5;
+    border: 1px solid #a9b8cb;
+}
+
+/* =========================================
+    PROJECT BADGES — DARK MODE
+   ========================================= */
+
+@media (prefers-color-scheme: dark) {
+
+    /* Real-world applications */
+    .project-badge.project-badge-real-world {
+        color: #b8f0d2;
+        background-color: rgba(31, 133, 91, 0.20);
+        border-color: rgba(100, 218, 158, 0.48);
+    }
+
+    /* Academic projects */
+    .project-badge.project-badge-academic {
+        color: #d5dce9;
+        background-color: rgba(116, 133, 158, 0.18);
+        border-color: rgba(160, 174, 195, 0.42);
+    }
 }
 
 .project-group-title {
