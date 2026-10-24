@@ -1044,7 +1044,7 @@ p {
     overflow: hidden;
     border: 1px solid var(--card-border);
     box-shadow: 0 12px 30px var(--card-shadow);
-    background: var(--card-bg-2);
+    background: var(--card-bg);
 }
 
 .project-carousel-img {

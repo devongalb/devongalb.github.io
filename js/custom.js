@@ -40,33 +40,40 @@ $(document).ready(function () {
         };
     }
 
+    var $projectGrids = $('#hci-grid, #interactive-grid, #engineering-grid');
+
+    $projectGrids.each(function () {
+        $(this).isotope({
+            itemSelector: '.project-card',
+            layoutMode: 'fitRows',
+            percentPosition: true,
+            filter: buildFilterFn()
+        });
+    });
+
     function refilterGrids() {
         var fn = buildFilterFn();
-        $deployedGrid.isotope({ transitionDuration: 0, filter: fn });
-        $academicGrid.isotope({ transitionDuration: 0, filter: fn });
+
+        $projectGrids.each(function () {
+            $(this).isotope({
+                transitionDuration: 0,
+                filter: fn
+            });
+        });
+
         setTimeout(function () {
-            $deployedGrid.isotope({ transitionDuration: '0.3s' });
-            $academicGrid.isotope({ transitionDuration: '0.3s' });
+            $projectGrids.each(function () {
+                $(this).isotope({
+                    transitionDuration: '0.3s'
+                });
+            });
         }, 50);
     }
 
-    var $deployedGrid = $('#deployed-grid').isotope({
-        itemSelector: '.project-card',
-        layoutMode: 'fitRows',
-        percentPosition: true,
-        filter: buildFilterFn()
-    });
-
-    var $academicGrid = $('#academic-grid').isotope({
-        itemSelector: '.project-card',
-        layoutMode: 'fitRows',
-        percentPosition: true,
-        filter: buildFilterFn()
-    });
-
     $(window).on('resize', function () {
-        $deployedGrid.isotope('layout');
-        $academicGrid.isotope('layout');
+        $projectGrids.each(function () {
+            $(this).isotope('layout');
+        });
     });
 
     /* ============================
@@ -182,7 +189,7 @@ $(document).ready(function () {
 
     function clearLangFilter(skipRefilter) {
         currentLang = '';
-        $('.project-grid').removeClass('language-filter-active');
+        $projectGrids.removeClass('language-filter-active');
         $('.project-card').removeClass('language-match');
         $('.skill-filter').removeClass('is-active').attr('aria-pressed', 'false');
         if (!skipRefilter) refilterGrids();
@@ -213,7 +220,7 @@ $(document).ready(function () {
             return langs.indexOf(lang) !== -1;
         });
         $pill.addClass('is-active').attr('aria-pressed', 'true');
-        $('.project-grid').addClass('language-filter-active');
+        $projectGrids.addClass('language-filter-active');
         $matches.addClass('language-match');
         refilterGrids();
         $('html, body').animate({ scrollTop: $('#projects-section').offset().top - 110 }, 450);
