@@ -351,7 +351,15 @@ $(document).ready(function () {
             $scrollBtn.toggleClass('visible', window.scrollY > aboutEl.offsetTop + aboutEl.offsetHeight);
         });
         $scrollBtn[0].addEventListener('click', function () {
-            window.scrollTo({ top: 0, behavior: 'smooth' });
+            var reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+            var distance = Math.abs($(window).scrollTop());
+            var duration = reducedMotion ? 0 : Math.min(900, Math.max(500, distance * 0.45));
+
+            $('html, body').stop(true).animate(
+                { scrollTop: 0 },
+                duration,
+                'swing'
+            );
         });
     }
 
